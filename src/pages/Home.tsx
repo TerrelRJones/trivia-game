@@ -1,5 +1,5 @@
 import { useGameRound } from 'store/game/game.hooks';
-import Button from 'components/Button/Button';
+import Button from 'components/Button';
 import React from 'react';
 
 const Home: React.FunctionComponent = () => {
