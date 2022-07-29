@@ -2,6 +2,9 @@ import { FunctionComponent, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 import { Colors } from 'styles/colors';
 
+import correctCheckmark from 'assets/images/correct.svg';
+import incorrectX from 'assets/images/incorrect.svg';
+
 export enum ButtonType {
   EASY = 'easy',
   MEDIUM = 'medium',
@@ -13,50 +16,61 @@ export enum ButtonType {
 export interface ButtonProps {
   buttonType?: ButtonType;
   className?: string;
+  correct?: boolean;
   disabled?: boolean;
+  incorrect?: boolean;
   testId?: string;
   onClick?: () => void;
 }
 
 const StyledButton = styled.button<
-  Pick<ButtonProps, 'buttonType' | 'disabled'>
+  Pick<ButtonProps, 'buttonType' | 'disabled' | 'correct' | 'incorrect'>
 >`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   box-sizing: border-box;
   font-family: 'Lato';
   font-weight: 900;
-  color: ${Colors.white};
   text-align: center;
+  margin-bottom: 40px;
+  color: ${({ theme: { colors } }) => colors.white};
 
   box-shadow: 0 0 0 0.25em
-      ${({ buttonType, disabled }) => {
+      ${({ buttonType, disabled, correct, incorrect }) => {
         if (disabled) return '#D7D7D7';
-        if (buttonType === ButtonType.EASY) return '#00E412';
+        if (buttonType === ButtonType.EASY || correct) return '#00E412';
         if (buttonType === ButtonType.MEDIUM) return '#FF9B00';
-        if (buttonType === ButtonType.SETH) return '#FF0000';
+        if (buttonType === ButtonType.SETH || incorrect) return '#FF0000';
         return Colors.selected;
       }},
     0 5px 9px 0 rgba(42, 42, 42, 0.5);
 
-  background: ${({ buttonType, disabled }) => {
-    if (disabled) return 'linear-gradient(0deg, #9F9F9F 0%, #D7D7D7 100%)';
-
-    if (buttonType === ButtonType.EASY)
-      return 'linear-gradient(180deg, #00E412 0%, #004D03 100%);';
-    if (buttonType === ButtonType.MEDIUM)
-      return 'linear-gradient(180deg, #FF9B00 0%, #AE2F00 100%);';
-    if (buttonType === ButtonType.SETH)
-      return 'linear-gradient(180deg, #FF0000 0%, #6B0000 100%);';
-
-    return 'linear-gradient(180deg, #02f3fe 0%, #7f2eff 100%)';
+  background: ${({
+    buttonType,
+    disabled,
+    correct,
+    incorrect,
+    theme: { colors },
+  }) => {
+    if (disabled) return `${Colors.disabledBtnGradient}`;
+    if (buttonType === ButtonType.EASY || correct)
+      return `${colors.easyBtnGradient}`;
+    if (buttonType === ButtonType.MEDIUM) return `${Colors.mediumBtnGradient}`;
+    if (buttonType === ButtonType.SETH || incorrect)
+      return `${colors.sethBtnGradient}`;
+    return `${colors.defaultBtnGradient}`;
   }};
 
   border: 3px solid
-    ${({ buttonType, disabled }) => {
-      if (disabled) return '#ABABAB';
-      if (buttonType === 'easy') return '#008221';
-      if (buttonType === 'medium') return '#BE3B01';
-      if (buttonType === 'seth') return '#A30000';
+    ${({ buttonType, disabled, correct, incorrect, theme: { colors } }) => {
+      if (disabled) return `${colors.disabledGray}`;
+      if (buttonType === ButtonType.EASY || correct)
+        return `${colors.easyGreen}`;
+      if (buttonType === ButtonType.MEDIUM) return `${colors.mediumOrange}`;
+      if (buttonType === ButtonType.SETH || incorrect)
+        return `${colors.sethRed}`;
       return '#038dc1';
     }};
 
@@ -97,7 +111,22 @@ const StyledButton = styled.button<
   }};
 
   &:hover {
+    ${({ buttonType, disabled }) =>
+      !buttonType && !disabled && 'box-shadow: 0 0 9px 4px #038dc1;'}
     cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  }
+
+  @media (max-width: 400px) {
+    min-width: 100%;
+  }
+`;
+
+const StyledIcon = styled.img`
+  margin-right: 15px;
+  width: 26.05px;
+
+  .incorrect {
+    width: 22px;
   }
 `;
 
@@ -105,6 +134,8 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
   buttonType,
   children,
   className,
+  correct,
+  incorrect,
   disabled,
   testId,
   onClick,
@@ -113,10 +144,16 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
     <StyledButton
       buttonType={buttonType}
       className={className}
+      correct={correct}
+      incorrect={incorrect}
       disabled={disabled}
       data-testid={testId}
       onClick={onClick}
     >
+      {correct && <StyledIcon src={correctCheckmark} alt="Correct Checkmark" />}
+      {incorrect && (
+        <StyledIcon className="incorrect" src={incorrectX} alt="Incorrect X" />
+      )}
       {children}
     </StyledButton>
   );

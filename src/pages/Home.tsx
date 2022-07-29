@@ -1,15 +1,64 @@
-import { useGameRound } from 'store/game/game.hooks';
 import Button from 'components/Button';
-import React from 'react';
+import { ButtonType } from 'components/Button/Button';
+import styled from 'styled-components';
+
+const StyledLandingPageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+
+  @media (max-width: 400px) {
+    padding: 0 30px;
+  }
+`;
+
+const Header = styled.h1`
+  font-family: Impact;
+  font-size: 99px;
+  letter-spacing: 0;
+  line-height: 121px;
+  text-align: center;
+  text-transform: uppercase;
+
+  @media (max-width: 400px) {
+    font-size: 80px;
+    line-height: 80px;
+  }
+`;
+
+const StyledBtnContainer = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+`;
 
 const Home: React.FunctionComponent = () => {
-  const [currentRound, { incrementRound }] = useGameRound();
-
   return (
-    <div>
-      <h1>Round: {currentRound}</h1>
-      <Button onClick={incrementRound}>Increment Round</Button>
-    </div>
+    <StyledLandingPageContainer>
+      <Header>Trivia Fighter</Header>
+      <StyledBtnContainer>
+        <Button
+          buttonType={ButtonType.EASY}
+          onClick={() => console.log('clicked easy')}
+        >
+          Easy
+        </Button>
+        <Button
+          buttonType={ButtonType.MEDIUM}
+          onClick={() => console.log('clicked medium')}
+        >
+          Medium
+        </Button>
+        <Button
+          buttonType={ButtonType.SETH}
+          onClick={() => console.log('clicked seth')}
+        >
+          Seth
+        </Button>
+      </StyledBtnContainer>
+    </StyledLandingPageContainer>
   );
 };
 

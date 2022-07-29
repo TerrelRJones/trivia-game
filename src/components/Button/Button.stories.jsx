@@ -51,16 +51,34 @@ Disabled.args = {
   children: 'Abraham Lincoln',
   disabled: true,
 };
+
 export const Secondary = Template.bind({});
 Secondary.args = {
   buttonType: ButtonType.SECONDARY,
   onclick: console.log('clicked'),
   children: 'Abraham Lincoln',
 };
+
 export const SecondaryDisabled = Template.bind({});
 SecondaryDisabled.args = {
   buttonType: ButtonType.SECONDARY,
   onclick: console.log('clicked'),
   children: 'Abraham Lincoln',
   disabled: true,
+};
+
+export const Correct = Template.bind({});
+Correct.args = {
+  buttonType: ButtonType.SECONDARY,
+  correct: true,
+  onclick: console.log('clicked'),
+  children: 'Abraham Lincoln',
+};
+
+export const Inorrect = Template.bind({});
+Inorrect.args = {
+  buttonType: ButtonType.SECONDARY,
+  incorrect: true,
+  onclick: console.log('clicked'),
+  children: 'Abraham Lincoln',
 };
