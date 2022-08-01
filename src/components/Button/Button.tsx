@@ -18,7 +18,7 @@ export interface ButtonProps {
   correct?: boolean;
   disabled?: boolean;
   incorrect?: boolean;
-  selected: boolean;
+  selected?: boolean;
   testId?: string;
   onClick?: () => void;
 }
