@@ -1,6 +1,5 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 import styled from 'styled-components';
-import { Colors } from 'styles/colors';
 
 import correctCheckmark from 'assets/images/correct.svg';
 import incorrectX from 'assets/images/incorrect.svg';
@@ -55,7 +54,7 @@ const StyledButton = styled.button<
         if (buttonType === ButtonType.EASY || correct) return '#00E412';
         if (buttonType === ButtonType.MEDIUM) return '#FF9B00';
         if (buttonType === ButtonType.SETH || incorrect) return '#FF0000';
-        return Colors.selected;
+        return colors.selected;
       }},
     0 5px 9px 0 rgba(42, 42, 42, 0.5);
 
@@ -71,7 +70,7 @@ const StyledButton = styled.button<
     if (selected) return `${colors.selectedBtnGradient}`;
     if (buttonType === ButtonType.EASY || correct)
       return `${colors.easyBtnGradient}`;
-    if (buttonType === ButtonType.MEDIUM) return `${Colors.mediumBtnGradient}`;
+    if (buttonType === ButtonType.MEDIUM) return `${colors.mediumBtnGradient}`;
     if (buttonType === ButtonType.SETH || incorrect)
       return `${colors.sethBtnGradient}`;
     return `${colors.defaultBtnGradient}`;
