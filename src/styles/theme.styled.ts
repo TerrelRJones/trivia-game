@@ -9,6 +9,7 @@ const theme: DefaultTheme = {
     easyGreen: '#008221',
     mediumOrange: '#BE3B01',
     sethRed: '#A30000',
+    selectedBlue: '#2000AC',
 
     selected: '#00c6f3',
     success: '#1cff00',
@@ -25,4 +26,4 @@ const theme: DefaultTheme = {
   },
 };
 
-export { theme };
+export default theme;

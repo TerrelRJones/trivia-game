@@ -6,7 +6,7 @@ import AppRoutes from 'AppRoutes';
 
 import styled from 'styled-components';
 
-import { theme } from 'styles/theme.styled';
+import theme from 'styles/theme.styled';
 
 const AppContainer = styled.body`
   display: flex;

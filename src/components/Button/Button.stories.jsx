@@ -67,6 +67,21 @@ SecondaryDisabled.args = {
   disabled: true,
 };
 
+export const SelectedDefault = Template.bind({});
+SelectedDefault.args = {
+  onclick: console.log('clicked'),
+  children: 'Abraham Lincoln',
+  selected: true,
+};
+
+export const SelectedSecondary = Template.bind({});
+SelectedSecondary.args = {
+  buttonType: ButtonType.SECONDARY,
+  onclick: console.log('clicked'),
+  children: 'Abraham Lincoln',
+  selected: true,
+};
+
 export const Correct = Template.bind({});
 Correct.args = {
   buttonType: ButtonType.SECONDARY,

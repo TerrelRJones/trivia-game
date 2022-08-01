@@ -19,12 +19,16 @@ export interface ButtonProps {
   correct?: boolean;
   disabled?: boolean;
   incorrect?: boolean;
+  selected: boolean;
   testId?: string;
   onClick?: () => void;
 }
 
 const StyledButton = styled.button<
-  Pick<ButtonProps, 'buttonType' | 'disabled' | 'correct' | 'incorrect'>
+  Pick<
+    ButtonProps,
+    'buttonType' | 'disabled' | 'correct' | 'incorrect' | 'selected'
+  >
 >`
   display: flex;
   align-items: center;
@@ -38,8 +42,16 @@ const StyledButton = styled.button<
   color: ${({ theme: { colors } }) => colors.white};
 
   box-shadow: 0 0 0 0.25em
-      ${({ buttonType, disabled, correct, incorrect }) => {
+      ${({
+        buttonType,
+        disabled,
+        correct,
+        incorrect,
+        selected,
+        theme: { colors },
+      }) => {
         if (disabled) return '#D7D7D7';
+        if (selected) return '#0056DB';
         if (buttonType === ButtonType.EASY || correct) return '#00E412';
         if (buttonType === ButtonType.MEDIUM) return '#FF9B00';
         if (buttonType === ButtonType.SETH || incorrect) return '#FF0000';
@@ -52,9 +64,11 @@ const StyledButton = styled.button<
     disabled,
     correct,
     incorrect,
+    selected,
     theme: { colors },
   }) => {
-    if (disabled) return `${Colors.disabledBtnGradient}`;
+    if (disabled) return `${colors.disabledBtnGradient}`;
+    if (selected) return `${colors.selectedBtnGradient}`;
     if (buttonType === ButtonType.EASY || correct)
       return `${colors.easyBtnGradient}`;
     if (buttonType === ButtonType.MEDIUM) return `${Colors.mediumBtnGradient}`;
@@ -64,8 +78,17 @@ const StyledButton = styled.button<
   }};
 
   border: 3px solid
-    ${({ buttonType, disabled, correct, incorrect, theme: { colors } }) => {
+    ${({
+      buttonType,
+      disabled,
+      correct,
+      incorrect,
+      selected,
+      theme: { colors },
+    }) => {
       if (disabled) return `${colors.disabledGray}`;
+      if (selected) return `${colors.selectedBlue}`;
+
       if (buttonType === ButtonType.EASY || correct)
         return `${colors.easyGreen}`;
       if (buttonType === ButtonType.MEDIUM) return `${colors.mediumOrange}`;
@@ -112,7 +135,8 @@ const StyledButton = styled.button<
 
   &:hover {
     ${({ buttonType, disabled }) =>
-      !buttonType && !disabled && 'box-shadow: 0 0 9px 4px #038dc1;'}
+      !buttonType && !disabled && 'box-shadow: 0 0 9px 4px #038dc1;'};
+
     cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   }
 
@@ -138,6 +162,7 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
   incorrect,
   disabled,
   testId,
+  selected,
   onClick,
 }) => {
   return (
@@ -149,6 +174,7 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
       disabled={disabled}
       data-testid={testId}
       onClick={onClick}
+      selected={selected}
     >
       {correct && <StyledIcon src={correctCheckmark} alt="Correct Checkmark" />}
       {incorrect && (
