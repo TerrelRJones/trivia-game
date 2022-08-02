@@ -1,8 +1,8 @@
-import { screen, render, fireEvent } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import Home from 'pages/Home';
 import * as GameHooks from 'store/game/game.hooks';
-import { ThemeProvider } from 'styled-components';
-import theme from 'styles/theme.styled';
+
+import { renderWithProviders } from 'testHelpers';
 
 describe('Home Page', () => {
   let useGameRoundSpy: jest.SpyInstance;
@@ -19,21 +19,12 @@ describe('Home Page', () => {
   });
 
   it('should title as TRIVIA FIGHTER', () => {
-    render(
-      <ThemeProvider theme={theme}>
-        <Home />
-      </ThemeProvider>
-    );
-    expect(screen.getByRole('heading')).toHaveTextContent('Trivia Fighter');
+    renderWithProviders(<Home />);
+    expect(screen.getByTestId('title')).toHaveTextContent('Trivia Fighter');
   });
 
-  it('should have label as "Easy"', () => {
-    render(
-      <ThemeProvider theme={theme}>
-        <Home />
-      </ThemeProvider>
-    );
-
+  it('should display label as "Easy"', () => {
+    renderWithProviders(<Home />);
     expect(screen.getByTestId('easy-btn')).toHaveTextContent('Easy');
   });
 });

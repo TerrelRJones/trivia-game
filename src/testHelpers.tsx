@@ -12,6 +12,9 @@ import { Provider } from 'react-redux';
 import type { RootState } from 'store';
 import { rootReducer, AppStore } from 'store';
 
+import { ThemeProvider } from 'styled-components';
+import theme from 'styles/theme.styled';
+
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
 export interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
@@ -42,7 +45,11 @@ export function renderWithProviders(
   }: ExtendedRenderOptions = {}
 ) {
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
-    return <Provider store={store}>{children}</Provider>;
+    return (
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>{children}</Provider>
+      </ThemeProvider>
+    );
   }
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 }

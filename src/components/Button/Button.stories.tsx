@@ -1,11 +1,12 @@
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 import styled from 'styled-components';
 import Button from '.';
-import { ButtonType } from './Button';
+import { ButtonProps, ButtonType } from './Button';
 
 export default {
   title: 'Buttons',
   component: Button,
-};
+} as ComponentMeta<typeof Button>;
 
 const Background = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const Background = styled.div`
   background: radial-gradient(circle, #000e5d 0%, #010024 100%);
 `;
 
-const Template = (args) => (
+const Template: ComponentStory<typeof Button> = (args: ButtonProps) => (
   <Background>
     <Button {...args} />
   </Background>
@@ -23,31 +24,31 @@ const Template = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  onclick: console.log('clicked'),
+  onClick: () => console.log('clicked'),
   children: 'Play Again',
 };
 
 export const Easy = Template.bind({});
 Easy.args = {
   buttonType: ButtonType.EASY,
-  onclick: console.log('clicked'),
+  onClick: () => console.log('clicked'),
   children: 'Easy',
 };
 export const Medium = Template.bind({});
 Medium.args = {
   buttonType: ButtonType.MEDIUM,
-  onclick: console.log('clicked'),
+  onClick: () => console.log('clicked'),
   children: 'Medium',
 };
 export const Seth = Template.bind({});
 Seth.args = {
   buttonType: ButtonType.SETH,
-  onclick: console.log('clicked'),
+  onClick: () => console.log('clicked'),
   children: 'Seth',
 };
 export const Disabled = Template.bind({});
 Disabled.args = {
-  onclick: console.log('clicked'),
+  onClick: () => console.log('clicked'),
   children: 'Abraham Lincoln',
   disabled: true,
 };
@@ -55,21 +56,21 @@ Disabled.args = {
 export const Secondary = Template.bind({});
 Secondary.args = {
   buttonType: ButtonType.SECONDARY,
-  onclick: console.log('clicked'),
+  onClick: () => console.log('clicked'),
   children: 'Abraham Lincoln',
 };
 
 export const SecondaryDisabled = Template.bind({});
 SecondaryDisabled.args = {
   buttonType: ButtonType.SECONDARY,
-  onclick: console.log('clicked'),
+  onClick: () => console.log('clicked'),
   children: 'Abraham Lincoln',
   disabled: true,
 };
 
 export const SelectedDefault = Template.bind({});
 SelectedDefault.args = {
-  onclick: console.log('clicked'),
+  onClick: () => console.log('clicked'),
   children: 'Abraham Lincoln',
   selected: true,
 };
@@ -77,7 +78,7 @@ SelectedDefault.args = {
 export const SelectedSecondary = Template.bind({});
 SelectedSecondary.args = {
   buttonType: ButtonType.SECONDARY,
-  onclick: console.log('clicked'),
+  onClick: () => console.log('clicked'),
   children: 'Abraham Lincoln',
   selected: true,
 };
@@ -86,7 +87,7 @@ export const Correct = Template.bind({});
 Correct.args = {
   buttonType: ButtonType.SECONDARY,
   correct: true,
-  onclick: console.log('clicked'),
+  onClick: () => console.log('clicked'),
   children: 'Abraham Lincoln',
 };
 
@@ -94,6 +95,6 @@ export const Inorrect = Template.bind({});
 Inorrect.args = {
   buttonType: ButtonType.SECONDARY,
   incorrect: true,
-  onclick: console.log('clicked'),
+  onClick: () => console.log('clicked'),
   children: 'Abraham Lincoln',
 };
