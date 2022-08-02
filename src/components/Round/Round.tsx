@@ -11,9 +11,9 @@ const StyledRoundTitle = styled.h1`
   font-size: 50px;
   letter-spacing: 0;
   line-height: 61px;
-  /* color: ${({ theme }) => theme.colors.white}; */
-  color: white;
+  color: ${({ theme }) => theme.colors.white};
   text-transform: uppercase;
+  margin: 0;
 `;
 
 export const Round = ({ round, testId }: RoundProps) => {
