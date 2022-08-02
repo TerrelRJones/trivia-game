@@ -19,7 +19,7 @@ const StyledRoundTitle = styled.h1`
 export const Round = ({ round, testId }: RoundProps) => {
   return (
     <div>
-      <StyledRoundTitle data-testid={testId}>Round {round}</StyledRoundTitle>
+      <StyledRoundTitle data-testid={testId}>Round: {round}</StyledRoundTitle>
     </div>
   );
 };
