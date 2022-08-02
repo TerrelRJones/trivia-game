@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 import theme from 'styles/theme.styled';
 
-const AppContainer = styled.body`
+const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
