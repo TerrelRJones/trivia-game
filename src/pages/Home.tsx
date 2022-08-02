@@ -37,9 +37,10 @@ const StyledBtnContainer = styled.div`
 const Home: React.FunctionComponent = () => {
   return (
     <StyledLandingPageContainer>
-      <Header>Trivia Fighter</Header>
+      <Header data-testid="title">Trivia Fighter</Header>
       <StyledBtnContainer>
         <Button
+          testId="easy-btn"
           buttonType={ButtonType.EASY}
           onClick={() => console.log('clicked easy')}
         >
