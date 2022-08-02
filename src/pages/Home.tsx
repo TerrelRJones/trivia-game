@@ -40,6 +40,7 @@ const Home: React.FunctionComponent = () => {
       <Header>Trivia Fighter</Header>
       <StyledBtnContainer>
         <Button
+          testId="easy-btn"
           buttonType={ButtonType.EASY}
           onClick={() => console.log('clicked easy')}
         >

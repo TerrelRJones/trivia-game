@@ -1,6 +1,8 @@
 import { screen, render, fireEvent } from '@testing-library/react';
 import Home from 'pages/Home';
 import * as GameHooks from 'store/game/game.hooks';
+import { ThemeProvider } from 'styled-components';
+import theme from 'styles/theme.styled';
 
 describe('Home Page', () => {
   let useGameRoundSpy: jest.SpyInstance;
@@ -16,15 +18,22 @@ describe('Home Page', () => {
     useGameRoundSpy.mockRestore();
   });
 
-  it('should render the current round', () => {
-    render(<Home />);
-    expect(screen.getByRole('heading')).toHaveTextContent('Round: 2');
+  it('should title as TRIVIA FIGHTER', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <Home />
+      </ThemeProvider>
+    );
+    expect(screen.getByRole('heading')).toHaveTextContent('Trivia Fighter');
   });
 
-  it('should call incrementRound when the button is clicked', () => {
-    render(<Home />);
-    fireEvent.click(screen.getByRole('button'));
+  it('should have label as "Easy"', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <Home />
+      </ThemeProvider>
+    );
 
-    expect(incrementRoundSpy).toHaveBeenCalled();
+    expect(screen.getByTestId('easy-btn')).toHaveTextContent('Easy');
   });
 });

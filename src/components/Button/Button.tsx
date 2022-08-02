@@ -38,7 +38,7 @@ const StyledButton = styled.button<
   font-weight: 900;
   text-align: center;
   margin-bottom: 40px;
-  color: ${({ theme: { colors } }) => colors.white};
+  color: white;
 
   box-shadow: 0 0 0 0.25em
       ${({

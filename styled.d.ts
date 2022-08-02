@@ -5,18 +5,20 @@ import 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
+      background: string;
       primary: string;
       primaryDark: string;
       disabledGray: string;
       easyGreen: string;
       mediumOrange: string;
       sethRed: string;
+      selectedBlue: string;
+      healthGreenGradient: string;
+      healthRedGradient: string;
       selected: string;
       success: string;
-
       textBg: string;
       white: string;
-
       disabledBtnGradient: string;
       easyBtnGradient: string;
       mediumBtnGradient: string;
