@@ -10,9 +10,11 @@ export enum ButtonType {
   SETH = 'seth',
   SELECTED = 'selected',
   SECONDARY = 'secondary',
+  ATTACK = 'attack',
 }
 
 export interface ButtonProps {
+  attackIcon?: string[];
   buttonType?: ButtonType;
   className?: string;
   correct?: boolean;
@@ -97,22 +99,40 @@ const getLineHeight = ({ buttonType }: StyledButtonProps): string => {
   if (buttonType === ButtonType.SECONDARY) return '22px';
   return '42px';
 };
-const getMinHeight = ({ buttonType }: StyledButtonProps): string => {
+const getMaxHeight = ({ buttonType }: StyledButtonProps): string => {
   if (!buttonType) return '53px';
-  if (buttonType === ButtonType.SECONDARY) return '43px';
+  if (buttonType === ButtonType.SECONDARY || buttonType === ButtonType.ATTACK)
+    return '43px';
   return '70px';
 };
 const getMinWidth = ({ buttonType }: StyledButtonProps): string => {
   if (!buttonType) return '200px';
   if (buttonType === ButtonType.SECONDARY) return '373px';
+  if (buttonType === ButtonType.ATTACK) return '300px';
   return '350px';
 };
 
 const getFontSize = ({ buttonType }: StyledButtonProps): string => {
   if (!buttonType) return '25px';
   if (buttonType === ButtonType.SECONDARY) return '18px';
+  if (buttonType === ButtonType.ATTACK) return '18px';
   return '35px';
 };
+
+// Styled components
+
+const ButtonContainer = styled.div<StyledButtonProps>`
+  max-height: ${getMaxHeight};
+  height: 100%;
+  min-width: ${getMinWidth};
+  box-shadow: 0 0 0 0.25em ${getBoxShadowColor};
+  border-radius: ${getBorderRadius};
+  margin-bottom: 40px;
+
+  &:hover {
+    box-shadow: 0 0 9px 8px ${getBoxShadowColor};
+  }
+`;
 
 const StyledButton = styled.button<StyledButtonProps>`
   display: flex;
@@ -120,28 +140,22 @@ const StyledButton = styled.button<StyledButtonProps>`
   justify-content: center;
   text-decoration: none;
   box-sizing: border-box;
+  height: 100%;
+  width: 100%;
   font-family: 'Lato';
   font-weight: 900;
   text-align: center;
-  margin-bottom: 40px;
   color: ${({ theme: { colors } }) => colors.white};
-
-  box-shadow: 0 0 0 0.25em ${getBoxShadowColor} 0 5px 9px 0
-    rgba(42, 42, 42, 0.5);
-
+  box-shadow: 0 0 0 0.25em ${getBoxShadowColor};
   background: ${getBackgroundColor};
   border: 3px solid ${getBorderColor};
   border-radius: ${getBorderRadius};
   letter-spacing: ${getLetterSpacing};
   line-height: ${getLineHeight};
-  min-height: ${getMinHeight};
-  min-width: ${getMinWidth};
+
   font-size: ${getFontSize};
 
   &:hover {
-    ${({ buttonType, disabled }) =>
-      !buttonType && !disabled && 'box-shadow: 0 0 9px 4px #038dc1;'};
-
     cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   }
 
@@ -159,7 +173,19 @@ const StyledIcon = styled.img`
   }
 `;
 
+const AttackIconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+`;
+
+const StyledAttackIcon = styled.img`
+  width: 23px;
+`;
+
 export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
+  attackIcon,
   buttonType,
   children,
   className,
@@ -171,7 +197,7 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
   onClick,
 }) => {
   return (
-    <StyledButton
+    <ButtonContainer
       buttonType={buttonType}
       className={className}
       correct={correct}
@@ -181,22 +207,40 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
       onClick={onClick}
       selected={selected}
     >
-      {correct && (
-        <StyledIcon
-          data-testid="checkmark-icon"
-          src={correctCheckmark}
-          alt="Correct Checkmark"
-        />
-      )}
-      {incorrect && (
-        <StyledIcon
-          data-testid="incorrect-icon"
-          className="incorrect"
-          src={incorrectX}
-          alt="Incorrect X"
-        />
-      )}
-      {children}
-    </StyledButton>
+      <StyledButton
+        buttonType={buttonType}
+        className={className}
+        correct={correct}
+        incorrect={incorrect}
+        disabled={disabled}
+        data-testid={testId}
+        onClick={onClick}
+        selected={selected}
+      >
+        {attackIcon && (
+          <AttackIconContainer>
+            {attackIcon.map((icon, index) => (
+              <StyledAttackIcon key={index} src={icon} alt="Sword Icon" />
+            ))}
+          </AttackIconContainer>
+        )}
+        {correct && (
+          <StyledIcon
+            data-testid="checkmark-icon"
+            src={correctCheckmark}
+            alt="Correct Checkmark"
+          />
+        )}
+        {incorrect && (
+          <StyledIcon
+            data-testid="incorrect-icon"
+            className="incorrect"
+            src={incorrectX}
+            alt="Incorrect X"
+          />
+        )}
+        {children}
+      </StyledButton>
+    </ButtonContainer>
   );
 };
