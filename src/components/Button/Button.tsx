@@ -203,9 +203,9 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
       correct={correct}
       incorrect={incorrect}
       disabled={disabled}
-      data-testid={testId}
       onClick={onClick}
       selected={selected}
+      data-testid="btn-container"
     >
       <StyledButton
         buttonType={buttonType}

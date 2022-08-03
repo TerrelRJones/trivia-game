@@ -53,17 +53,13 @@ describe('Button Component', () => {
         Secondary Button
       </Button>
     );
-    expect(screen.getByTestId('button-secondary')).toHaveStyle(
-      'min-width: 373px'
-    );
+    expect(screen.getByTestId('btn-container')).toHaveStyle('min-width: 373px');
   });
 
   it('should render min-width: 200px; as default btn (undefined)', () => {
     renderWithProviders(
       <Button testId="button-default">Default Button</Button>
     );
-    expect(screen.getByTestId('button-default')).toHaveStyle(
-      'min-width: 200px'
-    );
+    expect(screen.getByTestId('btn-container')).toHaveStyle('min-width: 200px');
   });
 });
