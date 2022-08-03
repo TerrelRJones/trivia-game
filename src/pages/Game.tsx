@@ -12,73 +12,70 @@ import { ActionState } from 'components/Action/Action';
 const StyledGameContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding-top: 45px;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
 `;
 
 const TopContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  max-width: 800px;
-  margin: 0 auto;
   width: 100%;
+  justify-content: space-between;
   margin-bottom: 69px;
 `;
 
-const AvatarContainer = styled.div`
+const StyledPlayerContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  max-width: 800px;
-  margin: 0 auto;
   width: 100%;
+  justify-content: space-between;
 `;
 
-const PlayerContainer = styled.div`
-  position: relative;
-  width: 350px;
-  background-color: red;
+const PlayerOneContainer = styled.div`
+  width: 100%;
 
-  .action-container {
+  .container {
+    position: relative;
+  }
+
+  .action {
     position: absolute;
+    top: 0;
     right: 0;
   }
 `;
 
-const PlayerContainerTwo = styled.div`
-  position: relative;
-  width: 350px;
-  background-color: red;
+const PlayerTwoContainer = styled.div`
+  width: 100%;
+`;
 
-  .action-container {
-    position: absolute;
-  }
+const ActionContainer = styled.div`
+  display: flex;
+  gap: 192px;
 `;
 
 const Game: React.FunctionComponent = () => (
   <StyledGameContainer>
     <TopContainer>
-      <HealthBar maxHealth={150} currentHealth={90} />
+      <HealthBar currentHealth={100} maxHealth={150} />
       <Round round={1} />
-      <HealthBar maxHealth={150} currentHealth={43} isReversed={true} />
+      <HealthBar isReversed currentHealth={43} maxHealth={150} />
     </TopContainer>
-    <AvatarContainer>
-      <PlayerContainer>
-        <div className="action-container">
-          <Action actionState={ActionState.BLOCK} attackValue={10} />
-        </div>
-        <Avatar name="Terrel" avatar={foxKnight} />
-      </PlayerContainer>
-      <PlayerContainerTwo>
-        <div className="action-container">
-          <Action
-            actionState={ActionState.ATTACK}
-            attackValue={23}
-            isReversed={true}
-          />
-        </div>
-        <Avatar name="Terrel" avatar={wizardPig} />
-      </PlayerContainerTwo>
-    </AvatarContainer>
+    <StyledPlayerContainer>
+      <PlayerOneContainer>
+        <Avatar avatar={foxKnight} name="Terrel" />
+      </PlayerOneContainer>
+      <ActionContainer>
+        <Action actionState={ActionState.BLOCK} attackValue={0} />
+        <Action isReversed actionState={ActionState.ATTACK} attackValue={10} />
+      </ActionContainer>
+      <PlayerTwoContainer>
+        <Avatar avatar={wizardPig} name="Medium" />
+      </PlayerTwoContainer>
+    </StyledPlayerContainer>
   </StyledGameContainer>
 );
 

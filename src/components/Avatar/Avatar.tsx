@@ -6,16 +6,22 @@ interface AvatarProps {
   testID?: string;
 }
 
-const StyledAvatarContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  min-height: 300px;
+  justify-content: space-between;
+  height: 100%;
+`;
+
+const StyledAvatarContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 100%;
 `;
 
 const AvatarImg = styled.img`
-  width: 297px;
+  height: 100%;
 `;
 
 const NameContainer = styled.div`
@@ -37,9 +43,11 @@ const NameContainer = styled.div`
 
 export const Avatar = ({ name, avatar, testID }: AvatarProps) => {
   return (
-    <StyledAvatarContainer>
-      <AvatarImg data-testid={testID} src={avatar} alt="Fox Knight Avatar" />
+    <Container>
+      <StyledAvatarContainer>
+        <AvatarImg data-testid={testID} src={avatar} alt="Fox Knight Avatar" />
+      </StyledAvatarContainer>
       <NameContainer data-testid="name">{name}</NameContainer>
-    </StyledAvatarContainer>
+    </Container>
   );
 };

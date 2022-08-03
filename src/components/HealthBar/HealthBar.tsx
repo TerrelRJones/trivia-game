@@ -52,6 +52,7 @@ const HealthBarMiddle = styled.div<
 `;
 
 const HeartImage = styled.img<Pick<HealthBarProps, 'isReversed'>>`
+  z-index: 2;
   position: absolute;
   ${({ isReversed }) => (isReversed ? 'right: -60px' : 'left: -60px;')}
 `;
