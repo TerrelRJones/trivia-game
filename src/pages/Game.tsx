@@ -34,21 +34,7 @@ const StyledPlayerContainer = styled.div`
   justify-content: space-between;
 `;
 
-const PlayerOneContainer = styled.div`
-  width: 100%;
-
-  .container {
-    position: relative;
-  }
-
-  .action {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-`;
-
-const PlayerTwoContainer = styled.div`
+const PlayerContainer = styled.div`
   width: 100%;
 `;
 
@@ -65,16 +51,16 @@ const Game: React.FunctionComponent = () => (
       <HealthBar isReversed currentHealth={43} maxHealth={150} />
     </TopContainer>
     <StyledPlayerContainer>
-      <PlayerOneContainer>
+      <PlayerContainer>
         <Avatar avatar={foxKnight} name="Terrel" />
-      </PlayerOneContainer>
+      </PlayerContainer>
       <ActionContainer>
         <Action actionState={ActionState.BLOCK} attackValue={0} />
         <Action isReversed actionState={ActionState.ATTACK} attackValue={10} />
       </ActionContainer>
-      <PlayerTwoContainer>
+      <PlayerContainer>
         <Avatar avatar={wizardPig} name="Medium" />
-      </PlayerTwoContainer>
+      </PlayerContainer>
     </StyledPlayerContainer>
   </StyledGameContainer>
 );
