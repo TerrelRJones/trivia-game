@@ -13,6 +13,7 @@ interface AcrtionProps {
   isReversed?: boolean;
   actionState: ActionState;
   attackValue: number;
+  testID?: string;
 }
 
 const AttackContainer = styled.div<Pick<AcrtionProps, 'isReversed'>>`
@@ -42,14 +43,17 @@ export const Action = ({
   isReversed,
   actionState,
   attackValue,
+  testID,
 }: AcrtionProps) => {
   return (
-    <AttackContainer isReversed={isReversed}>
+    <AttackContainer data-testid={testID} isReversed={isReversed}>
       {actionState === ActionState.ATTACK && (
         <>
-          {' '}
-          <StyledAttackPoints>{attackValue}</StyledAttackPoints>
+          <StyledAttackPoints data-testid="attack-value">
+            {attackValue}
+          </StyledAttackPoints>
           <StyledIcon
+            data-testid="sword-icon"
             isReversed={isReversed}
             src={swordIcon}
             alt="Sword Icon"
@@ -57,7 +61,11 @@ export const Action = ({
         </>
       )}
       {actionState === ActionState.BLOCK && (
-        <StyledIcon src={shieldIcon} alt="Shield Icon" />
+        <StyledIcon
+          data-testid="shield-icon"
+          src={shieldIcon}
+          alt="Shield Icon"
+        />
       )}
     </AttackContainer>
   );
