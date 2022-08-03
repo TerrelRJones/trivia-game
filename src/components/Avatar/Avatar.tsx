@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface AvatarProps {
   name: string;
   avatar: string;
+  testID?: string;
 }
 
 const StyledAvatarContainer = styled.div`
@@ -34,11 +35,11 @@ const NameContainer = styled.div`
   border-radius: 8px;
 `;
 
-export const Avatar = ({ name, avatar }: AvatarProps) => {
+export const Avatar = ({ name, avatar, testID }: AvatarProps) => {
   return (
     <StyledAvatarContainer>
-      <AvatarImg src={avatar} alt="Fox Knight Avatar" />
-      <NameContainer>{name}</NameContainer>
+      <AvatarImg data-testid={testID} src={avatar} alt="Fox Knight Avatar" />
+      <NameContainer data-testid="name">{name}</NameContainer>
     </StyledAvatarContainer>
   );
 };

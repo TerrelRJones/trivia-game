@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import Avatar from '.';
 
+import foxAvatar from 'assets/images/fox-knight.svg';
+import wizardPigAvatar from 'assets/images/wizard-pig.svg';
+
 export default {
   title: 'Avatar',
   component: Avatar,
@@ -23,9 +26,11 @@ const Template = (args) => (
 export const Fox = Template.bind({});
 Fox.args = {
   name: 'Terrel',
+  avatar: foxAvatar,
 };
 
-export const FoxDefeated = Template.bind({});
-FoxDefeated.args = {
-  name: 'Terrel',
+export const WizardPig = Template.bind({});
+WizardPig.args = {
+  name: 'Wizard Pig',
+  avatar: wizardPigAvatar,
 };

@@ -6,6 +6,7 @@ interface HealthBarProps {
   isReversed?: boolean;
   maxHealth: number;
   currentHealth: number;
+  testID?: string;
 }
 
 const Container = styled.div<Pick<HealthBarProps, 'isReversed'>>`
@@ -71,18 +72,28 @@ export const HealthBar = ({
   isReversed,
   maxHealth,
   currentHealth,
+  testID,
 }: HealthBarProps) => {
   return (
-    <Container isReversed={isReversed}>
+    <Container data-testid={testID} isReversed={isReversed}>
       <StyledHealthBar isReversed={isReversed}>
         <HeartImage
+          data-testid="heart-icon"
           isReversed={isReversed}
           src={currentHealth <= 50 ? healthBarLow : healthBarFull}
-          alt="Green Health Heart Icon"
+          alt={
+            currentHealth <= 50
+              ? 'Red Health Broken Heart Icon'
+              : 'Green Health Heart Icon'
+          }
         />
-        <HealthBarMiddle maxHealth={maxHealth} currentHealth={currentHealth} />
+        <HealthBarMiddle
+          data-testid="health-bar"
+          maxHealth={maxHealth}
+          currentHealth={currentHealth}
+        />
       </StyledHealthBar>
-      <HealthText isReversed={isReversed}>
+      <HealthText data-testid="health-text" isReversed={isReversed}>
         {currentHealth}/{maxHealth}
       </HealthText>
     </Container>
