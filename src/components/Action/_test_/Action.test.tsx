@@ -49,4 +49,15 @@ describe('Button Component', () => {
     );
     expect(screen.getByTestId('attack-value')).toHaveTextContent('10');
   });
+
+  it('should not render attack value if action state is BLOCK', () => {
+    renderWithProviders(
+      <Action
+        testID="action-btn"
+        actionState={ActionState.BLOCK}
+        attackValue={0}
+      />
+    );
+    expect(screen.queryByTestId('attack-value')).not.toBeInTheDocument();
+  });
 });
