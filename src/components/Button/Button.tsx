@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import correctCheckmark from 'assets/images/correct.svg';
 import incorrectX from 'assets/images/incorrect.svg';
+import sword from 'assets/images/sword.svg';
+import shield from 'assets/images/shield.svg';
 
 export enum ButtonType {
   EASY = 'easy',
@@ -14,6 +16,8 @@ export enum ButtonType {
 }
 
 export interface ButtonProps {
+  attack?: boolean;
+  block?: boolean;
   attackIcon?: string[];
   buttonType?: ButtonType;
   className?: string;
@@ -105,7 +109,7 @@ const getMaxHeight = ({ buttonType }: StyledButtonProps): string => {
     return '43px';
   return '70px';
 };
-const getMinWidth = ({ buttonType }: StyledButtonProps): string => {
+const getMaxWidth = ({ buttonType }: StyledButtonProps): string => {
   if (!buttonType) return '200px';
   if (buttonType === ButtonType.SECONDARY) return '373px';
   if (buttonType === ButtonType.ATTACK) return '300px';
@@ -122,12 +126,13 @@ const getFontSize = ({ buttonType }: StyledButtonProps): string => {
 // Styled components
 
 const ButtonContainer = styled.div<StyledButtonProps>`
-  max-height: ${getMaxHeight};
-  height: 100%;
-  min-width: ${getMinWidth};
+  height: ${getMaxHeight};
+  /* height: 100%; */
+  width: ${getMaxWidth};
+  /* width: 100%; */
   box-shadow: 0 0 0 0.25em ${getBoxShadowColor};
   border-radius: ${getBorderRadius};
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
 
   &:hover {
     box-shadow: 0 0 9px 8px ${getBoxShadowColor};
@@ -185,6 +190,8 @@ const StyledAttackIcon = styled.img`
 `;
 
 export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
+  attack,
+  block,
   attackIcon,
   buttonType,
   children,
@@ -217,6 +224,8 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
         onClick={onClick}
         selected={selected}
       >
+        {attack && <StyledIcon src={sword} alt="Sword Attack Icon" />}
+        {block && <StyledIcon src={shield} alt="Shield Block Icon" />}
         {attackIcon && (
           <AttackIconContainer>
             {attackIcon.map((icon, index) => (
