@@ -28,21 +28,30 @@ export const AttackDialog = ({ testID }: AttackDialogProps) => {
   return (
     <StyledAttackDialogContainer data-testid={testID}>
       <AttackButtonContainer>
-        <Button buttonType={ButtonType.ATTACK} attackIcon={[sword]}>
-          Light Attack
-        </Button>
-      </AttackButtonContainer>
-      <AttackButtonContainer>
-        <Button buttonType={ButtonType.ATTACK} attackIcon={[sword, sword]}>
+        <Button
+          testId="light-attack"
+          buttonType={ButtonType.ATTACK}
+          attackIcon={[sword]}
+        >
           Light Attack
         </Button>
       </AttackButtonContainer>
       <AttackButtonContainer>
         <Button
+          testId="medium-attack"
+          buttonType={ButtonType.ATTACK}
+          attackIcon={[sword, sword]}
+        >
+          Medium Attack
+        </Button>
+      </AttackButtonContainer>
+      <AttackButtonContainer>
+        <Button
+          testId="heavy-attack"
           buttonType={ButtonType.ATTACK}
           attackIcon={[sword, sword, sword]}
         >
-          Light Attack
+          Heavy Attack
         </Button>
       </AttackButtonContainer>
     </StyledAttackDialogContainer>

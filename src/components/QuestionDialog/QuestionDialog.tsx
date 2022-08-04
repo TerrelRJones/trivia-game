@@ -5,6 +5,9 @@ import { ButtonType } from 'components/Button/Button';
 
 interface QuestionDialogProps {
   testID?: string;
+  question: string;
+  answer: string;
+  options: string[];
 }
 
 const StyledQuestionDialogContainer = styled.div``;
@@ -13,6 +16,7 @@ const Question = styled.h3`
   color: ${({ theme: { colors } }) => colors.white};
   font-family: 'Lato';
   font-size: 19px;
+  font-weight: 300;
   letter-spacing: -0.68px;
   line-height: 23px;
 `;
@@ -24,28 +28,26 @@ const AnswerContainer = styled.div`
 `;
 const AnswerButtonContainer = styled.div``;
 
-export const QuestionDialog = ({ testID }: QuestionDialogProps) => {
+export const QuestionDialog = ({
+  testID,
+  question,
+  answer,
+  options,
+}: QuestionDialogProps) => {
   return (
     <StyledQuestionDialogContainer data-testid={testID}>
-      <Question>
-        Which best selling toy of 1983 caused hysteria, resulting in riots
-        breaking out in stores?
-      </Question>
+      <Question data-testid="question-text">{question}</Question>
       <AnswerContainer>
-        <AnswerButtonContainer>
-          <Button buttonType={ButtonType.SECONDARY}>Transformers</Button>
-        </AnswerButtonContainer>
-        <AnswerButtonContainer>
-          <Button buttonType={ButtonType.SECONDARY} selected>
-            Cabbage Patch Kids
-          </Button>
-        </AnswerButtonContainer>
-        <AnswerButtonContainer>
-          <Button buttonType={ButtonType.SECONDARY}>Rubik's Cube</Button>
-        </AnswerButtonContainer>
-        <AnswerButtonContainer>
-          <Button buttonType={ButtonType.SECONDARY}>Care Bears</Button>
-        </AnswerButtonContainer>
+        {options.map((potentialAnswer, index) => (
+          <AnswerButtonContainer key={index}>
+            <Button
+              testId={`button-${index}`}
+              buttonType={ButtonType.SECONDARY}
+            >
+              {potentialAnswer}
+            </Button>
+          </AnswerButtonContainer>
+        ))}
       </AnswerContainer>
     </StyledQuestionDialogContainer>
   );

@@ -1,5 +1,4 @@
 import Button from 'components/Button';
-import { ButtonType } from 'components/Button/Button';
 import styled from 'styled-components';
 
 interface ActionDialogProps {
@@ -23,10 +22,14 @@ export const ActionDialog = ({ testID }: ActionDialogProps) => {
   return (
     <StyledActionDialogContainer data-testid={testID}>
       <ActionButtonContainer>
-        <Button attack>Attack</Button>
+        <Button testId="attack" attack>
+          Attack
+        </Button>
       </ActionButtonContainer>
       <ActionButtonContainer>
-        <Button block>Block</Button>
+        <Button testId="block" block>
+          Block
+        </Button>
       </ActionButtonContainer>
     </StyledActionDialogContainer>
   );

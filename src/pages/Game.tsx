@@ -8,6 +8,8 @@ import foxKnight from 'assets/images/fox-knight.svg';
 import wizardPig from 'assets/images/wizard-pig.svg';
 
 import { ActionState } from 'components/Action/Action';
+import Dialog from 'components/Dialog';
+import ActionDialog from 'components/ActionDialog';
 
 const StyledGameContainer = styled.div`
   display: flex;
@@ -62,6 +64,7 @@ const Game: React.FunctionComponent = () => (
         <Avatar avatar={wizardPig} name="Medium" />
       </PlayerContainer>
     </StyledPlayerContainer>
+    <Dialog message="Choose an attack" dialog={<ActionDialog />} />
   </StyledGameContainer>
 );
 

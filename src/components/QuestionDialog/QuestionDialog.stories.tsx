@@ -21,6 +21,17 @@ const Template: ComponentStory<typeof QuestionDialog> = (args) => (
   </Background>
 );
 
+const arr = [
+  'Transformers',
+  'Cabbage Patch Kids',
+  "Rubik's Cube",
+  'Care Bears',
+];
+
 export const Default = Template.bind({});
 Default.args = {
+  question:
+    ' Which best selling toy of 1983 caused hysteria, resulting in riots breaking out in stores?',
+  options: arr,
+  answer: 'Cabbage Patch Kids',
 };
