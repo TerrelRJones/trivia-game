@@ -122,7 +122,7 @@ const getFontSize = ({ buttonType }: StyledButtonProps): string => {
 // Styled components
 
 const ButtonContainer = styled.div<StyledButtonProps>`
-  min-height: ${getMaxHeight};
+  max-height: ${getMaxHeight};
   height: 100%;
   min-width: ${getMinWidth};
   box-shadow: 0 0 0 0.25em ${getBoxShadowColor};
