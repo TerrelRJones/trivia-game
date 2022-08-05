@@ -5,10 +5,10 @@ interface ${name}Props {
   testID?: string;
 };
 
-const Styled${name}Container = styled.div\`\`
+const ${name}Container = styled.div\`\`
 
 export const ${name} = ({testID}: ${name}Props) => {
-  return <Styled${name}Container data-testid={testID}>Hello 👋, I am a ${name} component.</Styled${name}Container>;
+  return <${name}Container data-testid={testID}>${name}</${name}Container>;
 };
 `;
 
@@ -16,7 +16,7 @@ export const ${name} = ({testID}: ${name}Props) => {
 exports.story = (
   name
 ) => `import { ComponentStory, ComponentMeta } from '@storybook/react';
-import styled from 'styled-components';
+import { StoriesBackgroundContainer } from 'styles/styledElements';
 import ${name} from '.';
 
 export default {
@@ -24,18 +24,10 @@ export default {
   component: ${name},
 } as ComponentMeta<typeof ${name}>;
 
-const Background = styled.div\`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: radial-gradient(circle, #000e5d 0%, #010024 100%);
-\`;
-
 const Template: ComponentStory<typeof ${name}> = (args) => (
-  <Background>
+  <StoriesBackgroundContainer>
     <${name} {...args} />
-  </Background>
+  </StoriesBackgroundContainer>
 );
 
 export const Default = Template.bind({});

@@ -3,15 +3,8 @@ import QuestionDialog from 'components/QuestionDialog';
 
 import { renderWithProviders } from 'testHelpers';
 
-const arr = [
-  'Transformers',
-  'Cabbage Patch Kids',
-  "Rubik's Cube",
-  'Care Bears',
-];
-
-const question =
-  'Which best selling toy of 1983 caused hysteria, resulting in riots breaking out in stores?';
+import { questionOne } from '../mockQuestionData';
+const { question, options, answer } = questionOne;
 
 describe('QuestionDialog Component', () => {
   it('should render QuestionDialog component to DOM', () => {
@@ -19,8 +12,8 @@ describe('QuestionDialog Component', () => {
       <QuestionDialog
         testID="question-dialog"
         question={question}
-        options={arr}
-        answer={arr[1]}
+        options={options}
+        answer={answer}
       />
     );
     expect(screen.getByTestId('question-dialog')).toBeInTheDocument();
@@ -31,22 +24,22 @@ describe('QuestionDialog Component', () => {
       <QuestionDialog
         testID="question-dialog"
         question={question}
-        options={arr}
-        answer={arr[1]}
+        options={options}
+        answer={answer}
       />
     );
     expect(screen.getByTestId('question-text')).toHaveTextContent(question);
   });
 
-  it(`should render ${arr[2]} as button text`, () => {
+  it(`should render ${options[2]} as button text`, () => {
     renderWithProviders(
       <QuestionDialog
         testID="question-dialog"
         question={question}
-        options={arr}
-        answer={arr[1]}
+        options={options}
+        answer={answer}
       />
     );
-    expect(screen.getByTestId('button-2')).toHaveTextContent(arr[2]);
+    expect(screen.getByTestId('button-2')).toHaveTextContent(options[2]);
   });
 });

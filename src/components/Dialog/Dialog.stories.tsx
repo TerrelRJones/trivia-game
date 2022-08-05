@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import styled from 'styled-components';
+import { StoriesBackgroundContainer } from 'styles/styledElements';
 import Dialog from '.';
 
 import ActionDialog from 'components/ActionDialog';
@@ -11,21 +11,13 @@ export default {
   component: Dialog,
 } as ComponentMeta<typeof Dialog>;
 
-const Background = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: radial-gradient(circle, #000e5d 0%, #010024 100%);
-`;
-
 const Template: ComponentStory<typeof Dialog> = (args) => (
-  <Background>
+  <StoriesBackgroundContainer>
     <Dialog {...args} />
-  </Background>
+  </StoriesBackgroundContainer>
 );
 
-const arr = [
+const questionArr = [
   'Transformers',
   'Cabbage Patch Kids',
   "Rubik's Cube",
@@ -51,7 +43,7 @@ EasyAttack.args = {
     <QuestionDialog
       question="Which best selling toy of 1983 caused hysteria, resulting in riots
       breaking out in stores?"
-      options={arr}
+      options={questionArr}
       answer="Cabbage Patch Kids"
     />
   ),

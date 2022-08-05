@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 import swordIcon from 'assets/images/sword.svg';
 import shieldIcon from 'assets/images/shield.svg';
+import { BodyText } from 'styles/styledElements';
 
 export enum ActionState {
   NONE = 'none',
@@ -9,23 +10,21 @@ export enum ActionState {
   ATTACK = 'attack',
 }
 
-interface AcrtionProps {
+interface ActionProps {
   isReversed?: boolean;
   actionState: ActionState;
   attackValue: number;
   testID?: string;
 }
 
-const AttackContainer = styled.div<Pick<AcrtionProps, 'isReversed'>>`
+const AttackContainer = styled.div<Pick<ActionProps, 'isReversed'>>`
   display: flex;
   width: 50px;
   flex-direction: column;
   align-items: ${({ isReversed }) => (isReversed ? 'flex-end' : 'flex-start')};
 `;
 
-const StyledAttackPoints = styled.p`
-  color: ${({ theme: { colors } }) => colors.white};
-  font-family: 'Lato';
+const AttackPoints = styled(BodyText)`
   font-size: 25px;
   letter-spacing: -0.89px;
   line-height: 30px;
@@ -33,7 +32,7 @@ const StyledAttackPoints = styled.p`
   margin: 0;
 `;
 
-const StyledIcon = styled.img<Pick<AcrtionProps, 'isReversed'>>`
+const Icon = styled.img<Pick<ActionProps, 'isReversed'>>`
   width: 38px;
   color: ${({ theme: { colors } }) => colors.white};
   transform: ${({ isReversed }) => isReversed && 'scaleX(-1)'};
@@ -44,15 +43,13 @@ export const Action = ({
   actionState,
   attackValue,
   testID,
-}: AcrtionProps) => {
+}: ActionProps) => {
   return (
     <AttackContainer data-testid={testID} isReversed={isReversed}>
       {actionState === ActionState.ATTACK && (
         <>
-          <StyledAttackPoints data-testid="attack-value">
-            {attackValue}
-          </StyledAttackPoints>
-          <StyledIcon
+          <AttackPoints data-testid="attack-value">{attackValue}</AttackPoints>
+          <Icon
             data-testid="sword-icon"
             isReversed={isReversed}
             src={swordIcon}
@@ -61,11 +58,7 @@ export const Action = ({
         </>
       )}
       {actionState === ActionState.BLOCK && (
-        <StyledIcon
-          data-testid="shield-icon"
-          src={shieldIcon}
-          alt="Shield Icon"
-        />
+        <Icon data-testid="shield-icon" src={shieldIcon} alt="Shield Icon" />
       )}
     </AttackContainer>
   );

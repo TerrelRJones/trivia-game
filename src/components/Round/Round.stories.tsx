@@ -1,17 +1,19 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { StoriesBackgroundContainer } from 'styles/styledElements';
-import ActionDialog from '.';
+import Round from '.';
 
 export default {
-  title: 'ActionDialog',
-  component: ActionDialog,
-} as ComponentMeta<typeof ActionDialog>;
+  title: 'RoundTitle',
+  component: Round,
+} as ComponentMeta<typeof Round>;
 
-const Template: ComponentStory<typeof ActionDialog> = (args) => (
+const Template: ComponentStory<typeof Round> = (args) => (
   <StoriesBackgroundContainer>
-    <ActionDialog {...args} />
+    <Round {...args} />
   </StoriesBackgroundContainer>
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  round: 1,
+};

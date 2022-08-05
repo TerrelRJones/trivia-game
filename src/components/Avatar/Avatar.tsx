@@ -18,7 +18,7 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const StyledAvatarContainer = styled.div`
+const AvatarContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
@@ -71,7 +71,7 @@ const NameContainer = styled.div`
 export const Avatar = ({ name, avatar, testID }: AvatarProps) => {
   return (
     <Container>
-      <StyledAvatarContainer>
+      <AvatarContainer>
         <AvatarImg data-testid={testID} src={avatar} alt="Fox Knight Avatar" />
         <ShadowGradientImg
           data-testid="shadow"
@@ -79,7 +79,7 @@ export const Avatar = ({ name, avatar, testID }: AvatarProps) => {
           alt="Avatar Shadow"
         />
         <ShadowImg data-testid="shadow" src={shadow} alt="Avatar Shadow" />
-      </StyledAvatarContainer>
+      </AvatarContainer>
       <NameContainer data-testid="name">{name}</NameContainer>
     </Container>
   );

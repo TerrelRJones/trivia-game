@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import styled from 'styled-components';
+import { StoriesBackgroundContainer } from 'styles/styledElements';
+
 import Button from '.';
 import { ButtonProps, ButtonType } from './Button';
 import sword from 'assets/images/sword.svg';
@@ -9,18 +10,10 @@ export default {
   component: Button,
 } as ComponentMeta<typeof Button>;
 
-const Background = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: radial-gradient(circle, #000e5d 0%, #010024 100%);
-`;
-
 const Template: ComponentStory<typeof Button> = (args: ButtonProps) => (
-  <Background>
+  <StoriesBackgroundContainer>
     <Button {...args} />
-  </Background>
+  </StoriesBackgroundContainer>
 );
 
 export const Default = Template.bind({});

@@ -1,5 +1,5 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 import correctCheckmark from 'assets/images/correct.svg';
 import incorrectX from 'assets/images/incorrect.svg';
@@ -136,7 +136,7 @@ const ButtonContainer = styled.div<StyledButtonProps>`
   }
 `;
 
-const StyledButton = styled.button<StyledButtonProps>`
+const GameButton = styled.button<StyledButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -166,7 +166,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   }
 `;
 
-const StyledIcon = styled.img`
+const Icon = styled.img`
   margin-right: 15px;
   width: 26.05px;
 
@@ -211,7 +211,7 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
       selected={selected}
       data-testid="btn-container"
     >
-      <StyledButton
+      <GameButton
         buttonType={buttonType}
         className={className}
         correct={correct}
@@ -221,8 +221,8 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
         onClick={onClick}
         selected={selected}
       >
-        {attack && <StyledIcon src={sword} alt="Sword Attack Icon" />}
-        {block && <StyledIcon src={shield} alt="Shield Block Icon" />}
+        {attack && <Icon src={sword} alt="Sword Attack Icon" />}
+        {block && <Icon src={shield} alt="Shield Block Icon" />}
         {attackIcon && (
           <AttackIconContainer>
             {attackIcon.map((icon, index) => (
@@ -231,14 +231,14 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
           </AttackIconContainer>
         )}
         {correct && (
-          <StyledIcon
+          <Icon
             data-testid="checkmark-icon"
             src={correctCheckmark}
             alt="Correct Checkmark"
           />
         )}
         {incorrect && (
-          <StyledIcon
+          <Icon
             data-testid="incorrect-icon"
             className="incorrect"
             src={incorrectX}
@@ -246,7 +246,7 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
           />
         )}
         {children}
-      </StyledButton>
+      </GameButton>
     </ButtonContainer>
   );
 };

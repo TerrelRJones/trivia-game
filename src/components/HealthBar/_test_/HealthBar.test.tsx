@@ -3,7 +3,7 @@ import HealthBar from 'components/HealthBar';
 
 import { renderWithProviders } from 'testHelpers';
 
-describe('Button Component', () => {
+describe('HealthBar Component', () => {
   it('should render Health Bar to screen', () => {
     renderWithProviders(
       <HealthBar testID="health-bar-1" currentHealth={50} maxHealth={150} />
