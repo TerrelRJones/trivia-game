@@ -3,7 +3,6 @@ import Dialog from 'components/Dialog';
 
 import ActionDialog from 'components/ActionDialog';
 import AttackDialog from 'components/AttackDialog';
-import QuestionDialog from 'components/QuestionDialog';
 
 import { renderWithProviders } from 'testHelpers';
 
