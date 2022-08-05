@@ -1,5 +1,5 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 import correctCheckmark from 'assets/images/correct.svg';
 import incorrectX from 'assets/images/incorrect.svg';
@@ -99,7 +99,7 @@ const getLineHeight = ({ buttonType }: StyledButtonProps): string => {
   if (buttonType === ButtonType.SECONDARY) return '22px';
   return '42px';
 };
-const getMinHeight = ({ buttonType }: StyledButtonProps): string => {
+const getMaxHeight = ({ buttonType }: StyledButtonProps): string => {
   if (!buttonType) return '53px';
   if (buttonType === ButtonType.SECONDARY || buttonType === ButtonType.ATTACK)
     return '43px';
@@ -122,7 +122,7 @@ const getFontSize = ({ buttonType }: StyledButtonProps): string => {
 // Styled components
 
 const ButtonContainer = styled.div<StyledButtonProps>`
-  min-height: ${getMinHeight};
+  max-height: ${getMaxHeight};
   height: 100%;
   min-width: ${getMinWidth};
   box-shadow: 0 0 0 0.25em ${getBoxShadowColor};
