@@ -18,7 +18,7 @@ const Container = styled.div<Pick<HealthBarProps, 'isReversed'>>`
   max-height: 50px;
 `;
 
-const StyledHealthBar = styled.div<Pick<HealthBarProps, 'isReversed'>>`
+const HealthBarContainer = styled.div<Pick<HealthBarProps, 'isReversed'>>`
   position: relative;
   display: flex;
   justify-content: center;
@@ -77,7 +77,7 @@ export const HealthBar = ({
 }: HealthBarProps) => {
   return (
     <Container data-testid={testID} isReversed={isReversed}>
-      <StyledHealthBar isReversed={isReversed}>
+      <HealthBarContainer isReversed={isReversed}>
         <HeartImage
           data-testid="heart-icon"
           isReversed={isReversed}
@@ -93,7 +93,7 @@ export const HealthBar = ({
           maxHealth={maxHealth}
           currentHealth={currentHealth}
         />
-      </StyledHealthBar>
+      </HealthBarContainer>
       <HealthText data-testid="health-text" isReversed={isReversed}>
         {currentHealth}/{maxHealth}
       </HealthText>

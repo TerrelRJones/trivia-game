@@ -1,24 +1,18 @@
-import styled from 'styled-components';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoriesBackgroundContainer } from 'styles/styledElements';
+
 import Action from '.';
 import { ActionState } from './Action';
 
 export default {
   title: 'Action',
   component: Action,
-};
+} as ComponentMeta<typeof Action>;
 
-const Background = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: radial-gradient(circle, #000e5d 0%, #010024 100%);
-`;
-
-const Template = (args) => (
-  <Background>
+const Template: ComponentStory<typeof Action> = (args) => (
+  <StoriesBackgroundContainer>
     <Action {...args} />
-  </Background>
+  </StoriesBackgroundContainer>
 );
 
 export const Attack = Template.bind({});

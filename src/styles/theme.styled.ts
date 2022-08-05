@@ -27,6 +27,7 @@ const theme: DefaultTheme = {
     defaultBtnGradient: 'linear-gradient(180deg, #02f3fe 0%, #7f2eff 100%);',
     selectedBtnGradient: 'linear-gradient(0deg, #000767 0%, #0056DB 100%);',
   },
+  fontFamily: { body: 'Lato' },
 };
 
 export default theme;

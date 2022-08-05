@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 interface AvatarProps {
   name: string;
@@ -11,10 +11,13 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  max-height: 350px;
+  max-width: 297px;
   height: 100%;
 `;
 
-const StyledAvatarContainer = styled.div`
+const AvatarContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   height: 100%;
@@ -44,9 +47,9 @@ const NameContainer = styled.div`
 export const Avatar = ({ name, avatar, testID }: AvatarProps) => {
   return (
     <Container>
-      <StyledAvatarContainer>
+      <AvatarContainer>
         <AvatarImg data-testid={testID} src={avatar} alt="Fox Knight Avatar" />
-      </StyledAvatarContainer>
+      </AvatarContainer>
       <NameContainer data-testid="name">{name}</NameContainer>
     </Container>
   );
