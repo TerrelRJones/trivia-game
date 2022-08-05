@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import Avatar from '.';
 
 import foxAvatar from 'assets/images/fox-knight.svg';

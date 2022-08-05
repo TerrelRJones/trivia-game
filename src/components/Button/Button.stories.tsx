@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import Button from '.';
 import { ButtonProps, ButtonType } from './Button';
 import sword from 'assets/images/sword.svg';

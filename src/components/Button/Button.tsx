@@ -1,5 +1,5 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 import correctCheckmark from 'assets/images/correct.svg';
 import incorrectX from 'assets/images/incorrect.svg';
