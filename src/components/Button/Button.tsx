@@ -122,12 +122,11 @@ const getFontSize = ({ buttonType }: StyledButtonProps): string => {
 // Styled components
 
 const ButtonContainer = styled.div<StyledButtonProps>`
-  max-height: ${getMaxHeight};
+  min-height: ${getMaxHeight};
   height: 100%;
   min-width: ${getMinWidth};
   box-shadow: 0 0 0 0.25em ${getBoxShadowColor};
   border-radius: ${getBorderRadius};
-  margin-bottom: 40px;
 
   &:hover {
     box-shadow: 0 0 9px 8px ${getBoxShadowColor};
