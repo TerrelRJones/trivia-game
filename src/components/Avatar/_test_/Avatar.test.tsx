@@ -6,7 +6,7 @@ import wizardPigAvatar from 'assets/images/wizard-pig.svg';
 
 import { renderWithProviders } from 'testHelpers';
 
-describe('Button Component', () => {
+describe('Avatar Component', () => {
   it('should render Fox Knight as avatar', () => {
     renderWithProviders(
       <Avatar testID="avatar-1" avatar={foxAvatar} name="Terrel" />
