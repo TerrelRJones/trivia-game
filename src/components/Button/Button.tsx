@@ -221,8 +221,8 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
         onClick={onClick}
         selected={selected}
       >
-        {attack && <StyledIcon src={sword} alt="Sword Attack Icon" />}
-        {block && <StyledIcon src={shield} alt="Shield Block Icon" />}
+        {attack && <Icon src={sword} alt="Sword Attack Icon" />}
+        {block && <Icon src={shield} alt="Shield Block Icon" />}
         {attackIcon && (
           <AttackIconContainer>
             {attackIcon.map((icon, index) => (
