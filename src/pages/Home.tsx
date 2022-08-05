@@ -34,30 +34,40 @@ const StyledBtnContainer = styled.div`
   flex-direction: column;
 `;
 
+const ButtonContainter = styled.div`
+  margin-bottom: 40px;
+`;
+
 const Home: React.FunctionComponent = () => {
   return (
     <StyledLandingPageContainer>
       <Header data-testid="title">Trivia Fighter</Header>
       <StyledBtnContainer>
-        <Button
-          testId="easy-btn"
-          buttonType={ButtonType.EASY}
-          onClick={() => console.log('clicked easy')}
-        >
-          Easy
-        </Button>
-        <Button
-          buttonType={ButtonType.MEDIUM}
-          onClick={() => console.log('clicked medium')}
-        >
-          Medium
-        </Button>
-        <Button
-          buttonType={ButtonType.SETH}
-          onClick={() => console.log('clicked seth')}
-        >
-          Seth
-        </Button>
+        <ButtonContainter>
+          <Button
+            testId="easy-btn"
+            buttonType={ButtonType.EASY}
+            onClick={() => console.log('clicked easy')}
+          >
+            Easy
+          </Button>
+        </ButtonContainter>
+        <ButtonContainter>
+          <Button
+            buttonType={ButtonType.MEDIUM}
+            onClick={() => console.log('clicked medium')}
+          >
+            Medium
+          </Button>
+        </ButtonContainter>
+        <ButtonContainter>
+          <Button
+            buttonType={ButtonType.SETH}
+            onClick={() => console.log('clicked seth')}
+          >
+            Seth
+          </Button>
+        </ButtonContainter>
       </StyledBtnContainer>
     </StyledLandingPageContainer>
   );
