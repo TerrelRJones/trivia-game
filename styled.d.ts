@@ -26,5 +26,8 @@ declare module 'styled-components' {
       defaultBtnGradient: string;
       selectedBtnGradient: string;
     };
+    fontFamily: {
+      body: string;
+    };
   }
 }
