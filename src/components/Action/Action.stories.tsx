@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import styled from 'styled-components/macro';
+import { StoriesBackgroundContainer } from 'styles/styledElements';
+
 import Action from '.';
 import { ActionState } from './Action';
 
@@ -8,18 +9,10 @@ export default {
   component: Action,
 } as ComponentMeta<typeof Action>;
 
-const Background = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: radial-gradient(circle, #000e5d 0%, #010024 100%);
-`;
-
 const Template: ComponentStory<typeof Action> = (args) => (
-  <Background>
+  <StoriesBackgroundContainer>
     <Action {...args} />
-  </Background>
+  </StoriesBackgroundContainer>
 );
 
 export const Attack = Template.bind({});

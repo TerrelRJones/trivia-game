@@ -1,4 +1,5 @@
-import styled from 'styled-components/macro';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoriesBackgroundContainer } from 'styles/styledElements';
 import Avatar from '.';
 
 import foxAvatar from 'assets/images/fox-knight.svg';
@@ -7,20 +8,12 @@ import wizardPigAvatar from 'assets/images/wizard-pig.svg';
 export default {
   title: 'Avatar',
   component: Avatar,
-};
+} as ComponentMeta<typeof Avatar>;
 
-const Background = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: radial-gradient(circle, #000e5d 0%, #010024 100%);
-`;
-
-const Template = (args) => (
-  <Background>
+const Template: ComponentStory<typeof Avatar> = (args) => (
+  <StoriesBackgroundContainer>
     <Avatar {...args} />
-  </Background>
+  </StoriesBackgroundContainer>
 );
 
 export const Fox = Template.bind({});
