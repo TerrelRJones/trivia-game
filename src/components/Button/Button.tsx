@@ -99,7 +99,7 @@ const getLineHeight = ({ buttonType }: StyledButtonProps): string => {
   if (buttonType === ButtonType.SECONDARY) return '22px';
   return '42px';
 };
-const getMaxHeight = ({ buttonType }: StyledButtonProps): string => {
+const getMinHeight = ({ buttonType }: StyledButtonProps): string => {
   if (!buttonType) return '53px';
   if (buttonType === ButtonType.SECONDARY || buttonType === ButtonType.ATTACK)
     return '43px';
@@ -122,12 +122,11 @@ const getFontSize = ({ buttonType }: StyledButtonProps): string => {
 // Styled components
 
 const ButtonContainer = styled.div<StyledButtonProps>`
-  max-height: ${getMaxHeight};
+  min-height: ${getMinHeight};
   height: 100%;
   min-width: ${getMinWidth};
   box-shadow: 0 0 0 0.25em ${getBoxShadowColor};
   border-radius: ${getBorderRadius};
-  margin-bottom: 40px;
 
   &:hover {
     box-shadow: 0 0 9px 8px ${getBoxShadowColor};
