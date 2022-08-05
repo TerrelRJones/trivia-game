@@ -1,11 +1,12 @@
-import styled from 'styled-components';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import styled from 'styled-components/macro';
 import Action from '.';
 import { ActionState } from './Action';
 
 export default {
   title: 'Action',
   component: Action,
-};
+} as ComponentMeta<typeof Action>;
 
 const Background = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const Background = styled.div`
   background: radial-gradient(circle, #000e5d 0%, #010024 100%);
 `;
 
-const Template = (args) => (
+const Template: ComponentStory<typeof Action> = (args) => (
   <Background>
     <Action {...args} />
   </Background>
