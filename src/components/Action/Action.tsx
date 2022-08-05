@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 import swordIcon from 'assets/images/sword.svg';
 import shieldIcon from 'assets/images/shield.svg';
@@ -9,14 +9,14 @@ export enum ActionState {
   ATTACK = 'attack',
 }
 
-interface AcrtionProps {
+interface ActionProps {
   isReversed?: boolean;
   actionState: ActionState;
   attackValue: number;
   testID?: string;
 }
 
-const AttackContainer = styled.div<Pick<AcrtionProps, 'isReversed'>>`
+const AttackContainer = styled.div<Pick<ActionProps, 'isReversed'>>`
   display: flex;
   width: 50px;
   flex-direction: column;
@@ -33,7 +33,7 @@ const StyledAttackPoints = styled.p`
   margin: 0;
 `;
 
-const StyledIcon = styled.img<Pick<AcrtionProps, 'isReversed'>>`
+const StyledIcon = styled.img<Pick<ActionProps, 'isReversed'>>`
   width: 38px;
   color: ${({ theme: { colors } }) => colors.white};
   transform: ${({ isReversed }) => isReversed && 'scaleX(-1)'};
@@ -44,7 +44,7 @@ export const Action = ({
   actionState,
   attackValue,
   testID,
-}: AcrtionProps) => {
+}: ActionProps) => {
   return (
     <AttackContainer data-testid={testID} isReversed={isReversed}>
       {actionState === ActionState.ATTACK && (
