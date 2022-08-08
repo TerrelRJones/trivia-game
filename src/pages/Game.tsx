@@ -5,7 +5,7 @@ import Round from 'components/Round';
 import styled from 'styled-components';
 
 import foxKnight from 'assets/images/fox-knight.svg';
-import wizardPig from 'assets/images/wizard-pig.svg';
+import barbarianBunny from 'assets/images/barbarian-bunny.svg';
 
 import { ActionState } from 'components/Action/Action';
 
@@ -59,7 +59,7 @@ const Game: React.FunctionComponent = () => (
         <Action isReversed actionState={ActionState.ATTACK} attackValue={10} />
       </ActionContainer>
       <PlayerContainer>
-        <Avatar avatar={wizardPig} name="Medium" />
+        <Avatar avatar={barbarianBunny} name="Medium" />
       </PlayerContainer>
     </StyledPlayerContainer>
   </StyledGameContainer>
