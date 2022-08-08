@@ -1,4 +1,6 @@
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
+import shadowGradient from 'assets/images/shadow-gradient.svg';
+import shadow from 'assets/images/shadow.svg';
 
 interface AvatarProps {
   name: string;
@@ -20,11 +22,29 @@ const AvatarContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
+  max-height: 297px;
+  width: 100%;
   height: 100%;
 `;
 
 const AvatarImg = styled.img`
+  z-index: 1;
+  max-height: 297px;
   height: 100%;
+`;
+
+const ShadowGradientImg = styled.img`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+`;
+
+const ShadowImg = styled.img`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -15px;
 `;
 
 const NameContainer = styled.div`
@@ -39,7 +59,7 @@ const NameContainer = styled.div`
   letter-spacing: -0.96px;
   line-height: 33px;
   text-align: center;
-  margin-top: 23px;
+  margin-top: 38px;
   padding: 5px 15px;
   border-radius: 8px;
 `;
@@ -49,6 +69,12 @@ export const Avatar = ({ name, avatar, testID }: AvatarProps) => {
     <Container>
       <AvatarContainer>
         <AvatarImg data-testid={testID} src={avatar} alt="Fox Knight Avatar" />
+        <ShadowGradientImg
+          data-testid="shadow"
+          src={shadowGradient}
+          alt="Avatar Shadow"
+        />
+        <ShadowImg src={shadow} alt="Shadow Ground Image" />
       </AvatarContainer>
       <NameContainer data-testid="name">{name}</NameContainer>
     </Container>
