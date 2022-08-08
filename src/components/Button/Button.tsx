@@ -140,7 +140,7 @@ const ButtonContainer = styled.div<StyledButtonProps>`
   box-shadow: 0 0 0 0.25em ${getBoxShadowColor};
   border-radius: ${getBorderRadius};
 
-  &:hover {
+  &:not(.disabledContainer):hover {
     box-shadow: 0 0 9px 8px ${getBoxShadowColor};
   }
 
@@ -214,6 +214,9 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
 }) => {
   return (
     <ButtonContainer
+      className={
+        disabled || correct || incorrect ? 'disabledContainer' : undefined
+      }
       buttonType={buttonType}
       correct={correct}
       incorrect={incorrect}
