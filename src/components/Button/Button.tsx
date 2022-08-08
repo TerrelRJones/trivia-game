@@ -20,12 +20,11 @@ export interface ButtonProps {
   block?: boolean;
   attackIcon?: string[];
   buttonType?: ButtonType;
-  className?: string;
   correct?: boolean;
   disabled?: boolean;
   incorrect?: boolean;
   selected?: boolean;
-  testId?: string;
+  testID?: string;
   theme?: any;
   onClick?: () => void;
 }
@@ -123,16 +122,34 @@ const getFontSize = ({ buttonType }: StyledButtonProps): string => {
   return '35px';
 };
 
-// Styled components
+const getActiveState = ({
+  disabled,
+  correct,
+  incorrect,
+  theme: { colors },
+}: StyledButtonProps): string | undefined => {
+  if (disabled || correct || incorrect) return;
 
+  return `  &:active {
+    background: ${colors.selectedBtnGradient};
+    box-shadow: 0 0 0 0.25em #0056db;
+    border: 3px solid ${colors.selectedBlue};
+  }`;
+};
+
+// Styled components
 const ButtonContainer = styled.div<StyledButtonProps>`
   height: ${getMaxHeight};
   width: ${getMaxWidth};
   box-shadow: 0 0 0 0.25em ${getBoxShadowColor};
   border-radius: ${getBorderRadius};
 
-  &:hover {
+  &:not(.disabledContainer):hover {
     box-shadow: 0 0 9px 8px ${getBoxShadowColor};
+  }
+
+  &:active {
+    box-shadow: none;
   }
 `;
 
@@ -154,12 +171,14 @@ const GameButton = styled.button<StyledButtonProps>`
   border-radius: ${getBorderRadius};
   letter-spacing: ${getLetterSpacing};
   line-height: ${getLineHeight};
-
   font-size: ${getFontSize};
 
   &:hover {
-    cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+    cursor: ${({ disabled, correct, incorrect }) =>
+      disabled || correct || incorrect ? 'not-allowed' : 'pointer'};
   }
+
+  ${getActiveState}
 
   @media (max-width: 400px) {
     min-width: 100%;
@@ -192,18 +211,19 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
   attackIcon,
   buttonType,
   children,
-  className,
   correct,
   incorrect,
   disabled,
-  testId,
+  testID,
   selected,
   onClick,
 }) => {
   return (
     <ButtonContainer
+      className={
+        disabled || correct || incorrect ? 'disabledContainer' : undefined
+      }
       buttonType={buttonType}
-      className={className}
       correct={correct}
       incorrect={incorrect}
       disabled={disabled}
@@ -213,13 +233,11 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
     >
       <GameButton
         buttonType={buttonType}
-        className={className}
         correct={correct}
         incorrect={incorrect}
         disabled={disabled}
-        data-testid={testId}
+        data-testid={testID}
         onClick={onClick}
-        selected={selected}
       >
         {attack && <Icon src={sword} alt="Sword Attack Icon" />}
         {block && <Icon src={shield} alt="Shield Block Icon" />}

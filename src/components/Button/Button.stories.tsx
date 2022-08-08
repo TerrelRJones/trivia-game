@@ -40,12 +40,6 @@ Seth.args = {
   onClick: () => console.log('clicked'),
   children: 'Seth',
 };
-export const Disabled = Template.bind({});
-Disabled.args = {
-  onClick: () => console.log('clicked'),
-  children: 'Abraham Lincoln',
-  disabled: true,
-};
 
 export const Secondary = Template.bind({});
 Secondary.args = {
@@ -60,21 +54,6 @@ SecondaryDisabled.args = {
   onClick: () => console.log('clicked'),
   children: 'Abraham Lincoln',
   disabled: true,
-};
-
-export const SelectedDefault = Template.bind({});
-SelectedDefault.args = {
-  onClick: () => console.log('clicked'),
-  children: 'Abraham Lincoln',
-  selected: true,
-};
-
-export const SelectedSecondary = Template.bind({});
-SelectedSecondary.args = {
-  buttonType: ButtonType.SECONDARY,
-  onClick: () => console.log('clicked'),
-  children: 'Abraham Lincoln',
-  selected: true,
 };
 
 export const LightAttack = Template.bind({});

@@ -10,8 +10,6 @@ interface QuestionDialogProps {
   options: string[];
 }
 
-const StyledQuestionDialogContainer = styled.div``;
-
 const Question = styled.h3`
   color: ${({ theme: { colors } }) => colors.white};
   font-family: 'Lato';
@@ -35,13 +33,13 @@ export const QuestionDialog = ({
   options,
 }: QuestionDialogProps) => {
   return (
-    <StyledQuestionDialogContainer data-testid={testID}>
+    <div data-testid={testID}>
       <Question data-testid="question-text">{question}</Question>
       <AnswerContainer>
         {options.map((potentialAnswer, index) => (
           <AnswerButtonContainer key={index}>
             <Button
-              testId={`button-${index}`}
+              testID={`button-${index}`}
               buttonType={ButtonType.SECONDARY}
             >
               {potentialAnswer}
@@ -49,6 +47,6 @@ export const QuestionDialog = ({
           </AnswerButtonContainer>
         ))}
       </AnswerContainer>
-    </StyledQuestionDialogContainer>
+    </div>
   );
 };

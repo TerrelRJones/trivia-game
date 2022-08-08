@@ -22,12 +22,12 @@ export const ActionDialog = ({ testID }: ActionDialogProps) => {
   return (
     <StyledActionDialogContainer data-testid={testID}>
       <ActionButtonContainer>
-        <Button testId="attack" attack>
+        <Button testID="attack" attack>
           Attack
         </Button>
       </ActionButtonContainer>
       <ActionButtonContainer>
-        <Button testId="block" block>
+        <Button testID="block" block>
           Block
         </Button>
       </ActionButtonContainer>

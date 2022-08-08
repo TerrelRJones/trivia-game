@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { BodyText } from 'styles/styledElements';
 
 interface DialogProps {
   message: string;
@@ -11,11 +12,9 @@ const StyledDialogContainer = styled.div`
   flex-direction: column;
 `;
 
-const Message = styled.p`
+const Message = styled(BodyText)`
   margin: 0;
   margin-bottom: 20px;
-  color: ${({ theme: { colors } }) => colors.white};
-  font-family: 'Lato';
   font-size: 25px;
   letter-spacing: -0.89px;
   line-height: 30px;

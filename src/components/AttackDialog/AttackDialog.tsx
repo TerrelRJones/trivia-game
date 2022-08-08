@@ -9,7 +9,7 @@ interface AttackDialogProps {
   testID?: string;
 }
 
-const StyledAttackDialogContainer = styled.div`
+const AttackDialogContainer = styled.div`
   display: flex;
   gap: 20px;
   max-width: 750px;
@@ -26,10 +26,10 @@ const AttackButtonContainer = styled.div`
 
 export const AttackDialog = ({ testID }: AttackDialogProps) => {
   return (
-    <StyledAttackDialogContainer data-testid={testID}>
+    <AttackDialogContainer data-testid={testID}>
       <AttackButtonContainer>
         <Button
-          testId="light-attack"
+          testID="light-attack"
           buttonType={ButtonType.ATTACK}
           attackIcon={[sword]}
         >
@@ -38,7 +38,7 @@ export const AttackDialog = ({ testID }: AttackDialogProps) => {
       </AttackButtonContainer>
       <AttackButtonContainer>
         <Button
-          testId="medium-attack"
+          testID="medium-attack"
           buttonType={ButtonType.ATTACK}
           attackIcon={[sword, sword]}
         >
@@ -47,13 +47,13 @@ export const AttackDialog = ({ testID }: AttackDialogProps) => {
       </AttackButtonContainer>
       <AttackButtonContainer>
         <Button
-          testId="heavy-attack"
+          testID="heavy-attack"
           buttonType={ButtonType.ATTACK}
           attackIcon={[sword, sword, sword]}
         >
           Heavy Attack
         </Button>
       </AttackButtonContainer>
-    </StyledAttackDialogContainer>
+    </AttackDialogContainer>
   );
 };
