@@ -1,4 +1,4 @@
-import { FunctionComponent, PropsWithChildren } from 'react';
+import { FunctionComponent, PropsWithChildren, useState } from 'react';
 import styled from 'styled-components/macro';
 
 import correctCheckmark from 'assets/images/correct.svg';
@@ -16,7 +16,6 @@ export enum ButtonType {
 export interface ButtonProps {
   attackIcon?: string[];
   buttonType?: ButtonType;
-  className?: string;
   correct?: boolean;
   disabled?: boolean;
   incorrect?: boolean;
@@ -130,6 +129,10 @@ const ButtonContainer = styled.div<StyledButtonProps>`
   &:hover {
     box-shadow: 0 0 9px 8px ${getBoxShadowColor};
   }
+
+  &.active {
+    box-shadow: none;
+  }
 `;
 
 const StyledButton = styled.button<StyledButtonProps>`
@@ -150,11 +153,16 @@ const StyledButton = styled.button<StyledButtonProps>`
   border-radius: ${getBorderRadius};
   letter-spacing: ${getLetterSpacing};
   line-height: ${getLineHeight};
-
   font-size: ${getFontSize};
 
   &:hover {
     cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  }
+
+  &.active {
+    background: ${({ theme: { colors } }) => colors.selectedBtnGradient};
+    box-shadow: 0 0 0 0.25em #0056db;
+    border: 3px solid ${({ theme: { colors } }) => colors.selectedBlue};
   }
 
   @media (max-width: 400px) {
@@ -186,7 +194,6 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
   attackIcon,
   buttonType,
   children,
-  className,
   correct,
   incorrect,
   disabled,
@@ -194,10 +201,12 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
   selected,
   onClick,
 }) => {
+  const [active, setActive] = useState<boolean>(false);
+
   return (
     <ButtonContainer
+      className={active ? 'active' : ''}
       buttonType={buttonType}
-      className={className}
       correct={correct}
       incorrect={incorrect}
       disabled={disabled}
@@ -206,14 +215,13 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
       data-testid="btn-container"
     >
       <StyledButton
+        className={active ? 'active' : 'no'}
         buttonType={buttonType}
-        className={className}
         correct={correct}
         incorrect={incorrect}
         disabled={disabled}
         data-testid={testId}
-        onClick={onClick}
-        selected={selected}
+        onClick={() => setActive(!active)}
       >
         {attackIcon && (
           <AttackIconContainer>
