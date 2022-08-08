@@ -47,12 +47,6 @@ Seth.args = {
   onClick: () => console.log('clicked'),
   children: 'Seth',
 };
-export const Disabled = Template.bind({});
-Disabled.args = {
-  onClick: () => console.log('clicked'),
-  children: 'Abraham Lincoln',
-  disabled: true,
-};
 
 export const Secondary = Template.bind({});
 Secondary.args = {

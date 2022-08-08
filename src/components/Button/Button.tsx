@@ -118,8 +118,22 @@ const getFontSize = ({ buttonType }: StyledButtonProps): string => {
   return '35px';
 };
 
-// Styled components
+const getActiveState = ({
+  disabled,
+  correct,
+  incorrect,
+  theme: { colors },
+}: StyledButtonProps): string | undefined => {
+  if (disabled || correct || incorrect) return;
 
+  return `  &:active {
+    background: ${colors.selectedBtnGradient};
+    box-shadow: 0 0 0 0.25em #0056db;
+    border: 3px solid ${colors.selectedBlue};
+  }`;
+};
+
+// Styled components
 const ButtonContainer = styled.div<StyledButtonProps>`
   height: ${getMaxHeight};
   width: ${getMinWidth};
@@ -156,14 +170,11 @@ const StyledButton = styled.button<StyledButtonProps>`
   font-size: ${getFontSize};
 
   &:hover {
-    cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+    cursor: ${({ disabled, correct, incorrect }) =>
+      disabled || correct || incorrect ? 'not-allowed' : 'pointer'};
   }
 
-  &:active {
-    background: ${({ theme: { colors } }) => colors.selectedBtnGradient};
-    box-shadow: 0 0 0 0.25em #0056db;
-    border: 3px solid ${({ theme: { colors } }) => colors.selectedBlue};
-  }
+  ${getActiveState}
 
   @media (max-width: 400px) {
     min-width: 100%;
