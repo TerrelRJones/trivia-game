@@ -1,4 +1,4 @@
-import { FunctionComponent, PropsWithChildren, useState } from 'react';
+import { FunctionComponent, PropsWithChildren } from 'react';
 import styled from 'styled-components/macro';
 
 import correctCheckmark from 'assets/images/correct.svg';
@@ -130,7 +130,7 @@ const ButtonContainer = styled.div<StyledButtonProps>`
     box-shadow: 0 0 9px 8px ${getBoxShadowColor};
   }
 
-  &.active {
+  &:active {
     box-shadow: none;
   }
 `;
@@ -159,7 +159,7 @@ const StyledButton = styled.button<StyledButtonProps>`
     cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   }
 
-  &.active {
+  &:active {
     background: ${({ theme: { colors } }) => colors.selectedBtnGradient};
     box-shadow: 0 0 0 0.25em #0056db;
     border: 3px solid ${({ theme: { colors } }) => colors.selectedBlue};
@@ -201,11 +201,8 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
   selected,
   onClick,
 }) => {
-  const [active, setActive] = useState<boolean>(false);
-
   return (
     <ButtonContainer
-      className={active ? 'active' : ''}
       buttonType={buttonType}
       correct={correct}
       incorrect={incorrect}
@@ -215,13 +212,12 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
       data-testid="btn-container"
     >
       <StyledButton
-        className={active ? 'active' : 'no'}
         buttonType={buttonType}
         correct={correct}
         incorrect={incorrect}
         disabled={disabled}
         data-testid={testId}
-        onClick={() => setActive(!active)}
+        onClick={onClick}
       >
         {attackIcon && (
           <AttackIconContainer>
