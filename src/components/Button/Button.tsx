@@ -16,7 +16,6 @@ export enum ButtonType {
 export interface ButtonProps {
   attackIcon?: string[];
   buttonType?: ButtonType;
-  className?: string;
   correct?: boolean;
   disabled?: boolean;
   incorrect?: boolean;
@@ -119,17 +118,34 @@ const getFontSize = ({ buttonType }: StyledButtonProps): string => {
   return '35px';
 };
 
-// Styled components
+const getActiveState = ({
+  disabled,
+  correct,
+  incorrect,
+  theme: { colors },
+}: StyledButtonProps): string | undefined => {
+  if (disabled || correct || incorrect) return;
 
+  return `  &:active {
+    background: ${colors.selectedBtnGradient};
+    box-shadow: 0 0 0 0.25em #0056db;
+    border: 3px solid ${colors.selectedBlue};
+  }`;
+};
+
+// Styled components
 const ButtonContainer = styled.div<StyledButtonProps>`
-  max-height: ${getMaxHeight};
-  height: 100%;
-  min-width: ${getMinWidth};
+  height: ${getMaxHeight};
+  width: ${getMinWidth};
   box-shadow: 0 0 0 0.25em ${getBoxShadowColor};
   border-radius: ${getBorderRadius};
 
-  &:hover {
+  &:not(.disabledContainer):hover {
     box-shadow: 0 0 9px 8px ${getBoxShadowColor};
+  }
+
+  &:active {
+    box-shadow: none;
   }
 `;
 
@@ -151,12 +167,14 @@ const StyledButton = styled.button<StyledButtonProps>`
   border-radius: ${getBorderRadius};
   letter-spacing: ${getLetterSpacing};
   line-height: ${getLineHeight};
-
   font-size: ${getFontSize};
 
   &:hover {
-    cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+    cursor: ${({ disabled, correct, incorrect }) =>
+      disabled || correct || incorrect ? 'not-allowed' : 'pointer'};
   }
+
+  ${getActiveState}
 
   @media (max-width: 400px) {
     min-width: 100%;
@@ -187,7 +205,6 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
   attackIcon,
   buttonType,
   children,
-  className,
   correct,
   incorrect,
   disabled,
@@ -197,8 +214,10 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
 }) => {
   return (
     <ButtonContainer
+      className={
+        disabled || correct || incorrect ? 'disabledContainer' : undefined
+      }
       buttonType={buttonType}
-      className={className}
       correct={correct}
       incorrect={incorrect}
       disabled={disabled}
@@ -208,13 +227,11 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
     >
       <StyledButton
         buttonType={buttonType}
-        className={className}
         correct={correct}
         incorrect={incorrect}
         disabled={disabled}
         data-testid={testId}
         onClick={onClick}
-        selected={selected}
       >
         {attackIcon && (
           <AttackIconContainer>
