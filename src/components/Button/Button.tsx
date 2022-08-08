@@ -25,7 +25,7 @@ export interface ButtonProps {
   disabled?: boolean;
   incorrect?: boolean;
   selected?: boolean;
-  testId?: string;
+  testID?: string;
   theme?: any;
   onClick?: () => void;
 }
@@ -196,7 +196,7 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
   correct,
   incorrect,
   disabled,
-  testId,
+  testID,
   selected,
   onClick,
 }) => {
@@ -217,7 +217,7 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
         correct={correct}
         incorrect={incorrect}
         disabled={disabled}
-        data-testid={testId}
+        data-testid={testID}
         onClick={onClick}
         selected={selected}
       >

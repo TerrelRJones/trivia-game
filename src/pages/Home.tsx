@@ -45,7 +45,7 @@ const Home: React.FunctionComponent = () => {
       <StyledBtnContainer>
         <ButtonContainter>
           <Button
-            testId="easy-btn"
+            testID="easy-btn"
             buttonType={ButtonType.EASY}
             onClick={() => console.log('clicked easy')}
           >
