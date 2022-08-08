@@ -38,17 +38,13 @@ const ShadowGradientImg = styled.img`
   left: 50%;
   transform: translateX(-50%);
   bottom: 0;
-  height: 30px;
-  width: 211px;
-  background-color: #28216b;
-  border-radius: 50%;
 `;
 
 const ShadowImg = styled.img`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 15px;
+  bottom: -15px;
 `;
 
 const NameContainer = styled.div`
@@ -63,7 +59,7 @@ const NameContainer = styled.div`
   letter-spacing: -0.96px;
   line-height: 33px;
   text-align: center;
-  margin-top: 23px;
+  margin-top: 38px;
   padding: 5px 15px;
   border-radius: 8px;
 `;
@@ -78,7 +74,7 @@ export const Avatar = ({ name, avatar, testID }: AvatarProps) => {
           src={shadowGradient}
           alt="Avatar Shadow"
         />
-        <ShadowImg data-testid="shadow" src={shadow} alt="Avatar Shadow" />
+        <ShadowImg src={shadow} alt="Shadow Ground Image" />
       </AvatarContainer>
       <NameContainer data-testid="name">{name}</NameContainer>
     </Container>
