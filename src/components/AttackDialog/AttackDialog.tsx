@@ -26,7 +26,7 @@ const AttackButtonContainer = styled.div`
 
 export const AttackDialog = ({ testID }: AttackDialogProps) => {
   return (
-    <AttackDialogContainer data-testId={testID}>
+    <AttackDialogContainer data-testid={testID}>
       <AttackButtonContainer>
         <Button
           testID="light-attack"
