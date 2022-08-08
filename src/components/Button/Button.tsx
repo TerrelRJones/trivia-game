@@ -139,9 +139,8 @@ const getActiveState = ({
 
 // Styled components
 const ButtonContainer = styled.div<StyledButtonProps>`
-  max-height: ${getMaxHeight};
-  height: 100%;
-  min-width: ${getMinWidth};
+  height: ${getMaxHeight};
+  width: ${getMaxWidth};
   box-shadow: 0 0 0 0.25em ${getBoxShadowColor};
   border-radius: ${getBorderRadius};
 
