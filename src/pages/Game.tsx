@@ -1,15 +1,24 @@
+import styled from 'styled-components';
+import {
+  gameDialogSelector,
+  gameRoundSelector,
+} from 'store/game/game.selectors';
+import { useAppSelector } from 'store/hooks';
+
 import Action from 'components/Action';
 import Avatar from 'components/Avatar';
 import HealthBar from 'components/HealthBar';
 import Round from 'components/Round';
-import styled from 'styled-components';
+import Dialog from 'components/Dialog';
+import QuestionDialog from 'components/QuestionDialog';
 
 import foxKnight from 'assets/images/fox-knight.svg';
 import barbarianBunny from 'assets/images/barbarian-bunny.svg';
 
-import { ActionState } from 'components/Action/Action';
-import Dialog from 'components/Dialog';
-import ActionDialog from 'components/ActionDialog';
+import { ActionStateType } from 'models';
+import { questionOne } from 'components/QuestionDialog/mockQuestionData';
+
+const { question, options, answer } = questionOne;
 
 const StyledGameContainer = styled.div`
   display: flex;
@@ -45,27 +54,38 @@ const ActionContainer = styled.div`
   gap: 192px;
 `;
 
-const Game: React.FunctionComponent = () => (
-  <StyledGameContainer>
-    <TopContainer>
-      <HealthBar currentHealth={100} maxHealth={150} />
-      <Round round={1} />
-      <HealthBar isReversed currentHealth={43} maxHealth={150} />
-    </TopContainer>
-    <StyledPlayerContainer>
-      <PlayerContainer>
-        <Avatar avatar={foxKnight} name="Terrel" />
-      </PlayerContainer>
-      <ActionContainer>
-        <Action actionState={ActionState.BLOCK} attackValue={0} />
-        <Action isReversed actionState={ActionState.ATTACK} attackValue={10} />
-      </ActionContainer>
-      <PlayerContainer>
-        <Avatar avatar={barbarianBunny} name="Medium" />
-      </PlayerContainer>
-    </StyledPlayerContainer>
-    <Dialog message="Choose an attack" dialog={<ActionDialog />} />
-  </StyledGameContainer>
-);
+const Game: React.FunctionComponent = () => {
+  const gameDialog = useAppSelector(gameDialogSelector);
+  const gameRound = useAppSelector(gameRoundSelector);
+
+  return (
+    <StyledGameContainer>
+      <TopContainer>
+        <HealthBar currentHealth={100} maxHealth={150} />
+        <Round round={gameRound} />
+        <HealthBar isReversed currentHealth={43} maxHealth={150} />
+      </TopContainer>
+      <StyledPlayerContainer>
+        <PlayerContainer>
+          <Avatar avatar={foxKnight} name="Terrel" />
+        </PlayerContainer>
+        <ActionContainer>
+          <Action actionState={ActionStateType.BLOCK} attackValue={0} />
+          <Action
+            isReversed
+            actionState={ActionStateType.ATTACK}
+            attackValue={10}
+          />
+        </ActionContainer>
+        <PlayerContainer>
+          <Avatar avatar={barbarianBunny} name="Medium" />
+        </PlayerContainer>
+      </StyledPlayerContainer>
+      <Dialog message="Choose an attack">
+        <QuestionDialog question={question} options={options} answer={answer} />
+      </Dialog>
+    </StyledGameContainer>
+  );
+};
 
 export default Game;
