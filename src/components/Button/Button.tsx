@@ -148,7 +148,7 @@ const ButtonContainer = styled.div<StyledButtonProps>`
     box-shadow: 0 0 9px 8px ${getBoxShadowColor};
   }
 
-  &:active {
+  &:not(.disabledContainer):active {
     box-shadow: none;
   }
 `;
