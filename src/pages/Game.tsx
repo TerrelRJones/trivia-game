@@ -55,7 +55,7 @@ const ActionContainer = styled.div`
 `;
 
 const Game: React.FunctionComponent = () => {
-  const gameDialog = useAppSelector(gameDialogSelector);
+  // const gameDialog = useAppSelector(gameDialogSelector);
   const gameRound = useAppSelector(gameRoundSelector);
 
   return (
