@@ -4,7 +4,7 @@ import { BodyText } from 'styles/styledElements';
 interface DialogProps {
   message: string;
   testID?: string;
-  dialog: React.ReactElement;
+  children: React.ReactElement;
 }
 
 const StyledDialogContainer = styled.div`
@@ -33,11 +33,11 @@ const Box = styled.div`
   background-color: rgba(255, 255, 255, 0.15);
 `;
 
-export const Dialog = ({ testID, message, dialog }: DialogProps) => {
+export const Dialog = ({ testID, message, children }: DialogProps) => {
   return (
     <StyledDialogContainer data-testid={testID}>
       <Message data-testid="title">{message}</Message>
-      <Box>{dialog}</Box>
+      <Box>{children}</Box>
     </StyledDialogContainer>
   );
 };
