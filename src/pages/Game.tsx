@@ -48,20 +48,25 @@ const ActionContainer = styled.div`
 const Game: React.FunctionComponent = () => (
   <StyledGameContainer>
     <TopContainer>
-      <HealthBar currentHealth={100} maxHealth={150} />
-      <Round round={1} />
-      <HealthBar isReversed currentHealth={43} maxHealth={150} />
+      <HealthBar testID="health-bar-1" currentHealth={100} maxHealth={150} />
+      <Round testID="round" round={1} />
+      <HealthBar
+        testID="health-bar-2"
+        isReversed
+        currentHealth={43}
+        maxHealth={150}
+      />
     </TopContainer>
     <StyledPlayerContainer>
       <PlayerContainer>
-        <Avatar avatar={foxKnight} name="Terrel" />
+        <Avatar testID="player-1" avatar={foxKnight} name="Terrel" />
       </PlayerContainer>
       <ActionContainer>
         <Action actionState={ActionState.BLOCK} attackValue={0} />
         <Action isReversed actionState={ActionState.ATTACK} attackValue={10} />
       </ActionContainer>
       <PlayerContainer>
-        <Avatar avatar={barbarianBunny} name="Medium" />
+        <Avatar testID="player-2" avatar={barbarianBunny} name="Medium" />
       </PlayerContainer>
     </StyledPlayerContainer>
     <Dialog message="Choose an attack" dialog={<ActionDialog />} />
