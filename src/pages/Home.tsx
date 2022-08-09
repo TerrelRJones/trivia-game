@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 
 import Button from 'components/Button';
 import { ButtonType } from 'components/Button/Button';
@@ -40,9 +39,7 @@ const ButtonContainter = styled.div`
   margin-bottom: 40px;
 `;
 
-const Home: React.FunctionComponent = () => {
-  const navigate = useNavigate();
-
+const Home: React.FC = () => {
   return (
     <StyledLandingPageContainer>
       <Header data-testid="title">Trivia Fighter</Header>
@@ -51,7 +48,7 @@ const Home: React.FunctionComponent = () => {
           <Button
             testID="easy-btn"
             buttonType={ButtonType.EASY}
-            onClick={() => navigate('game')}
+            onClick={() => console.log('working')}
           >
             Easy
           </Button>
@@ -59,13 +56,16 @@ const Home: React.FunctionComponent = () => {
         <ButtonContainter>
           <Button
             buttonType={ButtonType.MEDIUM}
-            onClick={() => navigate('game')}
+            onClick={() => console.log('working')}
           >
             Medium
           </Button>
         </ButtonContainter>
         <ButtonContainter>
-          <Button buttonType={ButtonType.SETH} onClick={() => navigate('game')}>
+          <Button
+            buttonType={ButtonType.SETH}
+            onClick={() => console.log('working')}
+          >
             Seth
           </Button>
         </ButtonContainter>

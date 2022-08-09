@@ -59,21 +59,26 @@ const ActionContainer = styled.div`
   gap: 192px;
 `;
 
-const Game: React.FC<GameTypes> = () => {
+const Game: React.FC<GameTypes> = ({ testID }) => {
   const gameDialog = useAppSelector(gameDialogSelector);
   const gameRound = useAppSelector(gameRoundSelector);
   const { question, options, answer } = questionOne;
 
   return (
-    <StyledGameContainer>
+    <StyledGameContainer data-testid={testID}>
       <TopContainer>
-        <HealthBar currentHealth={100} maxHealth={150} />
-        <Round round={gameRound} />
-        <HealthBar isReversed currentHealth={43} maxHealth={150} />
+        <HealthBar testID="health-bar-1" currentHealth={100} maxHealth={150} />
+        <Round testID="round" round={gameRound} />
+        <HealthBar
+          testID="health-bar-2"
+          isReversed
+          currentHealth={43}
+          maxHealth={150}
+        />
       </TopContainer>
       <StyledPlayerContainer>
         <PlayerContainer>
-          <Avatar avatar={foxKnight} name="Terrel" />
+          <Avatar testID="player-1" avatar={foxKnight} name="Terrel" />
         </PlayerContainer>
         <ActionContainer>
           <Action actionState={ActionStateType.BLOCK} attackValue={0} />
@@ -84,24 +89,24 @@ const Game: React.FC<GameTypes> = () => {
           />
         </ActionContainer>
         <PlayerContainer>
-          <Avatar avatar={barbarianBunny} name="Medium" />
+          <Avatar testID="player-2" avatar={barbarianBunny} name="Medium" />
         </PlayerContainer>
       </StyledPlayerContainer>
 
       {gameDialog === DialogStageType.ACTION && (
-        <Dialog message="Choose an attack">
+        <Dialog testID="dialog" message="Choose an attack">
           <ActionDialog />
         </Dialog>
       )}
 
       {gameDialog === DialogStageType.ATTACKING && (
-        <Dialog message="Attack strength">
+        <Dialog testID="dialog" message="Attack strength">
           <AttackDialog />
         </Dialog>
       )}
 
       {gameDialog === DialogStageType.ANSWERING && (
-        <Dialog message="Choose wisely...">
+        <Dialog testID="dialog" message="Choose wisely...">
           <QuestionDialog
             question={question}
             options={options}
