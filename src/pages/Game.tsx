@@ -15,8 +15,10 @@ import QuestionDialog from 'components/QuestionDialog';
 import foxKnight from 'assets/images/fox-knight.svg';
 import barbarianBunny from 'assets/images/barbarian-bunny.svg';
 
-import { ActionStateType } from 'models';
+import { ActionStateType, DialogStageType } from 'models';
 import { questionOne } from 'components/QuestionDialog/mockQuestionData';
+import ActionDialog from 'components/ActionDialog';
+import AttackDialog from 'components/AttackDialog';
 
 const { question, options, answer } = questionOne;
 
@@ -56,7 +58,6 @@ const ActionContainer = styled.div`
 
 const Game: React.FunctionComponent = () => {
   const gameDialog = useAppSelector(gameDialogSelector);
-  console.log(gameDialog);
   const gameRound = useAppSelector(gameRoundSelector);
 
   return (
@@ -82,9 +83,28 @@ const Game: React.FunctionComponent = () => {
           <Avatar avatar={barbarianBunny} name="Medium" />
         </PlayerContainer>
       </StyledPlayerContainer>
-      <Dialog message="Choose an attack">
-        <QuestionDialog question={question} options={options} answer={answer} />
-      </Dialog>
+
+      {gameDialog === DialogStageType.ACTION && (
+        <Dialog message="Choose an attack">
+          <ActionDialog />
+        </Dialog>
+      )}
+
+      {gameDialog === DialogStageType.ATTACKING && (
+        <Dialog message="Attack strength">
+          <AttackDialog />
+        </Dialog>
+      )}
+
+      {gameDialog === DialogStageType.ANSWERING && (
+        <Dialog message="Choose wisely...">
+          <QuestionDialog
+            question={question}
+            options={options}
+            answer={answer}
+          />
+        </Dialog>
+      )}
     </StyledGameContainer>
   );
 };

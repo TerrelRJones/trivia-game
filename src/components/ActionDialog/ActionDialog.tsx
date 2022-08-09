@@ -1,5 +1,7 @@
-import Button from 'components/Button';
 import styled from 'styled-components';
+import Button from 'components/Button';
+
+import { useAttack, useBlock } from 'store/game/game.hooks';
 
 interface ActionDialogProps {
   testID?: string;
@@ -19,15 +21,18 @@ const ActionButtonContainer = styled.div`
 `;
 
 export const ActionDialog = ({ testID }: ActionDialogProps) => {
+  const attack = useAttack();
+  const block = useBlock();
+
   return (
     <StyledActionDialogContainer data-testid={testID}>
       <ActionButtonContainer>
-        <Button testID="attack" attack>
+        <Button testID="attack" onClick={attack} attack>
           Attack
         </Button>
       </ActionButtonContainer>
       <ActionButtonContainer>
-        <Button testID="block" block>
+        <Button testID="block" onClick={block} block>
           Block
         </Button>
       </ActionButtonContainer>

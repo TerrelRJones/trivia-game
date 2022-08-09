@@ -10,7 +10,7 @@ export interface GameState {
 
 export const initialState: GameState = {
   round: 1,
-  dialogStage: DialogStageType.DIFFICULTY,
+  dialogStage: DialogStageType.ACTION,
   action: ActionStateType.NONE,
   attackStrength: AttackStrengthType.EASY,
 };
@@ -48,6 +48,24 @@ export const gameSlice = createSlice({
     answered: (state) => {
       state.dialogStage = DialogStageType.ANSWERED;
     },
+
+    answeredVerify: (state, action: PayloadAction<boolean>) => {
+      if (action.payload && state.action === ActionStateType.ATTACK) {
+        state.dialogStage = DialogStageType.ATTACKING;
+      }
+      if (state.action === ActionStateType.BLOCK && action.payload) {
+        state.dialogStage = DialogStageType.ACTION;
+        state.action = ActionStateType.NONE;
+      }
+
+      if (
+        (!action.payload && state.action === ActionStateType.BLOCK) ||
+        state.action === ActionStateType.ATTACK
+      ) {
+        state.dialogStage = DialogStageType.ACTION;
+        state.action = ActionStateType.NONE;
+      }
+    },
   },
 });
 
@@ -59,6 +77,7 @@ export const {
   attackStrength,
   block,
   answered,
+  answeredVerify,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
