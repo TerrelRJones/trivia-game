@@ -3,6 +3,7 @@ import {
   gameDialogSelector,
   gameRoundSelector,
 } from 'store/game/game.selectors';
+
 import { useAppSelector } from 'store/hooks';
 
 import Action from 'components/Action';
@@ -11,6 +12,7 @@ import HealthBar from 'components/HealthBar';
 import Round from 'components/Round';
 import Dialog from 'components/Dialog';
 import QuestionDialog from 'components/QuestionDialog';
+import AttackDialog from 'components/AttackDialog';
 
 import foxKnight from 'assets/images/fox-knight.svg';
 import barbarianBunny from 'assets/images/barbarian-bunny.svg';
@@ -18,9 +20,10 @@ import barbarianBunny from 'assets/images/barbarian-bunny.svg';
 import { ActionStateType, DialogStageType } from 'models';
 import { questionOne } from 'components/QuestionDialog/mockQuestionData';
 import ActionDialog from 'components/ActionDialog';
-import AttackDialog from 'components/AttackDialog';
 
-const { question, options, answer } = questionOne;
+interface GameTypes {
+  testID?: string;
+}
 
 const StyledGameContainer = styled.div`
   display: flex;
@@ -56,9 +59,10 @@ const ActionContainer = styled.div`
   gap: 192px;
 `;
 
-const Game: React.FunctionComponent = () => {
+const Game: React.FC<GameTypes> = () => {
   const gameDialog = useAppSelector(gameDialogSelector);
   const gameRound = useAppSelector(gameRoundSelector);
+  const { question, options, answer } = questionOne;
 
   return (
     <StyledGameContainer>
