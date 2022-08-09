@@ -3,16 +3,11 @@ import styled from 'styled-components/macro';
 import swordIcon from 'assets/images/sword.svg';
 import shieldIcon from 'assets/images/shield.svg';
 import { BodyText } from 'styles/styledElements';
-
-export enum ActionState {
-  NONE = 'none',
-  BLOCK = 'block',
-  ATTACK = 'attack',
-}
+import { ActionStateType } from 'models';
 
 interface ActionProps {
   isReversed?: boolean;
-  actionState: ActionState;
+  actionState: ActionStateType;
   attackValue: number;
   testID?: string;
 }
@@ -46,7 +41,7 @@ export const Action = ({
 }: ActionProps) => {
   return (
     <AttackContainer data-testid={testID} isReversed={isReversed}>
-      {actionState === ActionState.ATTACK && (
+      {actionState === ActionStateType.ATTACK && (
         <>
           <AttackPoints data-testid="attack-value">{attackValue}</AttackPoints>
           <Icon
@@ -57,7 +52,7 @@ export const Action = ({
           />
         </>
       )}
-      {actionState === ActionState.BLOCK && (
+      {actionState === ActionStateType.BLOCK && (
         <Icon data-testid="shield-icon" src={shieldIcon} alt="Shield Icon" />
       )}
     </AttackContainer>
