@@ -49,7 +49,7 @@ const ActionContainer = styled.div`
   gap: 192px;
 `;
 
-const Game: React.FunctionComponent = ({ testID }: GameTypes) => (
+const Game: React.FC<GameTypes> = ({ testID }) => (
   <GameContainer data-testid={testID}>
     <TopContainer>
       <HealthBar testID="health-bar-1" currentHealth={100} maxHealth={150} />

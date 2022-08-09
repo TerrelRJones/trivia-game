@@ -5,7 +5,7 @@ import Game from './Game';
 
 describe('Game Page', () => {
   it('should render all game ui to screen. Both healthBars, Round, Players, and Dialog Box.', () => {
-    renderWithProviders(<Game />);
+    renderWithProviders(<Game testID="game-ui" />);
 
     expect(screen.getByTestId('game-ui')).toBeInTheDocument();
     expect(screen.getByTestId('health-bar-1')).toBeInTheDocument();
