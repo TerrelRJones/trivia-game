@@ -11,7 +11,11 @@ import { ActionState } from 'components/Action/Action';
 import Dialog from 'components/Dialog';
 import ActionDialog from 'components/ActionDialog';
 
-const StyledGameContainer = styled.div`
+interface GameTypes {
+  testID?: string;
+}
+
+const GameContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,8 +49,8 @@ const ActionContainer = styled.div`
   gap: 192px;
 `;
 
-const Game: React.FunctionComponent = () => (
-  <StyledGameContainer>
+const Game: React.FunctionComponent = ({ testID }: GameTypes) => (
+  <GameContainer data-testid={testID}>
     <TopContainer>
       <HealthBar testID="health-bar-1" currentHealth={100} maxHealth={150} />
       <Round testID="round" round={1} />
@@ -69,8 +73,12 @@ const Game: React.FunctionComponent = () => (
         <Avatar testID="player-2" avatar={barbarianBunny} name="Medium" />
       </PlayerContainer>
     </StyledPlayerContainer>
-    <Dialog message="Choose an attack" dialog={<ActionDialog />} />
-  </StyledGameContainer>
+    <Dialog
+      testID="dialog"
+      message="Choose an attack"
+      dialog={<ActionDialog />}
+    />
+  </GameContainer>
 );
 
 export default Game;
