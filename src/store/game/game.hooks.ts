@@ -27,7 +27,7 @@ export const useBlock = () => {
   return () => dispatch(block());
 };
 
-export const useAttackStrength = (strength: AttackStrengthType) => {
+export const useAttackStrength = () => {
   const dispatch = useAppDispatch();
-  return () => dispatch(attackStrength(strength));
+  return (strength: AttackStrengthType) => dispatch(attackStrength(strength));
 };
