@@ -11,6 +11,9 @@ const theme: DefaultTheme = {
     sethRed: '#A30000',
     selectedBlue: '#2000AC',
 
+    healthGreenGradient: 'linear-gradient(270deg, #1CFF00 0%, #0F8C00 100%)',
+    healthRedGradient: 'linear-gradient(270deg, #FF0000 0%, #960000 100%)',
+
     selected: '#00c6f3',
     success: '#1cff00',
 
@@ -24,6 +27,7 @@ const theme: DefaultTheme = {
     defaultBtnGradient: 'linear-gradient(180deg, #02f3fe 0%, #7f2eff 100%);',
     selectedBtnGradient: 'linear-gradient(0deg, #000767 0%, #0056DB 100%);',
   },
+  fontFamily: { body: 'Lato' },
 };
 
 export default theme;
