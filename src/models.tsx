@@ -17,3 +17,14 @@ export enum AttackStrengthType {
   MEDIUM = 'medium',
   HARD = 'hard',
 }
+
+export enum QuestionStatus {
+  IDLE = 'idle',
+  LOADING = 'loading',
+}
+
+export enum AttackPower {
+  LIGHT = 'light',
+  MEDIUM = 'medium',
+  HEAVY = 'heavy',
+}

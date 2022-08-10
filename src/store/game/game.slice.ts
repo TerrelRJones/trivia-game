@@ -1,11 +1,27 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ActionStateType, DialogStageType, AttackStrengthType } from 'models';
+import { Attack } from 'components/Action/Action.stories';
+import {
+  ActionStateType,
+  DialogStageType,
+  AttackStrengthType,
+  QuestionStatus,
+  AttackPower,
+} from 'models';
+
+type questionData = {
+  status: QuestionStatus;
+  text: string;
+  answwer: string;
+  choices: string[];
+};
 
 export interface GameState {
   round: number;
   dialogStage: DialogStageType;
   action: ActionStateType;
   attackStrength: AttackStrengthType;
+  question: questionData;
+  attackPower: AttackPower;
 }
 
 export const initialState: GameState = {
@@ -13,6 +29,13 @@ export const initialState: GameState = {
   dialogStage: DialogStageType.ACTION,
   action: ActionStateType.NONE,
   attackStrength: AttackStrengthType.EASY,
+  attackPower: AttackPower.LIGHT,
+  question: {
+    status: QuestionStatus.IDLE,
+    text: '',
+    answwer: '',
+    choices: [''],
+  },
 };
 
 export const gameSlice = createSlice({
@@ -33,6 +56,10 @@ export const gameSlice = createSlice({
     attack: (state) => {
       state.dialogStage = DialogStageType.ATTACKING;
       state.action = ActionStateType.ATTACK;
+    },
+
+    attackPower: (state, action: PayloadAction<AttackPower>) => {
+      state.attackPower = action.payload;
     },
 
     attackStrength: (state, action: PayloadAction<AttackStrengthType>) => {
