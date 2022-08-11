@@ -70,9 +70,9 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
 
   useEffect(() => {
     if (gameDialog === DialogStageType.DIFFICULTY) {
-      return navigate('home');
+      return navigate('/');
     }
-  }, [gameDialog]);
+  }, [gameDialog, navigate]);
 
   return (
     <StyledGameContainer data-testid={testID}>
