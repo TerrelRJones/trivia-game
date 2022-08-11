@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 
 import swordIcon from 'assets/images/sword.svg';
 import shieldIcon from 'assets/images/shield.svg';
-import { BodyText } from 'styles/styledElements';
+import { BodyText, ScreenReaderOnly } from 'styles/styledElements';
 
 export enum ActionState {
   NONE = 'none',
@@ -38,37 +38,22 @@ const Icon = styled.img<Pick<ActionProps, 'isReversed'>>`
   transform: ${({ isReversed }) => isReversed && 'scaleX(-1)'};
 `;
 
-const ScreenReaderOnly = styled.p`
-  border: 0;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-
-  &:active,
-  &:focus {
-    clip: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    position: static;
-    width: auto;
-  }
-`;
-
 export const Action = ({
   isReversed,
   actionState,
   attackValue,
   testID,
 }: ActionProps) => {
+  const attacking = actionState === ActionState.ATTACK;
+  const blocking = actionState === ActionState.BLOCK;
+
   return (
     <AttackContainer data-testid={testID} isReversed={isReversed}>
-      <ScreenReaderOnly>Currently attacking for {attackValue}</ScreenReaderOnly>
-      {actionState === ActionState.ATTACK && (
+      <ScreenReaderOnly>
+        {attacking && `Currently attacking for ${attackValue}`}
+        {blocking && 'Currently blocking.'}
+      </ScreenReaderOnly>
+      {attacking && (
         <>
           <AttackPoints data-testid="attack-value">{attackValue}</AttackPoints>
           <Icon
@@ -79,7 +64,7 @@ export const Action = ({
           />
         </>
       )}
-      {actionState === ActionState.BLOCK && (
+      {blocking && (
         <Icon data-testid="shield-icon" src={shieldIcon} alt="Shield Icon" />
       )}
     </AttackContainer>
