@@ -5,7 +5,7 @@ import {
   RenderHookOptions,
   RenderOptions,
 } from '@testing-library/react';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, Store } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 
@@ -19,13 +19,13 @@ import theme from 'styles/theme.styled';
 // as allows the user to specify other things such as initialState, store.
 export interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
-  store?: AppStore;
+  store?: Store;
 }
 
 export interface ExtendedRenderHookOptions<Props>
   extends Omit<RenderHookOptions<Props>, 'wrapper'> {
   preloadedState?: PreloadedState<RootState>;
-  store?: AppStore;
+  store?: Store;
 }
 
 const setupStore = (preloadedState?: PreloadedState<RootState>) => {
