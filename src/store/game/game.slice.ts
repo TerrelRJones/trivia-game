@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Attack } from 'components/Action/Action.stories';
+
 import {
   ActionStateType,
   DialogStageType,
@@ -8,10 +8,10 @@ import {
   AttackPower,
 } from 'models';
 
-type questionData = {
+export type questionData = {
   status: QuestionStatus;
   text: string;
-  answwer: string;
+  answer: string;
   choices: string[];
 };
 
@@ -26,17 +26,21 @@ export interface GameState {
 
 export const initialState: GameState = {
   round: 1,
-  dialogStage: DialogStageType.ACTION,
+  dialogStage: DialogStageType.ACTION, // <-- Change back to difficulty
   action: ActionStateType.NONE,
   attackStrength: AttackStrengthType.EASY,
   attackPower: AttackPower.LIGHT,
   question: {
     status: QuestionStatus.IDLE,
     text: '',
-    answwer: '',
-    choices: [''],
+    answer: '',
+    choices: [],
   },
 };
+
+export type GetQuestionPayloadAction = PayloadAction<{
+  difficulty: AttackStrengthType;
+}>;
 
 export const gameSlice = createSlice({
   name: 'game',
@@ -45,6 +49,7 @@ export const gameSlice = createSlice({
     setRound: (state, action: PayloadAction<number>) => {
       state.round = action.payload;
     },
+
     setDifficulty: (state, action: PayloadAction<DialogStageType>) => {
       state.dialogStage = action.payload;
     },
@@ -58,6 +63,11 @@ export const gameSlice = createSlice({
       state.action = ActionStateType.ATTACK;
     },
 
+    block: (state) => {
+      state.dialogStage = DialogStageType.ANSWERING;
+      state.action = ActionStateType.BLOCK;
+    },
+
     attackPower: (state, action: PayloadAction<AttackPower>) => {
       state.attackPower = action.payload;
     },
@@ -67,13 +77,21 @@ export const gameSlice = createSlice({
       state.attackStrength = action.payload;
     },
 
-    block: (state) => {
-      state.dialogStage = DialogStageType.ANSWERING;
-      state.action = ActionStateType.BLOCK;
+    getQuestionSuccess: (state, action: PayloadAction<questionData>) => {
+      state.question = action.payload;
     },
 
-    answered: (state) => {
+    getQuestion: (state, action: GetQuestionPayloadAction) => {},
+
+    answered: (state, action: PayloadAction<string>) => {
       state.dialogStage = DialogStageType.ANSWERED;
+
+      if (state.question.answer === action.payload) {
+        state.dialogStage = DialogStageType.ATTACKING;
+      } else {
+        state.dialogStage = DialogStageType.ACTION;
+        state.action = ActionStateType.NONE;
+      }
     },
 
     answeredVerify: (state, action: PayloadAction<boolean>) => {
@@ -101,10 +119,13 @@ export const {
   action,
   setDifficulty,
   attack,
+  attackPower,
   attackStrength,
   block,
   answered,
   answeredVerify,
+  getQuestionSuccess,
+  getQuestion,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
