@@ -65,7 +65,10 @@ const Home: React.FC = () => {
         <ButtonContainter>
           <Button
             buttonType={ButtonType.MEDIUM}
-            onClick={() => console.log('working')}
+            onClick={() => {
+              setDifficulty(DialogStageType.ACTION);
+              navigate('/game');
+            }}
           >
             Medium
           </Button>
@@ -73,7 +76,10 @@ const Home: React.FC = () => {
         <ButtonContainter>
           <Button
             buttonType={ButtonType.SETH}
-            onClick={() => console.log('working')}
+            onClick={() => {
+              setDifficulty(DialogStageType.ACTION);
+              navigate('/game');
+            }}
           >
             Seth
           </Button>
