@@ -8,7 +8,7 @@ interface RoundProps {
 export const Round = ({ round, testID }: RoundProps) => {
   return (
     <div>
-      <Title data-testid={testID}>Round: {round}</Title>
+      <Title data-testid={testID}>Round {round}</Title>
     </div>
   );
 };
