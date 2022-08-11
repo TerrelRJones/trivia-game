@@ -4,8 +4,12 @@ import styled from 'styled-components';
 import { ButtonType } from 'components/Button/Button';
 
 import sword from 'assets/images/sword.svg';
-import { useAttackStrength } from 'store/game/game.hooks';
-import { AttackStrengthType } from 'models';
+import {
+  useAttackPower,
+  useAttackStrength,
+  useGetQuestion,
+} from 'store/game/game.hooks';
+import { AttackPower, AttackStrengthType } from 'models';
 
 interface AttackDialogProps {
   testID?: string;
@@ -28,6 +32,8 @@ const AttackButtonContainer = styled.div`
 
 export const AttackDialog = ({ testID }: AttackDialogProps) => {
   const attackStrength = useAttackStrength();
+  const getQuestion = useGetQuestion();
+  const attackPower = useAttackPower();
 
   return (
     <AttackDialogContainer data-testid={testID}>
@@ -36,7 +42,11 @@ export const AttackDialog = ({ testID }: AttackDialogProps) => {
           testID="light-attack"
           buttonType={ButtonType.ATTACK}
           attackIcon={[sword]}
-          onClick={() => attackStrength(AttackStrengthType.EASY)}
+          onClick={() => {
+            attackStrength(AttackStrengthType.EASY);
+            getQuestion(AttackStrengthType.EASY);
+            attackPower(AttackPower.LIGHT);
+          }}
         >
           Light Attack
         </Button>
@@ -46,7 +56,11 @@ export const AttackDialog = ({ testID }: AttackDialogProps) => {
           testID="medium-attack"
           buttonType={ButtonType.ATTACK}
           attackIcon={[sword, sword]}
-          onClick={() => attackStrength(AttackStrengthType.MEDIUM)}
+          onClick={() => {
+            attackStrength(AttackStrengthType.MEDIUM);
+            getQuestion(AttackStrengthType.MEDIUM);
+            attackPower(AttackPower.MEDIUM);
+          }}
         >
           Medium Attack
         </Button>
@@ -56,7 +70,11 @@ export const AttackDialog = ({ testID }: AttackDialogProps) => {
           testID="heavy-attack"
           buttonType={ButtonType.ATTACK}
           attackIcon={[sword, sword, sword]}
-          onClick={() => attackStrength(AttackStrengthType.HARD)}
+          onClick={() => {
+            attackStrength(AttackStrengthType.HARD);
+            getQuestion(AttackStrengthType.HARD);
+            attackPower(AttackPower.HEAVY);
+          }}
         >
           Heavy Attack
         </Button>
