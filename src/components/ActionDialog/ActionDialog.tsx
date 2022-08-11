@@ -7,7 +7,7 @@ interface ActionDialogProps {
   testID?: string;
 }
 
-const StyledActionDialogContainer = styled.div`
+const ActionDialogContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,7 +25,7 @@ export const ActionDialog = ({ testID }: ActionDialogProps) => {
   const block = useBlock();
 
   return (
-    <StyledActionDialogContainer data-testid={testID}>
+    <ActionDialogContainer data-testid={testID}>
       <ActionButtonContainer>
         <Button testID="attack" onClick={attack} attack>
           Attack
@@ -36,6 +36,6 @@ export const ActionDialog = ({ testID }: ActionDialogProps) => {
           Block
         </Button>
       </ActionButtonContainer>
-    </StyledActionDialogContainer>
+    </ActionDialogContainer>
   );
 };
