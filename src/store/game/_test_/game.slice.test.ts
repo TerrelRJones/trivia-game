@@ -10,7 +10,15 @@ import gameReducer, {
 } from 'store/game/game.slice';
 
 import { MOCK_GAME_STATE } from 'store/mocks/game.mocks';
-import { ActionStateType, AttackStrengthType, DialogStageType } from 'models';
+import { questionOne } from 'components/QuestionDialog/mockQuestionData';
+import {
+  ActionStateType,
+  AttackStrengthType,
+  DialogStageType,
+  AttackPower,
+} from 'models';
+
+const { status, text, choices, answer } = questionOne;
 
 describe('Game Slice reducer', () => {
   it('should return the initial state when no previous state', () => {
@@ -23,6 +31,13 @@ describe('Game Slice reducer', () => {
       dialogStage: 'attacking',
       action: 'block',
       attackStrength: 'easy',
+      attackPower: AttackPower.LIGHT,
+      question: {
+        status,
+        text,
+        choices,
+        answer,
+      },
     });
   });
 
@@ -32,6 +47,13 @@ describe('Game Slice reducer', () => {
       dialogStage: 'attacking',
       action: 'none',
       attackStrength: 'easy',
+      attackPower: AttackPower.LIGHT,
+      question: {
+        status,
+        text,
+        choices,
+        answer,
+      },
     });
   });
 
@@ -43,6 +65,13 @@ describe('Game Slice reducer', () => {
       dialogStage: 'answering',
       action: 'block',
       attackStrength: 'easy',
+      attackPower: AttackPower.LIGHT,
+      question: {
+        status,
+        text,
+        choices,
+        answer,
+      },
     });
   });
 
@@ -52,6 +81,13 @@ describe('Game Slice reducer', () => {
       dialogStage: 'attacking',
       action: 'attack',
       attackStrength: 'easy',
+      attackPower: AttackPower.LIGHT,
+      question: {
+        status,
+        text,
+        choices,
+        answer,
+      },
     });
   });
 
@@ -63,6 +99,13 @@ describe('Game Slice reducer', () => {
       dialogStage: 'answering',
       action: 'block',
       attackStrength: 'hard',
+      attackPower: AttackPower.LIGHT,
+      question: {
+        status,
+        text,
+        choices,
+        answer,
+      },
     });
   });
 
@@ -72,15 +115,29 @@ describe('Game Slice reducer', () => {
       dialogStage: 'answering',
       action: 'block',
       attackStrength: 'easy',
+      attackPower: AttackPower.LIGHT,
+      question: {
+        status,
+        text,
+        choices,
+        answer,
+      },
     });
   });
 
   it('should set dialogStage to answered if answered function called', () => {
-    expect(gameReducer(MOCK_GAME_STATE, answered())).toEqual({
+    expect(gameReducer(MOCK_GAME_STATE, answered('test'))).toEqual({
       round: 2,
       dialogStage: 'answered',
       action: 'block',
       attackStrength: 'easy',
+      attackPower: AttackPower.LIGHT,
+      question: {
+        status,
+        text,
+        choices,
+        answer,
+      },
     });
   });
 });
