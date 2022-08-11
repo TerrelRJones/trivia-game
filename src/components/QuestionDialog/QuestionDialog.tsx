@@ -2,6 +2,7 @@ import Button from 'components/Button';
 import styled from 'styled-components';
 
 import { ButtonType } from 'components/Button/Button';
+import { useAnswered } from 'store/game/game.hooks';
 
 interface QuestionDialogProps {
   testID?: string;
@@ -29,9 +30,11 @@ const AnswerButtonContainer = styled.div``;
 export const QuestionDialog = ({
   testID,
   question,
-  answer,
   options,
+  answer,
 }: QuestionDialogProps) => {
+  const userAnswer = useAnswered();
+
   return (
     <div data-testid={testID}>
       <Question data-testid="question-text">{question}</Question>
@@ -41,6 +44,7 @@ export const QuestionDialog = ({
             <Button
               testID={`button-${index}`}
               buttonType={ButtonType.SECONDARY}
+              onClick={() => userAnswer(potentialAnswer)}
             >
               {potentialAnswer}
             </Button>
