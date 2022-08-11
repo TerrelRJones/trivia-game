@@ -91,7 +91,7 @@ describe('Game Slice reducer', () => {
     });
   });
 
-  it('should set attackStrength to hard, and dialog to answering', () => {
+  it('should set attackStrength to hard, dialogStage to answering, and attackPower to heavy', () => {
     expect(
       gameReducer(MOCK_GAME_STATE, attackStrength(AttackStrengthType.HARD))
     ).toEqual({
@@ -99,7 +99,7 @@ describe('Game Slice reducer', () => {
       dialogStage: DialogStageType.ANSWERING,
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.HARD,
-      attackPower: AttackPower.LIGHT,
+      attackPower: AttackPower.HEAVY,
       question: {
         status,
         text,

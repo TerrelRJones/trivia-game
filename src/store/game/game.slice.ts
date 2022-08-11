@@ -75,6 +75,14 @@ export const gameSlice = createSlice({
     attackStrength: (state, action: PayloadAction<AttackStrengthType>) => {
       state.dialogStage = DialogStageType.ANSWERING;
       state.attackStrength = action.payload;
+
+      if (action.payload === AttackStrengthType.EASY) {
+        state.attackPower = AttackPower.LIGHT;
+      } else if (action.payload === AttackStrengthType.MEDIUM) {
+        state.attackPower = AttackPower.MEDIUM;
+      } else {
+        state.attackPower = AttackPower.HEAVY;
+      }
     },
 
     getQuestionSuccess: (state, action: PayloadAction<questionData>) => {
