@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 import Button from 'components/Button';
 import { ButtonType } from 'components/Button/Button';
+import { useNavigate } from 'react-router-dom';
+import { useSetDifficulty } from 'store/game/game.hooks';
+import { DialogStageType } from 'models';
 
 const StyledLandingPageContainer = styled.div`
   display: flex;
@@ -40,6 +43,9 @@ const ButtonContainter = styled.div`
 `;
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+  const setDifficulty = useSetDifficulty();
+
   return (
     <StyledLandingPageContainer>
       <Header data-testid="title">Trivia Fighter</Header>
@@ -48,7 +54,10 @@ const Home: React.FC = () => {
           <Button
             testID="easy-btn"
             buttonType={ButtonType.EASY}
-            onClick={() => console.log('working')}
+            onClick={() => {
+              setDifficulty(DialogStageType.ACTION);
+              navigate('/game');
+            }}
           >
             Easy
           </Button>
