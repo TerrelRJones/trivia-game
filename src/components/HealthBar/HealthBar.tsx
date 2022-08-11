@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import healthBarFull from 'assets/images/health-full.svg';
 import healthBarLow from 'assets/images/health-low.svg';
+import { ScreenReaderOnly } from 'styles/styledElements';
 
 interface HealthBarProps {
   isReversed?: boolean;
@@ -77,6 +78,10 @@ export const HealthBar = ({
 }: HealthBarProps) => {
   return (
     <Container data-testid={testID} isReversed={isReversed}>
+      <ScreenReaderOnly>
+        Health is {Math.floor((currentHealth / maxHealth) * 100)}%,
+        {currentHealth} of {maxHealth}
+      </ScreenReaderOnly>
       <HealthBarContainer isReversed={isReversed}>
         <HeartImage
           data-testid="heart-icon"

@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 
 import swordIcon from 'assets/images/sword.svg';
 import shieldIcon from 'assets/images/shield.svg';
-import { BodyText } from 'styles/styledElements';
+import { BodyText, ScreenReaderOnly } from 'styles/styledElements';
 import { ActionStateType } from 'models';
 
 interface ActionProps {
@@ -39,9 +39,16 @@ export const Action = ({
   attackValue,
   testID,
 }: ActionProps) => {
+  const attacking = actionState === ActionStateType.ATTACK;
+  const blocking = actionState === ActionStateType.BLOCK;
+
   return (
     <AttackContainer data-testid={testID} isReversed={isReversed}>
-      {actionState === ActionStateType.ATTACK && (
+      <ScreenReaderOnly>
+        {attacking && `Currently attacking for ${attackValue}`}
+        {blocking && 'Currently blocking.'}
+      </ScreenReaderOnly>
+      {attacking && (
         <>
           <AttackPoints data-testid="attack-value">{attackValue}</AttackPoints>
           <Icon
@@ -52,7 +59,7 @@ export const Action = ({
           />
         </>
       )}
-      {actionState === ActionStateType.BLOCK && (
+      {blocking && (
         <Icon data-testid="shield-icon" src={shieldIcon} alt="Shield Icon" />
       )}
     </AttackContainer>
