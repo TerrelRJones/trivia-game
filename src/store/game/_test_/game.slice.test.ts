@@ -28,9 +28,9 @@ describe('Game Slice reducer', () => {
   it('setRound should set the current round', () => {
     expect(gameReducer(MOCK_GAME_STATE, setRound(4))).toEqual({
       round: 4,
-      dialogStage: 'attacking',
-      action: 'block',
-      attackStrength: 'easy',
+      dialogStage: DialogStageType.ATTACKING,
+      action: ActionStateType.BLOCK,
+      attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
       question: {
         status,
@@ -44,9 +44,9 @@ describe('Game Slice reducer', () => {
   it('ActionState.NONE should set action to "none"', () => {
     expect(gameReducer(MOCK_GAME_STATE, action(ActionStateType.NONE))).toEqual({
       round: 2,
-      dialogStage: 'attacking',
-      action: 'none',
-      attackStrength: 'easy',
+      dialogStage: DialogStageType.ATTACKING,
+      action: ActionStateType.NONE,
+      attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
       question: {
         status,
@@ -62,9 +62,9 @@ describe('Game Slice reducer', () => {
       gameReducer(MOCK_GAME_STATE, setDifficulty(DialogStageType.ANSWERING))
     ).toEqual({
       round: 2,
-      dialogStage: 'answering',
-      action: 'block',
-      attackStrength: 'easy',
+      dialogStage: DialogStageType.ANSWERING,
+      action: ActionStateType.BLOCK,
+      attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
       question: {
         status,
@@ -78,9 +78,9 @@ describe('Game Slice reducer', () => {
   it('should set dialogStage to attacking, and action to attack', () => {
     expect(gameReducer(MOCK_GAME_STATE, attack())).toEqual({
       round: 2,
-      dialogStage: 'attacking',
-      action: 'attack',
-      attackStrength: 'easy',
+      dialogStage: DialogStageType.ATTACKING,
+      action: ActionStateType.ATTACK,
+      attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
       question: {
         status,
@@ -96,9 +96,9 @@ describe('Game Slice reducer', () => {
       gameReducer(MOCK_GAME_STATE, attackStrength(AttackStrengthType.HARD))
     ).toEqual({
       round: 2,
-      dialogStage: 'answering',
-      action: 'block',
-      attackStrength: 'hard',
+      dialogStage: DialogStageType.ANSWERING,
+      action: ActionStateType.BLOCK,
+      attackStrength: AttackStrengthType.HARD,
       attackPower: AttackPower.LIGHT,
       question: {
         status,
@@ -112,9 +112,9 @@ describe('Game Slice reducer', () => {
   it('should set dialogStage to answering, and action to block', () => {
     expect(gameReducer(MOCK_GAME_STATE, block())).toEqual({
       round: 2,
-      dialogStage: 'answering',
-      action: 'block',
-      attackStrength: 'easy',
+      dialogStage: DialogStageType.ANSWERING,
+      action: ActionStateType.BLOCK,
+      attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
       question: {
         status,
@@ -125,12 +125,28 @@ describe('Game Slice reducer', () => {
     });
   });
 
-  it('should set dialogStage to answered if answered function called', () => {
-    expect(gameReducer(MOCK_GAME_STATE, answered('test'))).toEqual({
+  it('should set dialogStage to attacking if answer is correct.', () => {
+    expect(gameReducer(MOCK_GAME_STATE, answered(answer))).toEqual({
       round: 2,
-      dialogStage: 'answered',
-      action: 'block',
-      attackStrength: 'easy',
+      dialogStage: DialogStageType.ATTACKING,
+      action: ActionStateType.BLOCK,
+      attackStrength: AttackStrengthType.EASY,
+      attackPower: AttackPower.LIGHT,
+      question: {
+        status,
+        text,
+        choices,
+        answer,
+      },
+    });
+  });
+
+  it('should set dialogStage to action, and action to none if answer is incorrect.', () => {
+    expect(gameReducer(MOCK_GAME_STATE, answered(choices[0]))).toEqual({
+      round: 2,
+      dialogStage: DialogStageType.ACTION,
+      action: ActionStateType.NONE,
+      attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
       question: {
         status,

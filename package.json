@@ -20,7 +20,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --verbose",
+    "test": "react-scripts test",
+    "coverage": "npm test -- --coverage=true",
     "eject": "react-scripts eject",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook",

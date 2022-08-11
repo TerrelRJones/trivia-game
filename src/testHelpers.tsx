@@ -8,9 +8,10 @@ import {
 import { configureStore, Store } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 import type { RootState } from 'store';
-import { rootReducer, AppStore } from 'store';
+import { rootReducer } from 'store';
 
 import { ThemeProvider } from 'styled-components';
 import theme from 'styles/theme.styled';
@@ -47,7 +48,9 @@ export function renderWithProviders(
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
     return (
       <ThemeProvider theme={theme}>
-        <Provider store={store}>{children}</Provider>
+        <BrowserRouter>
+          <Provider store={store}>{children}</Provider>
+        </BrowserRouter>
       </ThemeProvider>
     );
   }
