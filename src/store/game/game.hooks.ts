@@ -9,8 +9,9 @@ import {
   getQuestion,
   answered,
   attackPower,
+  setDifficulty,
 } from 'store/game/game.slice';
-import { AttackPower, AttackStrengthType } from 'models';
+import { AttackPower, AttackStrengthType, DialogStageType } from 'models';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
 
@@ -54,4 +55,9 @@ export const useGetQuestion = () => {
 export const useAnswered = () => {
   const dispatch = useAppDispatch();
   return (answer: string) => dispatch(answered(answer));
+};
+
+export const useSetDifficulty = () => {
+  const dispatch = useAppDispatch();
+  return (difficulty: DialogStageType) => dispatch(setDifficulty(difficulty));
 };
