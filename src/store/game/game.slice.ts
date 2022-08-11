@@ -26,7 +26,7 @@ export interface GameState {
 
 export const initialState: GameState = {
   round: 1,
-  dialogStage: DialogStageType.ACTION, // <-- Change back to difficulty
+  dialogStage: DialogStageType.DIFFICULTY,
   action: ActionStateType.NONE,
   attackStrength: AttackStrengthType.EASY,
   attackPower: AttackPower.LIGHT,
