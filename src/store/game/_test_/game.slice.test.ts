@@ -192,9 +192,7 @@ describe('Game Slice reducer', () => {
         answer,
       },
     });
-  });
 
-  it('should set dialogStage to action, and action to none if answer is incorrect, and actionState is block or attack .', () => {
     expect(gameReducer(MOCK_GAME_STATE, answeredVerify(false))).toEqual({
       round: 2,
       dialogStage: DialogStageType.ACTION,
