@@ -33,6 +33,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      userAnswer: '',
       question: {
         status,
         text,
@@ -49,6 +50,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.NONE,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      userAnswer: '',
       question: {
         status,
         text,
@@ -67,6 +69,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      userAnswer: '',
       question: {
         status,
         text,
@@ -83,6 +86,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.ATTACK,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      userAnswer: '',
       question: {
         status,
         text,
@@ -101,6 +105,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.HARD,
       attackPower: AttackPower.HEAVY,
+      userAnswer: '',
       question: {
         status,
         text,
@@ -119,6 +124,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.MEDIUM,
       attackPower: AttackPower.MEDIUM,
+      userAnswer: '',
       question: {
         status,
         text,
@@ -137,6 +143,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      userAnswer: '',
       question: {
         status,
         text,
@@ -153,6 +160,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      userAnswer: '',
       question: {
         status,
         text,
@@ -162,13 +170,14 @@ describe('Game Slice reducer', () => {
     });
   });
 
-  it('should set dialogStage to attacking if answer is correct.', () => {
+  it('should set dialogStage to answered if user selected an answer.', () => {
     expect(gameReducer(MOCK_GAME_STATE, answered())).toEqual({
       round: 2,
-      dialogStage: DialogStageType.ATTACKING,
+      dialogStage: DialogStageType.ANSWERED,
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      userAnswer: '',
       question: {
         status,
         text,
@@ -185,6 +194,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.NONE,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      userAnswer: '',
       question: {
         status,
         text,

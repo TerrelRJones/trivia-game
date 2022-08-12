@@ -29,3 +29,8 @@ export const gameQuestionSelector = createSelector(
   gameSelector,
   (gameState): questionData => gameState.question
 );
+
+export const gameUserAnswerSelector = createSelector(
+  gameSelector,
+  (gameState) => gameState.userAnswer
+);

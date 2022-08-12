@@ -2,7 +2,13 @@ import Button from 'components/Button';
 import styled from 'styled-components';
 
 import { ButtonType } from 'components/Button/Button';
-import { useAnswered } from 'store/game/game.hooks';
+import {
+  useAnswered,
+  useAnsweredVerify,
+  useUserAnswer,
+} from 'store/game/game.hooks';
+import { useAppSelector } from 'store/hooks';
+import { gameUserAnswerSelector } from 'store/game/game.selectors';
 
 interface QuestionDialogProps {
   testID?: string;
@@ -25,7 +31,6 @@ const AnswerContainer = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 `;
-// const AnswerButtonContainer = styled.div``;
 
 export const QuestionDialog = ({
   testID,
@@ -34,20 +39,44 @@ export const QuestionDialog = ({
   answer,
 }: QuestionDialogProps) => {
   const answered = useAnswered();
+  const userAnswer = useAppSelector(gameUserAnswerSelector);
+  const setUserAnswer = useUserAnswer();
+  const answerVerify = useAnsweredVerify();
+
   return (
     <div data-testid={testID}>
       <Question data-testid="question-text">{question}</Question>
       <AnswerContainer>
-        {options.map((potentialAnswer, index) => (
-          <Button
-            key={index}
-            testID={`button-${index}`}
-            buttonType={ButtonType.SECONDARY}
-            onClick={() => answered()}
-          >
-            {potentialAnswer}
-          </Button>
-        ))}
+        {options.map((potentialAnswer, index) => {
+          return (
+            <Button
+              key={index}
+              testID={`button-${index}`}
+              buttonType={ButtonType.SECONDARY}
+              onClick={() => {
+                answered();
+                setUserAnswer(potentialAnswer);
+                answerVerify(userAnswer === answer); // <--- Does this go here?
+              }}
+              correct={
+                (userAnswer === answer && options[index] === answer) ||
+                (userAnswer !== '' &&
+                  userAnswer !== answer &&
+                  options[index] === answer)
+              }
+              incorrect={
+                userAnswer === options[index] && options[index] !== answer
+              }
+              disabled={
+                userAnswer !== '' &&
+                userAnswer !== options[index] &&
+                answer !== options[index]
+              }
+            >
+              {potentialAnswer}
+            </Button>
+          );
+        })}
       </AnswerContainer>
     </div>
   );

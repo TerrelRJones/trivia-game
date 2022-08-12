@@ -7,6 +7,7 @@ import {
   QuestionStatus,
   AttackPower,
 } from 'models';
+import { act } from 'react-dom/test-utils';
 
 export type questionData = {
   status: QuestionStatus;
@@ -20,8 +21,9 @@ export interface GameState {
   dialogStage: DialogStageType;
   action: ActionStateType;
   attackStrength: AttackStrengthType;
-  question: questionData;
   attackPower: AttackPower;
+  userAnswer: string;
+  question: questionData;
 }
 
 export const initialState: GameState = {
@@ -30,6 +32,7 @@ export const initialState: GameState = {
   action: ActionStateType.NONE,
   attackStrength: AttackStrengthType.EASY,
   attackPower: AttackPower.LIGHT,
+  userAnswer: '',
   question: {
     status: QuestionStatus.IDLE,
     text: '',
@@ -90,10 +93,16 @@ export const gameSlice = createSlice({
       state.question = action.payload;
     },
 
-    getQuestion: (state, action: GetQuestionPayloadAction) => {},
+    getQuestion: (state, action: GetQuestionPayloadAction) => {
+      state.userAnswer = ''; // <--- Can we move this?
+    },
 
     answered: (state) => {
       state.dialogStage = DialogStageType.ANSWERED;
+    },
+
+    userAnswer: (state, action: PayloadAction<string>) => {
+      state.userAnswer = action.payload;
     },
 
     answeredVerify: (state, action: PayloadAction<boolean>) => {
@@ -125,6 +134,7 @@ export const {
   attackStrength,
   block,
   answered,
+  userAnswer,
   answeredVerify,
   getQuestionSuccess,
   getQuestion,

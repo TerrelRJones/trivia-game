@@ -10,6 +10,8 @@ import {
   answered,
   attackPower,
   setDifficulty,
+  userAnswer,
+  answeredVerify,
 } from 'store/game/game.slice';
 import { AttackPower, AttackStrengthType, DialogStageType } from 'models';
 
@@ -55,6 +57,16 @@ export const useGetQuestion = () => {
 export const useAnswered = () => {
   const dispatch = useAppDispatch();
   return () => dispatch(answered());
+};
+
+export const useUserAnswer = () => {
+  const dispatch = useAppDispatch();
+  return (userAanswer: string) => dispatch(userAnswer(userAanswer));
+};
+
+export const useAnsweredVerify = () => {
+  const dispatch = useAppDispatch();
+  return (answer: boolean) => dispatch(answeredVerify(answer));
 };
 
 export const useSetDifficulty = () => {

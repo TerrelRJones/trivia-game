@@ -15,6 +15,7 @@ export const MOCK_GAME_STATE: GameState = {
   action: ActionStateType.BLOCK,
   attackStrength: AttackStrengthType.EASY,
   attackPower: AttackPower.LIGHT,
+  userAnswer: '',
   question: {
     status,
     text,
