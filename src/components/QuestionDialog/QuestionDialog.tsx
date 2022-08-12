@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import { ButtonType } from 'components/Button/Button';
 import { useAnswered } from 'store/game/game.hooks';
-import { Correct } from 'components/Button/Button.stories';
 
 interface QuestionDialogProps {
   testID?: string;
