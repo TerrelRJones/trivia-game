@@ -1,7 +1,13 @@
 import { useCallback } from 'react';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
 import { gameRoundSelector } from 'store/game/game.selectors';
-import { setRound, attack, block, attackStrength } from 'store/game/game.slice';
+import {
+  setRound,
+  attack,
+  block,
+  attackStrength,
+  answered,
+} from 'store/game/game.slice';
 import { AttackStrengthType } from 'models';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
@@ -30,4 +36,9 @@ export const useBlock = () => {
 export const useAttackStrength = () => {
   const dispatch = useAppDispatch();
   return (strength: AttackStrengthType) => dispatch(attackStrength(strength));
+};
+
+export const useAnswered = () => {
+  const dispatch = useAppDispatch();
+  return () => dispatch(answered());
 };
