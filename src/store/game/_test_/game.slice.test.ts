@@ -163,7 +163,7 @@ describe('Game Slice reducer', () => {
   });
 
   it('should set dialogStage to attacking if answer is correct.', () => {
-    expect(gameReducer(MOCK_GAME_STATE, answered(answer))).toEqual({
+    expect(gameReducer(MOCK_GAME_STATE, answered())).toEqual({
       round: 2,
       dialogStage: DialogStageType.ATTACKING,
       action: ActionStateType.BLOCK,
@@ -192,9 +192,9 @@ describe('Game Slice reducer', () => {
         answer,
       },
     };
-    expect(gameReducer(MOCK_GAME_STATE, answered(choices[0]))).toEqual(
-      mockStateRes
-    );
+    // expect(gameReducer(MOCK_GAME_STATE, answered()).toEqual(
+    //   mockStateRes
+    // );
 
     expect(gameReducer(MOCK_GAME_STATE, answeredVerify(false))).toEqual(
       mockStateRes

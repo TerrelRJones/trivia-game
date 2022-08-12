@@ -33,8 +33,7 @@ export const QuestionDialog = ({
   options,
   answer,
 }: QuestionDialogProps) => {
-  const userAnswer = useAnswered();
-
+  const answered = useAnswered();
   return (
     <div data-testid={testID}>
       <Question data-testid="question-text">{question}</Question>
@@ -44,7 +43,7 @@ export const QuestionDialog = ({
             key={index}
             testID={`button-${index}`}
             buttonType={ButtonType.SECONDARY}
-            onClick={() => userAnswer(potentialAnswer)}
+            onClick={() => answered()}
           >
             {potentialAnswer}
           </Button>

@@ -92,13 +92,8 @@ export const gameSlice = createSlice({
 
     getQuestion: (state, action: GetQuestionPayloadAction) => {},
 
-    answered: (state, action: PayloadAction<string>) => {
-      if (state.question.answer === action.payload) {
-        state.dialogStage = DialogStageType.ATTACKING;
-      } else {
-        state.dialogStage = DialogStageType.ACTION;
-        state.action = ActionStateType.NONE;
-      }
+    answered: (state) => {
+      state.dialogStage = DialogStageType.ANSWERED;
     },
 
     answeredVerify: (state, action: PayloadAction<boolean>) => {

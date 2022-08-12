@@ -115,7 +115,8 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
         </Dialog>
       )}
 
-      {gameDialog === DialogStageType.ANSWERING && (
+      {(gameDialog === DialogStageType.ANSWERING ||
+        gameDialog === DialogStageType.ANSWERED) && (
         <Dialog testID="dialog" message="Choose wisely...">
           <QuestionDialog question={text} options={choices} answer={answer} />
         </Dialog>

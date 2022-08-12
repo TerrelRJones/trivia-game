@@ -54,7 +54,7 @@ export const useGetQuestion = () => {
 
 export const useAnswered = () => {
   const dispatch = useAppDispatch();
-  return (answer: string) => dispatch(answered(answer));
+  return () => dispatch(answered());
 };
 
 export const useSetDifficulty = () => {

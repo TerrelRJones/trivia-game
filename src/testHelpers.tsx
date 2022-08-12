@@ -15,7 +15,6 @@ import { rootReducer } from 'store';
 
 import { ThemeProvider } from 'styled-components';
 import theme from 'styles/theme.styled';
-import { BrowserRouter } from 'react-router-dom';
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
