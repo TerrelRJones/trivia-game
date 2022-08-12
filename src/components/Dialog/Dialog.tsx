@@ -1,7 +1,12 @@
 import Button from 'components/Button';
 import { ButtonType } from 'components/Button/Button';
-import { DialogStageType } from 'models';
-import { gameDialogSelector } from 'store/game/game.selectors';
+import { AttackStrengthType, DialogStageType } from 'models';
+import { useGetQuestion } from 'store/game/game.hooks';
+import {
+  gameDialogSelector,
+  gameQuestionSelector,
+  gameUserAnswerSelector,
+} from 'store/game/game.selectors';
 import { useAppSelector } from 'store/hooks';
 import styled from 'styled-components';
 import { BodyText } from 'styles/styledElements';
@@ -58,15 +63,26 @@ const Box = styled.div`
 `;
 
 export const Dialog = ({ testID, message, children }: DialogProps) => {
+  const getNewQuestion = useGetQuestion();
   const dialogStage = useAppSelector(gameDialogSelector);
+  const { answer } = useAppSelector(gameQuestionSelector);
+  const userAnswer = useAppSelector(gameUserAnswerSelector);
+
   const answeredStage = dialogStage === DialogStageType.ANSWERED;
 
   return (
     <StyledDialogContainer answered={answeredStage} data-testid={testID}>
       {answeredStage ? (
         <NextButtonContainer>
-          <Message className="next-message">Correct!</Message>
-          <Button buttonType={ButtonType.NEXT}>Next</Button>
+          <Message className="next-message">
+            {userAnswer === answer ? 'Correct!' : 'Incorrect'}
+          </Message>
+          <Button
+            buttonType={ButtonType.NEXT}
+            onClick={() => getNewQuestion(AttackStrengthType.EASY)}
+          >
+            Next
+          </Button>
         </NextButtonContainer>
       ) : (
         <Message data-testid="title">{message}</Message>
