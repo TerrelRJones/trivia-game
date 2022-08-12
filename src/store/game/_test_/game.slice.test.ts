@@ -109,6 +109,42 @@ describe('Game Slice reducer', () => {
     });
   });
 
+  it('should set attackStrength to medium, dialogStage to answering, and attackPower to medium', () => {
+    expect(
+      gameReducer(MOCK_GAME_STATE, attackStrength(AttackStrengthType.MEDIUM))
+    ).toEqual({
+      round: 2,
+      dialogStage: DialogStageType.ANSWERING,
+      action: ActionStateType.BLOCK,
+      attackStrength: AttackStrengthType.MEDIUM,
+      attackPower: AttackPower.MEDIUM,
+      question: {
+        status,
+        text,
+        choices,
+        answer,
+      },
+    });
+  });
+
+  it('should set attackStrength to easy, dialogStage to answering, and attackPower to light', () => {
+    expect(
+      gameReducer(MOCK_GAME_STATE, attackStrength(AttackStrengthType.EASY))
+    ).toEqual({
+      round: 2,
+      dialogStage: DialogStageType.ANSWERING,
+      action: ActionStateType.BLOCK,
+      attackStrength: AttackStrengthType.EASY,
+      attackPower: AttackPower.LIGHT,
+      question: {
+        status,
+        text,
+        choices,
+        answer,
+      },
+    });
+  });
+
   it('should set dialogStage to answering, and action to block', () => {
     expect(gameReducer(MOCK_GAME_STATE, block())).toEqual({
       round: 2,

@@ -12,15 +12,12 @@ import { QuestionStatus } from 'models';
 import { shuffleArray } from 'helper/shuffleArray';
 
 export function* getQuestionFetch(action: GetQuestionPayloadAction): any {
-  // console.log('begin');
-
   try {
     const { difficulty } = action.payload;
     const questionData = yield call(
       fetch,
       `${BASE_QUESTION_URL}amount=1&category=21&difficulty=${difficulty}&type=multiple`
     );
-    // console.log(questionData);
 
     const res = yield questionData.json();
     const { question, correct_answer, incorrect_answers } = res.results[0];

@@ -19,6 +19,7 @@ describe('getQuestionsFetchSaga', () => {
         `${BASE_QUESTION_URL}amount=1&category=21&difficulty=${AttackStrengthType.HARD}&type=multiple`
       )
     );
+
     const mockData = {
       response_code: 0,
       results: [

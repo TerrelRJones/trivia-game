@@ -25,7 +25,7 @@ const AnswerContainer = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 `;
-const AnswerButtonContainer = styled.div``;
+// const AnswerButtonContainer = styled.div``;
 
 export const QuestionDialog = ({
   testID,
@@ -40,15 +40,14 @@ export const QuestionDialog = ({
       <Question data-testid="question-text">{question}</Question>
       <AnswerContainer>
         {options.map((potentialAnswer, index) => (
-          <AnswerButtonContainer key={index}>
-            <Button
-              testID={`button-${index}`}
-              buttonType={ButtonType.SECONDARY}
-              onClick={() => userAnswer(potentialAnswer)}
-            >
-              {potentialAnswer}
-            </Button>
-          </AnswerButtonContainer>
+          <Button
+            key={index}
+            testID={`button-${index}`}
+            buttonType={ButtonType.SECONDARY}
+            onClick={() => userAnswer(potentialAnswer)}
+          >
+            {potentialAnswer}
+          </Button>
         ))}
       </AnswerContainer>
     </div>
