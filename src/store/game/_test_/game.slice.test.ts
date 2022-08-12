@@ -7,6 +7,7 @@ import gameReducer, {
   attackStrength,
   block,
   answered,
+  answeredVerify,
 } from 'store/game/game.slice';
 
 import { MOCK_GAME_STATE } from 'store/mocks/game.mocks';
@@ -179,6 +180,22 @@ describe('Game Slice reducer', () => {
 
   it('should set dialogStage to action, and action to none if answer is incorrect.', () => {
     expect(gameReducer(MOCK_GAME_STATE, answered(choices[0]))).toEqual({
+      round: 2,
+      dialogStage: DialogStageType.ACTION,
+      action: ActionStateType.NONE,
+      attackStrength: AttackStrengthType.EASY,
+      attackPower: AttackPower.LIGHT,
+      question: {
+        status,
+        text,
+        choices,
+        answer,
+      },
+    });
+  });
+
+  it('should set dialogStage to action, and action to none if answer is incorrect, and actionState is block or attack .', () => {
+    expect(gameReducer(MOCK_GAME_STATE, answeredVerify(false))).toEqual({
       round: 2,
       dialogStage: DialogStageType.ACTION,
       action: ActionStateType.NONE,
