@@ -7,7 +7,6 @@ import {
   QuestionStatus,
   AttackPower,
 } from 'models';
-import { act } from 'react-dom/test-utils';
 
 export type questionData = {
   status: QuestionStatus;
