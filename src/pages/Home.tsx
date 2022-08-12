@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSetDifficulty } from 'store/game/game.hooks';
 import { DialogStageType } from 'models';
 
-const StyledLandingPageContainer = styled.div`
+const LandingPageContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -47,7 +47,7 @@ const Home: React.FC = () => {
   const setDifficulty = useSetDifficulty();
 
   return (
-    <StyledLandingPageContainer>
+    <LandingPageContainer>
       <Header data-testid="title">Trivia Fighter</Header>
       <StyledBtnContainer>
         <ButtonContainter>
@@ -85,7 +85,7 @@ const Home: React.FC = () => {
           </Button>
         </ButtonContainter>
       </StyledBtnContainer>
-    </StyledLandingPageContainer>
+    </LandingPageContainer>
   );
 };
 
