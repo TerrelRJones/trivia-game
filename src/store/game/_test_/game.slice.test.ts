@@ -179,7 +179,7 @@ describe('Game Slice reducer', () => {
   });
 
   it('should set dialogStage to action, and action to none if answer is incorrect.', () => {
-    expect(gameReducer(MOCK_GAME_STATE, answered(choices[0]))).toEqual({
+    const mockStateRes = {
       round: 2,
       dialogStage: DialogStageType.ACTION,
       action: ActionStateType.NONE,
@@ -191,20 +191,13 @@ describe('Game Slice reducer', () => {
         choices,
         answer,
       },
-    });
+    };
+    expect(gameReducer(MOCK_GAME_STATE, answered(choices[0]))).toEqual(
+      mockStateRes
+    );
 
-    expect(gameReducer(MOCK_GAME_STATE, answeredVerify(false))).toEqual({
-      round: 2,
-      dialogStage: DialogStageType.ACTION,
-      action: ActionStateType.NONE,
-      attackStrength: AttackStrengthType.EASY,
-      attackPower: AttackPower.LIGHT,
-      question: {
-        status,
-        text,
-        choices,
-        answer,
-      },
-    });
+    expect(gameReducer(MOCK_GAME_STATE, answeredVerify(false))).toEqual(
+      mockStateRes
+    );
   });
 });
