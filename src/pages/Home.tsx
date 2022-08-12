@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 import Button from 'components/Button';
 import { ButtonType } from 'components/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
-const StyledLandingPageContainer = styled.div`
+const LandingPageContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -40,15 +41,17 @@ const ButtonContainter = styled.div`
 `;
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
-    <StyledLandingPageContainer>
+    <LandingPageContainer>
       <Header data-testid="title">Trivia Fighter</Header>
       <StyledBtnContainer>
         <ButtonContainter>
           <Button
             testID="easy-btn"
             buttonType={ButtonType.EASY}
-            onClick={() => console.log('working')}
+            onClick={() => navigate('/game')}
           >
             Easy
           </Button>
@@ -56,7 +59,7 @@ const Home: React.FC = () => {
         <ButtonContainter>
           <Button
             buttonType={ButtonType.MEDIUM}
-            onClick={() => console.log('working')}
+            onClick={() => navigate('/game')}
           >
             Medium
           </Button>
@@ -64,13 +67,13 @@ const Home: React.FC = () => {
         <ButtonContainter>
           <Button
             buttonType={ButtonType.SETH}
-            onClick={() => console.log('working')}
+            onClick={() => navigate('/game')}
           >
             Seth
           </Button>
         </ButtonContainter>
       </StyledBtnContainer>
-    </StyledLandingPageContainer>
+    </LandingPageContainer>
   );
 };
 
