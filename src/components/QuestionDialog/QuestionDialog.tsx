@@ -47,9 +47,9 @@ export const QuestionDialog = ({
     answer: string,
     potentialAnswer: string
   ): boolean => {
-    return (
+    return Boolean(
       (userAnswer === answer && potentialAnswer === answer) ||
-      (userAnswer !== '' && userAnswer !== answer && potentialAnswer === answer)
+        (userAnswer && userAnswer !== answer && potentialAnswer === answer)
     );
   };
 
@@ -64,10 +64,8 @@ export const QuestionDialog = ({
     answer: string,
     potentialAnswer: string
   ): boolean => {
-    return (
-      userAnswer !== '' &&
-      userAnswer !== potentialAnswer &&
-      answer !== potentialAnswer
+    return Boolean(
+      userAnswer && userAnswer !== potentialAnswer && answer !== potentialAnswer
     );
   };
 
