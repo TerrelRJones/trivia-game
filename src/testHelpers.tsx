@@ -5,28 +5,28 @@ import {
   RenderHookOptions,
   RenderOptions,
 } from '@testing-library/react';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, Store } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 import type { RootState } from 'store';
-import { rootReducer, AppStore } from 'store';
+import { rootReducer } from 'store';
 
 import { ThemeProvider } from 'styled-components';
 import theme from 'styles/theme.styled';
-import { BrowserRouter } from 'react-router-dom';
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
 export interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
-  store?: AppStore;
+  store?: Store;
 }
 
 export interface ExtendedRenderHookOptions<Props>
   extends Omit<RenderHookOptions<Props>, 'wrapper'> {
   preloadedState?: PreloadedState<RootState>;
-  store?: AppStore;
+  store?: Store;
 }
 
 const setupStore = (preloadedState?: PreloadedState<RootState>) => {

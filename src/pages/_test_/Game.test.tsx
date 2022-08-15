@@ -13,6 +13,5 @@ describe('Game Page', () => {
     expect(screen.getByTestId('round')).toBeInTheDocument();
     expect(screen.getByTestId('player-1')).toBeInTheDocument();
     expect(screen.getByTestId('player-2')).toBeInTheDocument();
-    expect(screen.getByTestId('dialog')).toBeInTheDocument();
   });
 });

@@ -4,42 +4,42 @@ import QuestionDialog from 'components/QuestionDialog';
 import { renderWithProviders } from 'testHelpers';
 
 import { questionOne } from '../mockQuestionData';
-const { question, options, answer } = questionOne;
+const { text, choices, answer } = questionOne;
 
 describe('QuestionDialog Component', () => {
   it('should render QuestionDialog component to DOM', () => {
     renderWithProviders(
       <QuestionDialog
         testID="question-dialog"
-        question={question}
-        options={options}
+        question={text}
+        options={choices}
         answer={answer}
       />
     );
     expect(screen.getByTestId('question-dialog')).toBeInTheDocument();
   });
 
-  it(`should render ${question} as the question.`, () => {
+  it(`should render ${text} as the question.`, () => {
     renderWithProviders(
       <QuestionDialog
         testID="question-dialog"
-        question={question}
-        options={options}
+        question={text}
+        options={choices}
         answer={answer}
       />
     );
-    expect(screen.getByTestId('question-text')).toHaveTextContent(question);
+    expect(screen.getByTestId('question-text')).toHaveTextContent(text);
   });
 
-  it(`should render ${options[2]} as button text`, () => {
+  it(`should render ${choices[2]} as button text`, () => {
     renderWithProviders(
       <QuestionDialog
         testID="question-dialog"
-        question={question}
-        options={options}
+        question={text}
+        options={choices}
         answer={answer}
       />
     );
-    expect(screen.getByTestId('button-2')).toHaveTextContent(options[2]);
+    expect(screen.getByTestId('button-2')).toHaveTextContent(choices[2]);
   });
 });

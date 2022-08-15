@@ -2,7 +2,13 @@ import Button from 'components/Button';
 import styled from 'styled-components';
 
 import { ButtonType } from 'components/Button/Button';
-import { useAnswered } from 'store/game/game.hooks';
+import {
+  useAnswered,
+  useAnsweredVerify,
+  useUserAnswer,
+} from 'store/game/game.hooks';
+import { useAppSelector } from 'store/hooks';
+import { gameUserAnswerSelector } from 'store/game/game.selectors';
 
 interface QuestionDialogProps {
   testID?: string;
@@ -25,31 +31,67 @@ const AnswerContainer = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 `;
-const AnswerButtonContainer = styled.div``;
 
 export const QuestionDialog = ({
   testID,
   question,
-  answer,
   options,
+  answer,
 }: QuestionDialogProps) => {
   const answered = useAnswered();
+  const userAnswer = useAppSelector(gameUserAnswerSelector);
+  const setUserAnswer = useUserAnswer();
+  const answerVerify = useAnsweredVerify();
+
+  const isCorrectAnswer = (
+    answer: string,
+    potentialAnswer: string
+  ): boolean => {
+    return Boolean(
+      (userAnswer === answer && potentialAnswer === answer) ||
+        (userAnswer && userAnswer !== answer && potentialAnswer === answer)
+    );
+  };
+
+  const isIncorrectAnswer = (
+    answer: string,
+    potentialAnswer: string
+  ): boolean => {
+    return userAnswer === potentialAnswer && potentialAnswer !== answer;
+  };
+
+  const isButtonDisabled = (
+    answer: string,
+    potentialAnswer: string
+  ): boolean => {
+    return Boolean(
+      userAnswer && userAnswer !== potentialAnswer && answer !== potentialAnswer
+    );
+  };
 
   return (
     <div data-testid={testID}>
       <Question data-testid="question-text">{question}</Question>
       <AnswerContainer>
-        {options.map((potentialAnswer, index) => (
-          <AnswerButtonContainer key={index}>
+        {options.map((potentialAnswer, index) => {
+          return (
             <Button
+              key={index}
               testID={`button-${index}`}
               buttonType={ButtonType.SECONDARY}
-              onClick={() => answered()}
+              onClick={() => {
+                answered();
+                setUserAnswer(potentialAnswer);
+                answerVerify(potentialAnswer === answer);
+              }}
+              correct={isCorrectAnswer(answer, potentialAnswer)}
+              incorrect={isIncorrectAnswer(answer, potentialAnswer)}
+              disabled={isButtonDisabled(answer, potentialAnswer)}
             >
               {potentialAnswer}
             </Button>
-          </AnswerButtonContainer>
-        ))}
+          );
+        })}
       </AnswerContainer>
     </div>
   );

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import {
   gameDialogSelector,
   gameRoundSelector,
+  gameQuestionSelector,
 } from 'store/game/game.selectors';
 
 import { useAppSelector } from 'store/hooks';
@@ -18,8 +19,9 @@ import foxKnight from 'assets/images/fox-knight.svg';
 import barbarianBunny from 'assets/images/barbarian-bunny.svg';
 
 import { ActionStateType, DialogStageType } from 'models';
-import { questionOne } from 'components/QuestionDialog/mockQuestionData';
 import ActionDialog from 'components/ActionDialog';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface GameTypes {
   testID?: string;
@@ -62,7 +64,15 @@ const ActionContainer = styled.div`
 const Game: React.FC<GameTypes> = ({ testID }) => {
   const gameDialog = useAppSelector(gameDialogSelector);
   const gameRound = useAppSelector(gameRoundSelector);
-  const { question, options, answer } = questionOne;
+  const question = useAppSelector(gameQuestionSelector);
+  const { text, answer, choices } = question;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (gameDialog === DialogStageType.DIFFICULTY) {
+      return navigate('/');
+    }
+  }, [gameDialog, navigate]);
 
   return (
     <StyledGameContainer data-testid={testID}>
@@ -108,11 +118,7 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
       {(gameDialog === DialogStageType.ANSWERING ||
         gameDialog === DialogStageType.ANSWERED) && (
         <Dialog testID="dialog" message="Choose wisely...">
-          <QuestionDialog
-            question={question}
-            options={options}
-            answer={answer}
-          />
+          <QuestionDialog question={text} options={choices} answer={answer} />
         </Dialog>
       )}
     </StyledGameContainer>

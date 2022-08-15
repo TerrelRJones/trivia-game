@@ -1,5 +1,6 @@
 import { RootState } from 'store/index';
 import { createSelector } from '@reduxjs/toolkit';
+import { questionData } from './game.slice';
 
 export const gameSelector = (state: RootState) => state.game;
 
@@ -17,4 +18,19 @@ export const gameDialogSelector = createSelector(
 export const gameAttackStrengthSelector = createSelector(
   gameSelector,
   (gameState): string => gameState.attackStrength
+);
+
+export const gameAttackPowerSelector = createSelector(
+  gameSelector,
+  (gameState): string => gameState.attackPower
+);
+
+export const gameQuestionSelector = createSelector(
+  gameSelector,
+  (gameState): questionData => gameState.question
+);
+
+export const gameUserAnswerSelector = createSelector(
+  gameSelector,
+  (gameState) => gameState.userAnswer
 );

@@ -6,9 +6,14 @@ import {
   attack,
   block,
   attackStrength,
+  getQuestion,
   answered,
+  attackPower,
+  setDifficulty,
+  userAnswer,
+  answeredVerify,
 } from 'store/game/game.slice';
-import { AttackStrengthType } from 'models';
+import { AttackPower, AttackStrengthType, DialogStageType } from 'models';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
 
@@ -38,7 +43,33 @@ export const useAttackStrength = () => {
   return (strength: AttackStrengthType) => dispatch(attackStrength(strength));
 };
 
+export const useAttackPower = () => {
+  const dispatch = useAppDispatch();
+  return (power: AttackPower) => dispatch(attackPower(power));
+};
+
+export const useGetQuestion = () => {
+  const dispatch = useAppDispatch();
+  return (difficulty: AttackStrengthType) =>
+    dispatch(getQuestion({ difficulty }));
+};
+
 export const useAnswered = () => {
   const dispatch = useAppDispatch();
   return () => dispatch(answered());
+};
+
+export const useUserAnswer = () => {
+  const dispatch = useAppDispatch();
+  return (userAanswer: string) => dispatch(userAnswer(userAanswer));
+};
+
+export const useAnsweredVerify = () => {
+  const dispatch = useAppDispatch();
+  return (answer: boolean) => dispatch(answeredVerify(answer));
+};
+
+export const useSetDifficulty = () => {
+  const dispatch = useAppDispatch();
+  return (difficulty: DialogStageType) => dispatch(setDifficulty(difficulty));
 };

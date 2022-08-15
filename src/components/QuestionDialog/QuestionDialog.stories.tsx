@@ -5,7 +5,7 @@ import { StoriesBackgroundContainer } from 'styles/styledElements';
 import QuestionDialog from '.';
 
 import { questionOne } from './mockQuestionData';
-const { question, options, answer } = questionOne;
+const { text, choices, answer } = questionOne;
 
 export default {
   title: 'QuestionDialog',
@@ -22,7 +22,7 @@ const Template: ComponentStory<typeof QuestionDialog> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  question: question,
-  options: options,
-  answer: answer,
+  question: text,
+  options: choices,
+  answer,
 };
