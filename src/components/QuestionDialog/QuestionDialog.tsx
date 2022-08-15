@@ -43,27 +43,18 @@ export const QuestionDialog = ({
   const setUserAnswer = useUserAnswer();
   const answerVerify = useAnsweredVerify();
 
-  const isCorrectAnswer = (
-    answer: string,
-    potentialAnswer: string
-  ): boolean => {
+  const isCorrectAnswer = (potentialAnswer: string): boolean => {
     return Boolean(
       (userAnswer === answer && potentialAnswer === answer) ||
         (userAnswer && userAnswer !== answer && potentialAnswer === answer)
     );
   };
 
-  const isIncorrectAnswer = (
-    answer: string,
-    potentialAnswer: string
-  ): boolean => {
+  const isIncorrectAnswer = (potentialAnswer: string): boolean => {
     return userAnswer === potentialAnswer && potentialAnswer !== answer;
   };
 
-  const isButtonDisabled = (
-    answer: string,
-    potentialAnswer: string
-  ): boolean => {
+  const isButtonDisabled = (potentialAnswer: string): boolean => {
     return Boolean(
       userAnswer && userAnswer !== potentialAnswer && answer !== potentialAnswer
     );
@@ -84,9 +75,9 @@ export const QuestionDialog = ({
                 setUserAnswer(potentialAnswer);
                 answerVerify(potentialAnswer === answer);
               }}
-              correct={isCorrectAnswer(answer, potentialAnswer)}
-              incorrect={isIncorrectAnswer(answer, potentialAnswer)}
-              disabled={isButtonDisabled(answer, potentialAnswer)}
+              correct={isCorrectAnswer(potentialAnswer)}
+              incorrect={isIncorrectAnswer(potentialAnswer)}
+              disabled={isButtonDisabled(potentialAnswer)}
             >
               {potentialAnswer}
             </Button>
