@@ -1,8 +1,10 @@
-import Button from 'components/Button';
-import { ButtonType } from 'components/Button/Button';
 import styled from 'styled-components';
 
-const StyledLandingPageContainer = styled.div`
+import Button from 'components/Button';
+import { ButtonType } from 'components/Button/Button';
+import { useNavigate } from 'react-router-dom';
+
+const LandingPageContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -38,16 +40,18 @@ const ButtonContainter = styled.div`
   margin-bottom: 40px;
 `;
 
-const Home: React.FunctionComponent = () => {
+const Home: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
-    <StyledLandingPageContainer>
+    <LandingPageContainer>
       <Header data-testid="title">Trivia Fighter</Header>
       <StyledBtnContainer>
         <ButtonContainter>
           <Button
-            testId="easy-btn"
+            testID="easy-btn"
             buttonType={ButtonType.EASY}
-            onClick={() => console.log('clicked easy')}
+            onClick={() => navigate('/game')}
           >
             Easy
           </Button>
@@ -55,7 +59,7 @@ const Home: React.FunctionComponent = () => {
         <ButtonContainter>
           <Button
             buttonType={ButtonType.MEDIUM}
-            onClick={() => console.log('clicked medium')}
+            onClick={() => navigate('/game')}
           >
             Medium
           </Button>
@@ -63,13 +67,13 @@ const Home: React.FunctionComponent = () => {
         <ButtonContainter>
           <Button
             buttonType={ButtonType.SETH}
-            onClick={() => console.log('clicked seth')}
+            onClick={() => navigate('/game')}
           >
             Seth
           </Button>
         </ButtonContainter>
       </StyledBtnContainer>
-    </StyledLandingPageContainer>
+    </LandingPageContainer>
   );
 };
 

@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { StoriesBackgroundContainer } from 'styles/styledElements';
 
 import Action from '.';
-import { ActionState } from './Action';
+import { ActionStateType } from 'models';
 
 export default {
   title: 'Action',
@@ -18,25 +18,25 @@ const Template: ComponentStory<typeof Action> = (args) => (
 export const Attack = Template.bind({});
 Attack.args = {
   attackValue: 10,
-  actionState: ActionState.ATTACK,
+  actionState: ActionStateType.ATTACK,
 };
 
 export const AttackReversed = Template.bind({});
 AttackReversed.args = {
   attackValue: 10,
-  actionState: ActionState.ATTACK,
+  actionState: ActionStateType.ATTACK,
   isReversed: true,
 };
 
 export const Block = Template.bind({});
 Block.args = {
   attackValue: 10,
-  actionState: ActionState.BLOCK,
+  actionState: ActionStateType.BLOCK,
 };
 
 export const BlockReversed = Template.bind({});
 BlockReversed.args = {
   attackValue: 10,
-  actionState: ActionState.BLOCK,
+  actionState: ActionStateType.BLOCK,
   isReversed: true,
 };

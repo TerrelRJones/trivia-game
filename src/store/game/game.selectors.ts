@@ -8,3 +8,13 @@ export const gameRoundSelector = createSelector(
   gameSelector,
   (gameState): number => gameState.round
 );
+
+export const gameDialogSelector = createSelector(
+  gameSelector,
+  (gameState): string => gameState.dialogStage
+);
+
+export const gameAttackStrengthSelector = createSelector(
+  gameSelector,
+  (gameState): string => gameState.attackStrength
+);

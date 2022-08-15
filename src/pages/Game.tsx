@@ -1,13 +1,29 @@
+import styled from 'styled-components';
+import {
+  gameDialogSelector,
+  gameRoundSelector,
+} from 'store/game/game.selectors';
+
+import { useAppSelector } from 'store/hooks';
+
 import Action from 'components/Action';
 import Avatar from 'components/Avatar';
 import HealthBar from 'components/HealthBar';
 import Round from 'components/Round';
-import styled from 'styled-components';
+import Dialog from 'components/Dialog';
+import QuestionDialog from 'components/QuestionDialog';
+import AttackDialog from 'components/AttackDialog';
 
 import foxKnight from 'assets/images/fox-knight.svg';
 import barbarianBunny from 'assets/images/barbarian-bunny.svg';
 
-import { ActionState } from 'components/Action/Action';
+import { ActionStateType, DialogStageType } from 'models';
+import { questionOne } from 'components/QuestionDialog/mockQuestionData';
+import ActionDialog from 'components/ActionDialog';
+
+interface GameTypes {
+  testID?: string;
+}
 
 const StyledGameContainer = styled.div`
   display: flex;
@@ -43,31 +59,64 @@ const ActionContainer = styled.div`
   gap: 192px;
 `;
 
-const Game: React.FunctionComponent = () => (
-  <StyledGameContainer>
-    <TopContainer>
-      <HealthBar testID="health-bar-1" currentHealth={100} maxHealth={150} />
-      <Round testID="round" round={1} />
-      <HealthBar
-        testID="health-bar-2"
-        isReversed
-        currentHealth={43}
-        maxHealth={150}
-      />
-    </TopContainer>
-    <StyledPlayerContainer>
-      <PlayerContainer>
-        <Avatar testID="player-1" avatar={foxKnight} name="Terrel" />
-      </PlayerContainer>
-      <ActionContainer>
-        <Action actionState={ActionState.BLOCK} attackValue={0} />
-        <Action isReversed actionState={ActionState.ATTACK} attackValue={10} />
-      </ActionContainer>
-      <PlayerContainer>
-        <Avatar testID="player-2" avatar={barbarianBunny} name="Medium" />
-      </PlayerContainer>
-    </StyledPlayerContainer>
-  </StyledGameContainer>
-);
+const Game: React.FC<GameTypes> = ({ testID }) => {
+  const gameDialog = useAppSelector(gameDialogSelector);
+  const gameRound = useAppSelector(gameRoundSelector);
+  const { question, options, answer } = questionOne;
+
+  return (
+    <StyledGameContainer data-testid={testID}>
+      <TopContainer>
+        <HealthBar testID="health-bar-1" currentHealth={100} maxHealth={150} />
+        <Round testID="round" round={gameRound} />
+        <HealthBar
+          testID="health-bar-2"
+          isReversed
+          currentHealth={43}
+          maxHealth={150}
+        />
+      </TopContainer>
+      <StyledPlayerContainer>
+        <PlayerContainer>
+          <Avatar testID="player-1" avatar={foxKnight} name="Terrel" />
+        </PlayerContainer>
+        <ActionContainer>
+          <Action actionState={ActionStateType.BLOCK} attackValue={0} />
+          <Action
+            isReversed
+            actionState={ActionStateType.ATTACK}
+            attackValue={10}
+          />
+        </ActionContainer>
+        <PlayerContainer>
+          <Avatar testID="player-2" avatar={barbarianBunny} name="Medium" />
+        </PlayerContainer>
+      </StyledPlayerContainer>
+
+      {gameDialog === DialogStageType.ACTION && (
+        <Dialog testID="dialog" message="Choose an attack">
+          <ActionDialog />
+        </Dialog>
+      )}
+
+      {gameDialog === DialogStageType.ATTACKING && (
+        <Dialog testID="dialog" message="Attack strength">
+          <AttackDialog />
+        </Dialog>
+      )}
+
+      {(gameDialog === DialogStageType.ANSWERING ||
+        gameDialog === DialogStageType.ANSWERED) && (
+        <Dialog testID="dialog" message="Choose wisely...">
+          <QuestionDialog
+            question={question}
+            options={options}
+            answer={answer}
+          />
+        </Dialog>
+      )}
+    </StyledGameContainer>
+  );
+};
 
 export default Game;

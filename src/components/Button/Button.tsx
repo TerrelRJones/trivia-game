@@ -3,6 +3,8 @@ import styled from 'styled-components/macro';
 
 import correctCheckmark from 'assets/images/correct.svg';
 import incorrectX from 'assets/images/incorrect.svg';
+import sword from 'assets/images/sword.svg';
+import shield from 'assets/images/shield.svg';
 
 export enum ButtonType {
   EASY = 'easy',
@@ -11,16 +13,19 @@ export enum ButtonType {
   SELECTED = 'selected',
   SECONDARY = 'secondary',
   ATTACK = 'attack',
+  NEXT = 'next',
 }
 
 export interface ButtonProps {
+  attack?: boolean;
+  block?: boolean;
   attackIcon?: string[];
   buttonType?: ButtonType;
   correct?: boolean;
   disabled?: boolean;
   incorrect?: boolean;
   selected?: boolean;
-  testId?: string;
+  testID?: string;
   theme?: any;
   onClick?: () => void;
 }
@@ -43,6 +48,7 @@ const getBoxShadowColor = ({
   if (buttonType === ButtonType.EASY || correct) return '#00E412';
   if (buttonType === ButtonType.MEDIUM) return '#FF9B00';
   if (buttonType === ButtonType.SETH || incorrect) return '#FF0000';
+  if (buttonType === ButtonType.NEXT) return '#0056DB';
   return colors.selected;
 };
 
@@ -61,6 +67,7 @@ const getBackgroundColor = ({
   if (buttonType === ButtonType.MEDIUM) return `${colors.mediumBtnGradient}`;
   if (buttonType === ButtonType.SETH || incorrect)
     return `${colors.sethBtnGradient}`;
+  if (buttonType === ButtonType.NEXT) return `${colors.selectedBtnGradient}`;
   return `${colors.defaultBtnGradient}`;
 };
 
@@ -78,12 +85,14 @@ const getBorderColor = ({
   if (buttonType === ButtonType.EASY || correct) return `${colors.easyGreen}`;
   if (buttonType === ButtonType.MEDIUM) return `${colors.mediumOrange}`;
   if (buttonType === ButtonType.SETH || incorrect) return `${colors.sethRed}`;
+  if (buttonType === ButtonType.NEXT) return `${colors.selectedBlue}`;
   return '#038dc1';
 };
 
 const getBorderRadius = ({ buttonType }: StyledButtonProps): string => {
   if (!buttonType) return '9px';
-  if (buttonType === ButtonType.SECONDARY) return '8px';
+  if (buttonType === ButtonType.SECONDARY || buttonType === ButtonType.NEXT)
+    return '8px';
   return '15px';
 };
 
@@ -100,12 +109,17 @@ const getLineHeight = ({ buttonType }: StyledButtonProps): string => {
 };
 const getMaxHeight = ({ buttonType }: StyledButtonProps): string => {
   if (!buttonType) return '53px';
-  if (buttonType === ButtonType.SECONDARY || buttonType === ButtonType.ATTACK)
+  if (
+    buttonType === ButtonType.SECONDARY ||
+    buttonType === ButtonType.ATTACK ||
+    buttonType === ButtonType.NEXT
+  )
     return '43px';
   return '70px';
 };
-const getMinWidth = ({ buttonType }: StyledButtonProps): string => {
+const getMaxWidth = ({ buttonType }: StyledButtonProps): string => {
   if (!buttonType) return '200px';
+  if (buttonType === ButtonType.NEXT) return '181px';
   if (buttonType === ButtonType.SECONDARY) return '373px';
   if (buttonType === ButtonType.ATTACK) return '300px';
   return '350px';
@@ -115,6 +129,7 @@ const getFontSize = ({ buttonType }: StyledButtonProps): string => {
   if (!buttonType) return '25px';
   if (buttonType === ButtonType.SECONDARY) return '18px';
   if (buttonType === ButtonType.ATTACK) return '18px';
+  if (buttonType === ButtonType.NEXT) return '18px';
   return '35px';
 };
 
@@ -136,7 +151,7 @@ const getActiveState = ({
 // Styled components
 const ButtonContainer = styled.div<StyledButtonProps>`
   height: ${getMaxHeight};
-  width: ${getMinWidth};
+  width: ${getMaxWidth};
   box-shadow: 0 0 0 0.25em ${getBoxShadowColor};
   border-radius: ${getBorderRadius};
 
@@ -144,7 +159,7 @@ const ButtonContainer = styled.div<StyledButtonProps>`
     box-shadow: 0 0 9px 8px ${getBoxShadowColor};
   }
 
-  &:active {
+  &:not(.disabledContainer):active {
     box-shadow: none;
   }
 `;
@@ -202,13 +217,15 @@ const StyledAttackIcon = styled.img`
 `;
 
 export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
+  attack,
+  block,
   attackIcon,
   buttonType,
   children,
   correct,
   incorrect,
   disabled,
-  testId,
+  testID,
   selected,
   onClick,
 }) => {
@@ -230,9 +247,11 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
         correct={correct}
         incorrect={incorrect}
         disabled={disabled}
-        data-testid={testId}
+        data-testid={testID}
         onClick={onClick}
       >
+        {attack && <Icon src={sword} alt="Sword Attack Icon" />}
+        {block && <Icon src={shield} alt="Shield Block Icon" />}
         {attackIcon && (
           <AttackIconContainer>
             {attackIcon.map((icon, index) => (

@@ -95,3 +95,17 @@ Inorrect.args = {
   onClick: () => console.log('clicked'),
   children: 'Abraham Lincoln',
 };
+
+export const Attack = Template.bind({});
+Attack.args = {
+  onClick: () => console.log('clicked'),
+  children: 'Attack',
+  attack: true,
+};
+
+export const Block = Template.bind({});
+Block.args = {
+  onClick: () => console.log('clicked'),
+  children: 'Block',
+  block: true,
+};

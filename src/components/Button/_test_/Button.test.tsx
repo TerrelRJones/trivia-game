@@ -5,18 +5,18 @@ import { renderWithProviders } from 'testHelpers';
 
 describe('Button Component', () => {
   it('should render children content', () => {
-    renderWithProviders(<Button testId="button">Test Contents</Button>);
+    renderWithProviders(<Button testID="button">Test Contents</Button>);
     expect(screen.getByTestId('button')).toHaveTextContent('Test Contents');
   });
 
   it('should render "Start" as content', () => {
-    renderWithProviders(<Button testId="button-2">Start</Button>);
+    renderWithProviders(<Button testID="button-2">Start</Button>);
     expect(screen.getByTestId('button-2')).toHaveTextContent('Start');
   });
 
   it('should render checkmark icon if answer correct', () => {
     renderWithProviders(
-      <Button testId="button-3" correct>
+      <Button testID="button-3" correct>
         Correct
       </Button>
     );
@@ -27,7 +27,7 @@ describe('Button Component', () => {
 
   it('should render incorrect icon if answer is incorrect', () => {
     renderWithProviders(
-      <Button testId="button-3" incorrect>
+      <Button testID="button-3" incorrect>
         Incorrect
       </Button>
     );
@@ -38,7 +38,7 @@ describe('Button Component', () => {
 
   it('should render background color correctly if disabled', () => {
     renderWithProviders(
-      <Button testId="button-disabled" disabled>
+      <Button testID="button-disabled" disabled>
         Disabled
       </Button>
     );
@@ -49,7 +49,7 @@ describe('Button Component', () => {
 
   it('should render width: 373px; as secondary btn', () => {
     renderWithProviders(
-      <Button testId="button-secondary" buttonType={ButtonType.SECONDARY}>
+      <Button testID="button-secondary" buttonType={ButtonType.SECONDARY}>
         Secondary Button
       </Button>
     );
@@ -58,7 +58,7 @@ describe('Button Component', () => {
 
   it('should render width: 200px; as default btn (undefined)', () => {
     renderWithProviders(
-      <Button testId="button-default">Default Button</Button>
+      <Button testID="button-default">Default Button</Button>
     );
     expect(screen.getByTestId('btn-container')).toHaveStyle('width: 200px');
   });
