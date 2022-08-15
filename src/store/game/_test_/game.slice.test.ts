@@ -202,9 +202,6 @@ describe('Game Slice reducer', () => {
         answer,
       },
     };
-    // expect(gameReducer(MOCK_GAME_STATE, answered()).toEqual(
-    //   mockStateRes
-    // );
 
     expect(gameReducer(MOCK_GAME_STATE, answeredVerify(false))).toEqual(
       mockStateRes
