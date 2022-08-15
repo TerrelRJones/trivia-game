@@ -43,6 +43,34 @@ export const QuestionDialog = ({
   const setUserAnswer = useUserAnswer();
   const answerVerify = useAnsweredVerify();
 
+  const isCorrectAnswer = (
+    answer: string,
+    potentialAnswer: string
+  ): boolean => {
+    return (
+      (userAnswer === answer && potentialAnswer === answer) ||
+      (userAnswer !== '' && userAnswer !== answer && potentialAnswer === answer)
+    );
+  };
+
+  const isIncorrectAnswer = (
+    answer: string,
+    potentialAnswer: string
+  ): boolean => {
+    return userAnswer === potentialAnswer && potentialAnswer !== answer;
+  };
+
+  const isButtonDisabled = (
+    answer: string,
+    potentialAnswer: string
+  ): boolean => {
+    return (
+      userAnswer !== '' &&
+      userAnswer !== potentialAnswer &&
+      answer !== potentialAnswer
+    );
+  };
+
   return (
     <div data-testid={testID}>
       <Question data-testid="question-text">{question}</Question>
@@ -56,22 +84,11 @@ export const QuestionDialog = ({
               onClick={() => {
                 answered();
                 setUserAnswer(potentialAnswer);
-                answerVerify(userAnswer === answer); // <--- Does this go here?
+                answerVerify(potentialAnswer === answer);
               }}
-              correct={
-                (userAnswer === answer && options[index] === answer) ||
-                (userAnswer !== '' &&
-                  userAnswer !== answer &&
-                  options[index] === answer)
-              }
-              incorrect={
-                userAnswer === options[index] && options[index] !== answer
-              }
-              disabled={
-                userAnswer !== '' &&
-                userAnswer !== options[index] &&
-                answer !== options[index]
-              }
+              correct={isCorrectAnswer(answer, potentialAnswer)}
+              incorrect={isIncorrectAnswer(answer, potentialAnswer)}
+              disabled={isButtonDisabled(answer, potentialAnswer)}
             >
               {potentialAnswer}
             </Button>
