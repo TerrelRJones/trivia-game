@@ -1,4 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Provider } from 'react-redux';
+import { store } from 'store';
 import { StoriesBackgroundContainer } from 'styles/styledElements';
 import AttackDialog from '.';
 
@@ -9,7 +11,9 @@ export default {
 
 const Template: ComponentStory<typeof AttackDialog> = (args) => (
   <StoriesBackgroundContainer>
-    <AttackDialog {...args} />
+    <Provider store={store}>
+      <AttackDialog {...args} />
+    </Provider>
   </StoriesBackgroundContainer>
 );
 

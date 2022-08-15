@@ -1,4 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Provider } from 'react-redux';
+import { store } from 'store';
 import { StoriesBackgroundContainer } from 'styles/styledElements';
 import QuestionDialog from '.';
 
@@ -12,7 +14,9 @@ export default {
 
 const Template: ComponentStory<typeof QuestionDialog> = (args) => (
   <StoriesBackgroundContainer>
-    <QuestionDialog {...args} />
+    <Provider store={store}>
+      <QuestionDialog {...args} />
+    </Provider>
   </StoriesBackgroundContainer>
 );
 
