@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { ButtonType } from 'components/Button/Button';
 
 import sword from 'assets/images/sword.svg';
+import { useAttackStrength } from 'store/game/game.hooks';
+import { AttackStrengthType } from 'models';
 
 interface AttackDialogProps {
   testID?: string;
@@ -25,6 +27,8 @@ const AttackButtonContainer = styled.div`
 `;
 
 export const AttackDialog = ({ testID }: AttackDialogProps) => {
+  const attackStrength = useAttackStrength();
+
   return (
     <AttackDialogContainer data-testid={testID}>
       <AttackButtonContainer>
@@ -32,6 +36,7 @@ export const AttackDialog = ({ testID }: AttackDialogProps) => {
           testID="light-attack"
           buttonType={ButtonType.ATTACK}
           attackIcon={[sword]}
+          onClick={() => attackStrength(AttackStrengthType.EASY)}
         >
           Light Attack
         </Button>
@@ -41,6 +46,7 @@ export const AttackDialog = ({ testID }: AttackDialogProps) => {
           testID="medium-attack"
           buttonType={ButtonType.ATTACK}
           attackIcon={[sword, sword]}
+          onClick={() => attackStrength(AttackStrengthType.MEDIUM)}
         >
           Medium Attack
         </Button>
@@ -50,6 +56,7 @@ export const AttackDialog = ({ testID }: AttackDialogProps) => {
           testID="heavy-attack"
           buttonType={ButtonType.ATTACK}
           attackIcon={[sword, sword, sword]}
+          onClick={() => attackStrength(AttackStrengthType.HARD)}
         >
           Heavy Attack
         </Button>

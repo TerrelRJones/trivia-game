@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 
 import { renderWithProviders } from 'testHelpers';
-import Game from './Game';
+import Game from '../Game';
 
 describe('Game Page', () => {
   it('should render all game ui to screen. Both healthBars, Round, Players, and Dialog Box.', () => {

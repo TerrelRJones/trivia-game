@@ -27,19 +27,19 @@ const questionArr = [
 export const Action = Template.bind({});
 Action.args = {
   message: 'Choose an action',
-  dialog: <ActionDialog />,
+  children: <ActionDialog />,
 };
 
 export const Attack = Template.bind({});
 Attack.args = {
   message: 'Choose an attack',
-  dialog: <AttackDialog />,
+  children: <AttackDialog />,
 };
 
 export const EasyAttack = Template.bind({});
 EasyAttack.args = {
   message: 'Easy Attack',
-  dialog: (
+  children: (
     <QuestionDialog
       question="Which best selling toy of 1983 caused hysteria, resulting in riots
       breaking out in stores?"
