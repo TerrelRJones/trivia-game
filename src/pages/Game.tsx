@@ -3,6 +3,7 @@ import {
   gameDialogSelector,
   gameRoundSelector,
   gameQuestionSelector,
+  gameActionSelector,
 } from 'store/game/game.selectors';
 
 import { useAppSelector } from 'store/hooks';
@@ -22,6 +23,16 @@ import { ActionStateType, DialogStageType } from 'models';
 import ActionDialog from 'components/ActionDialog';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  heroAttackValueSelector,
+  heroCurrentHealthSelector,
+  heroMaxHealthSelector,
+} from 'store/hero/hero.selectors';
+import {
+  opponentAttackValueSelector,
+  opponentCurrentHealthSelector,
+  opponentMaxHealthSelector,
+} from 'store/opponent/opponent.selectors';
 
 interface GameTypes {
   testID?: string;
@@ -65,8 +76,24 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
   const gameDialog = useAppSelector(gameDialogSelector);
   const gameRound = useAppSelector(gameRoundSelector);
   const question = useAppSelector(gameQuestionSelector);
+  const action = useAppSelector(gameActionSelector);
+  // hero
+  const heroMaxHealth = useAppSelector(heroMaxHealthSelector);
+  const heroCurrentHealth = useAppSelector(heroCurrentHealthSelector);
+  const heroAttackValue = useAppSelector(heroAttackValueSelector);
+  // opponent
+  const opponentMaxHealth = useAppSelector(opponentMaxHealthSelector);
+  const opponentCurrentHealth = useAppSelector(opponentCurrentHealthSelector);
+  const opponentAttackValue = useAppSelector(opponentAttackValueSelector);
+
   const { text, answer, choices } = question;
   const navigate = useNavigate();
+
+  const getActionStateType = (): ActionStateType => {
+    if (action === ActionStateType.NONE) return ActionStateType.NONE;
+    if (action === ActionStateType.BLOCK) return ActionStateType.BLOCK;
+    return ActionStateType.ATTACK;
+  };
 
   useEffect(() => {
     if (gameDialog === DialogStageType.DIFFICULTY) {
@@ -77,13 +104,17 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
   return (
     <StyledGameContainer data-testid={testID}>
       <TopContainer>
-        <HealthBar testID="health-bar-1" currentHealth={100} maxHealth={150} />
+        <HealthBar
+          testID="health-bar-1"
+          currentHealth={heroCurrentHealth}
+          maxHealth={heroMaxHealth}
+        />
         <Round testID="round" round={gameRound} />
         <HealthBar
           testID="health-bar-2"
           isReversed
-          currentHealth={43}
-          maxHealth={150}
+          currentHealth={opponentCurrentHealth}
+          maxHealth={opponentMaxHealth}
         />
       </TopContainer>
       <StyledPlayerContainer>
@@ -91,11 +122,15 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
           <Avatar testID="player-1" avatar={foxKnight} name="Terrel" />
         </PlayerContainer>
         <ActionContainer>
-          <Action actionState={ActionStateType.BLOCK} attackValue={0} />
+          <Action
+            testID="hero-action"
+            actionState={getActionStateType()}
+            attackValue={heroAttackValue}
+          />
           <Action
             isReversed
             actionState={ActionStateType.ATTACK}
-            attackValue={10}
+            attackValue={opponentAttackValue}
           />
         </ActionContainer>
         <PlayerContainer>

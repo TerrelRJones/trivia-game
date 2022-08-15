@@ -28,3 +28,9 @@ export enum AttackPower {
   MEDIUM = 'medium',
   HEAVY = 'heavy',
 }
+
+export enum DifficultyType {
+  EASY = 'easy',
+  MEDIUM = 'medium',
+  SETH = 'seth',
+}
