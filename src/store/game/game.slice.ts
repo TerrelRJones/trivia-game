@@ -78,7 +78,6 @@ export const gameSlice = createSlice({
       state.dialogStage = DialogStageType.ANSWERING;
       state.attackStrength = action.payload;
 
-      // redundant? vvv choose one way to handle. vvv attackPower or attackStrength? <---- 8.11.22
       if (action.payload === AttackStrengthType.EASY) {
         state.attackPower = AttackPower.LIGHT;
       } else if (action.payload === AttackStrengthType.MEDIUM) {
