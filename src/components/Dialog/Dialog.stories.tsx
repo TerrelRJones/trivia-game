@@ -5,6 +5,8 @@ import Dialog from '.';
 import ActionDialog from 'components/ActionDialog';
 import AttackDialog from 'components/AttackDialog';
 import QuestionDialog from 'components/QuestionDialog';
+import { Provider } from 'react-redux';
+import { store } from 'store';
 
 export default {
   title: 'Dialog',
@@ -13,7 +15,9 @@ export default {
 
 const Template: ComponentStory<typeof Dialog> = (args) => (
   <StoriesBackgroundContainer>
-    <Dialog {...args} />
+    <Provider store={store}>
+      <Dialog {...args} />
+    </Provider>
   </StoriesBackgroundContainer>
 );
 
