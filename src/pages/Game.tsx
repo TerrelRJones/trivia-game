@@ -104,7 +104,7 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
 
   return (
     <StyledGameContainer data-testid={testID}>
-      <ScreenReaderOnly>{`You are at ${heroCurrentHealth} of ${heroMaxHealth} health. Your opponent is at ${opponentCurrentHealth} of ${opponentMaxHealth}, starting Round ${gameRound}`}</ScreenReaderOnly>
+      <ScreenReaderOnly aria-label="polite">{`You are at ${heroCurrentHealth} of ${heroMaxHealth} health. Your opponent is at ${opponentCurrentHealth} of ${opponentMaxHealth}, starting Round ${gameRound}`}</ScreenReaderOnly>
       <TopContainer>
         <HealthBar
           testID="health-bar-1"
