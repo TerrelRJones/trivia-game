@@ -19,9 +19,13 @@ export const heroSlice = createSlice({
     setHeroAttackValue: (state, action: PayloadAction<number>) => {
       state.attackValue = action.payload;
     },
+
+    setHeroCurrentHealth: (state, action: PayloadAction<number>) => {
+      state.currentHealth = action.payload;
+    },
   },
 });
 
-export const { setHeroAttackValue } = heroSlice.actions;
+export const { setHeroAttackValue, setHeroCurrentHealth } = heroSlice.actions;
 
 export default heroSlice.reducer;

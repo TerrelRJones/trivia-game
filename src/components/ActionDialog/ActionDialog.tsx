@@ -3,6 +3,7 @@ import Button from 'components/Button';
 
 import { useAttack, useBlock, useGetQuestion } from 'store/game/game.hooks';
 import { AttackStrengthType } from 'models';
+import { shuffleArray } from 'helper/shuffleArray';
 
 interface ActionDialogProps {
   testID?: string;
@@ -25,7 +26,18 @@ export const ActionDialog = ({ testID }: ActionDialogProps) => {
   const attack = useAttack();
   const block = useBlock();
   const getQuestion = useGetQuestion();
+  const [blockQuestion] = shuffleArray(['easy', 'medium', 'hard']);
 
+  const randomDifficultyQuestion = () => {
+    if (blockQuestion === AttackStrengthType.EASY) {
+      return getQuestion(AttackStrengthType.EASY);
+    }
+
+    if (blockQuestion === AttackStrengthType.MEDIUM) {
+      return getQuestion(AttackStrengthType.MEDIUM);
+    }
+    return getQuestion(AttackStrengthType.HARD);
+  };
   return (
     <ActionDialogContainer data-testid={testID}>
       <ActionButtonContainer>
@@ -37,7 +49,7 @@ export const ActionDialog = ({ testID }: ActionDialogProps) => {
         <Button
           testID="block"
           onClick={() => {
-            getQuestion(AttackStrengthType.EASY);
+            randomDifficultyQuestion();
             block();
           }}
           block

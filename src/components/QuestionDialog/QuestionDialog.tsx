@@ -2,14 +2,11 @@ import Button from 'components/Button';
 import styled from 'styled-components';
 
 import { ButtonType } from 'components/Button/Button';
-import {
-  useAnswered,
-  useAnsweredVerify,
-  useUserAnswer,
-} from 'store/game/game.hooks';
+import { useAnswered, useUserAnswer } from 'store/game/game.hooks';
 import { useAppSelector } from 'store/hooks';
 import { gameUserAnswerSelector } from 'store/game/game.selectors';
 import { useHeroAttack } from 'store/hero/hero.hooks';
+import { useOpponentAttack } from 'store/opponent/opponent.hooks';
 
 interface QuestionDialogProps {
   testID?: string;
@@ -43,6 +40,7 @@ export const QuestionDialog = ({
   const userAnswer = useAppSelector(gameUserAnswerSelector);
   const setUserAnswer = useUserAnswer();
   const heroAttack = useHeroAttack();
+  const opponentAttack = useOpponentAttack();
 
   const isCorrectAnswer = (potentialAnswer: string): boolean => {
     return Boolean(
@@ -75,6 +73,7 @@ export const QuestionDialog = ({
                 answered();
                 setUserAnswer(potentialAnswer);
                 heroAttack(potentialAnswer === answer);
+                opponentAttack(potentialAnswer === answer);
               }}
               correct={isCorrectAnswer(potentialAnswer)}
               incorrect={isIncorrectAnswer(potentialAnswer)}
