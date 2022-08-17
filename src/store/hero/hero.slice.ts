@@ -7,7 +7,7 @@ export interface HeroState {
 }
 
 export const initialState: HeroState = {
-  maxHealth: 150,
+  maxHealth: 100,
   currentHealth: 100,
   attackValue: 0,
 };
@@ -16,12 +16,12 @@ export const heroSlice = createSlice({
   name: 'hero',
   initialState,
   reducers: {
-    setAttackValue: (state, action: PayloadAction<number>) => {
+    setHeroAttackValue: (state, action: PayloadAction<number>) => {
       state.attackValue = action.payload;
     },
   },
 });
 
-export const { setAttackValue } = heroSlice.actions;
+export const { setHeroAttackValue } = heroSlice.actions;
 
 export default heroSlice.reducer;

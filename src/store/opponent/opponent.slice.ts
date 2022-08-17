@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DifficultyType } from 'models';
+import { number } from 'prop-types';
 
 export interface OpponentState {
   maxHealth: number;
@@ -22,9 +23,14 @@ export const opponentSlice = createSlice({
     setAttackValue: (state, action: PayloadAction<number>) => {
       state.attackValue = action.payload;
     },
+
+    setOpponentCurrentHealth: (state, action: PayloadAction<number>) => {
+      state.currentHealth = action.payload;
+    },
   },
 });
 
-export const { setAttackValue } = opponentSlice.actions;
+export const { setAttackValue, setOpponentCurrentHealth } =
+  opponentSlice.actions;
 
 export default opponentSlice.reducer;

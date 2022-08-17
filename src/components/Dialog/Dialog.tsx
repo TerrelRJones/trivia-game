@@ -1,7 +1,11 @@
 import Button from 'components/Button';
 import { ButtonType } from 'components/Button/Button';
 import { AttackStrengthType, DialogStageType } from 'models';
-import { useGetQuestion } from 'store/game/game.hooks';
+import {
+  useAnsweredVerify,
+  useGameRound,
+  useGetQuestion,
+} from 'store/game/game.hooks';
 import {
   gameDialogSelector,
   gameQuestionSelector,
@@ -67,8 +71,10 @@ export const Dialog = ({ testID, message, children }: DialogProps) => {
   const dialogStage = useAppSelector(gameDialogSelector);
   const { answer } = useAppSelector(gameQuestionSelector);
   const userAnswer = useAppSelector(gameUserAnswerSelector);
+  const answerVerify = useAnsweredVerify();
 
   const answeredStage = dialogStage === DialogStageType.ANSWERED;
+  const isUserAnswerCorrect = userAnswer === answer;
 
   return (
     <StyledDialogContainer answered={answeredStage} data-testid={testID}>
@@ -77,12 +83,25 @@ export const Dialog = ({ testID, message, children }: DialogProps) => {
           <Message className="next-message">
             {userAnswer === answer ? 'Correct!' : 'Incorrect'}
           </Message>
-          <Button
-            buttonType={ButtonType.NEXT}
-            onClick={() => getNewQuestion(AttackStrengthType.EASY)}
-          >
-            Next
-          </Button>
+          {isUserAnswerCorrect ? (
+            <Button
+              buttonType={ButtonType.NEXT}
+              onClick={() => {
+                getNewQuestion(AttackStrengthType.EASY);
+              }}
+            >
+              Next
+            </Button>
+          ) : (
+            <Button
+              buttonType={ButtonType.NEXT}
+              onClick={() => {
+                answerVerify(isUserAnswerCorrect);
+              }}
+            >
+              Next
+            </Button>
+          )}
         </NextButtonContainer>
       ) : (
         <Message data-testid="title">{message}</Message>

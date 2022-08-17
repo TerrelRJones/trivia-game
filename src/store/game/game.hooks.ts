@@ -1,6 +1,9 @@
 import { useCallback } from 'react';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
-import { gameRoundSelector } from 'store/game/game.selectors';
+import {
+  gameAttackStrengthSelector,
+  gameRoundSelector,
+} from 'store/game/game.selectors';
 import {
   setRound,
   attack,
@@ -50,6 +53,7 @@ export const useAttackPower = () => {
 
 export const useGetQuestion = () => {
   const dispatch = useAppDispatch();
+
   return (difficulty: AttackStrengthType) =>
     dispatch(getQuestion({ difficulty }));
 };
