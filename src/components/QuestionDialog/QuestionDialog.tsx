@@ -2,11 +2,7 @@ import Button from 'components/Button';
 import styled from 'styled-components';
 
 import { ButtonType } from 'components/Button/Button';
-import {
-  useAnswered,
-  useAnsweredVerify,
-  useUserAnswer,
-} from 'store/game/game.hooks';
+import { useAnswered, useUserAnswer } from 'store/game/game.hooks';
 import { useAppSelector } from 'store/hooks';
 import { gameUserAnswerSelector } from 'store/game/game.selectors';
 import { useHeroAttack } from 'store/hero/hero.hooks';
