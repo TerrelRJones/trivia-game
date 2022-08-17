@@ -67,7 +67,6 @@ const Box = styled.div`
 `;
 
 export const Dialog = ({ testID, message, children }: DialogProps) => {
-  const getNewQuestion = useGetQuestion();
   const dialogStage = useAppSelector(gameDialogSelector);
   const { answer } = useAppSelector(gameQuestionSelector);
   const userAnswer = useAppSelector(gameUserAnswerSelector);
@@ -83,25 +82,14 @@ export const Dialog = ({ testID, message, children }: DialogProps) => {
           <Message className="next-message">
             {userAnswer === answer ? 'Correct!' : 'Incorrect'}
           </Message>
-          {isUserAnswerCorrect ? (
-            <Button
-              buttonType={ButtonType.NEXT}
-              onClick={() => {
-                getNewQuestion(AttackStrengthType.EASY);
-              }}
-            >
-              Next
-            </Button>
-          ) : (
-            <Button
-              buttonType={ButtonType.NEXT}
-              onClick={() => {
-                answerVerify(isUserAnswerCorrect);
-              }}
-            >
-              Next
-            </Button>
-          )}
+          <Button
+            buttonType={ButtonType.NEXT}
+            onClick={() => {
+              answerVerify(isUserAnswerCorrect);
+            }}
+          >
+            Next
+          </Button>
         </NextButtonContainer>
       ) : (
         <Message data-testid="title">{message}</Message>
