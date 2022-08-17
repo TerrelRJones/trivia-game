@@ -1,6 +1,6 @@
 import opponentReducer, {
   initialState,
-  setAttackValue,
+  setOpponentAttackValue,
 } from 'store/opponent/opponent.slice';
 
 import { MOCK_OPPONENT_STATE } from 'store/mocks/opponent.mocks';
@@ -14,7 +14,9 @@ describe('Opponent Slice reducer', () => {
   });
 
   it('setAttackValue should set the opponentAttackValue to 5', () => {
-    expect(opponentReducer(MOCK_OPPONENT_STATE, setAttackValue(5))).toEqual({
+    expect(
+      opponentReducer(MOCK_OPPONENT_STATE, setOpponentAttackValue(5))
+    ).toEqual({
       maxHealth: 150,
       currentHealth: 150,
       attackValue: 5,

@@ -9,7 +9,7 @@ import {
 } from 'store/game/game.hooks';
 import { useAppSelector } from 'store/hooks';
 import { gameUserAnswerSelector } from 'store/game/game.selectors';
-import { useHeroAttackValue } from 'store/hero/hero.hooks';
+import { useHeroAttack } from 'store/hero/hero.hooks';
 
 interface QuestionDialogProps {
   testID?: string;
@@ -42,7 +42,7 @@ export const QuestionDialog = ({
   const answered = useAnswered();
   const userAnswer = useAppSelector(gameUserAnswerSelector);
   const setUserAnswer = useUserAnswer();
-  const incrementHeroAttackValue = useHeroAttackValue();
+  const heroAttack = useHeroAttack();
 
   const isCorrectAnswer = (potentialAnswer: string): boolean => {
     return Boolean(
@@ -74,7 +74,7 @@ export const QuestionDialog = ({
               onClick={() => {
                 answered();
                 setUserAnswer(potentialAnswer);
-                incrementHeroAttackValue(potentialAnswer === answer);
+                heroAttack(potentialAnswer === answer);
               }}
               correct={isCorrectAnswer(potentialAnswer)}
               incorrect={isIncorrectAnswer(potentialAnswer)}
