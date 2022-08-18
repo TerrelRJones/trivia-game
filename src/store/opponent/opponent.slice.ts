@@ -35,10 +35,7 @@ export const opponentSlice = createSlice({
       state.difficulty = action.payload;
     },
     resetOpponentState: (state) => {
-      state.maxHealth = 100;
-      state.currentHealth = 100;
-      state.attackValue = 0;
-      state.difficulty = DifficultyType.EASY;
+      return initialState;
     },
   },
 });
