@@ -136,9 +136,7 @@ export const gameSlice = createSlice({
     },
 
     resetGameState: (state) => {
-      state.round = 1;
-      state.dialogStage = DialogStageType.DIFFICULTY;
-      state.gameStatus = GameStatus.PLAYING;
+      return initialState;
     },
   },
 });

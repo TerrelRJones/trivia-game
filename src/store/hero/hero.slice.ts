@@ -25,9 +25,7 @@ export const heroSlice = createSlice({
     },
 
     resetHeroState: (state) => {
-      state.maxHealth = 100;
-      state.currentHealth = 100;
-      state.attackValue = 0;
+      return initialState;
     },
   },
 });
