@@ -23,6 +23,7 @@ import barbarianBunny from 'assets/images/barbarian-bunny.svg';
 import wizardPig from 'assets/images/wizard-pig.svg';
 
 interface OpponentDetails {
+  displayName: string;
   name: string;
   avatar: string;
 }
@@ -104,11 +105,15 @@ export const useOpponentDetails = (): UseOpponentDetailsResult => {
   const opponentDetails: OpponentDetails = useMemo(() => {
     switch (difficulty) {
       case DifficultyType.EASY:
-        return { name: 'Easy', avatar: wizardPig };
+        return { name: 'Wizard Pig', displayName: 'Easy', avatar: wizardPig };
       case DifficultyType.MEDIUM:
-        return { name: 'Medium', avatar: barbarianBunny };
+        return {
+          name: 'Barbarian Bunny',
+          displayName: 'Medium',
+          avatar: barbarianBunny,
+        };
       default:
-        return { name: 'Seth', avatar: dragonSeth };
+        return { name: 'Dragon Seth', displayName: 'Seth', avatar: dragonSeth };
     }
   }, [difficulty]);
 
