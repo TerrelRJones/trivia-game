@@ -37,6 +37,7 @@ const ShadowGradientImg = styled.img`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  transform-origin: bottom;
   bottom: 0;
 `;
 

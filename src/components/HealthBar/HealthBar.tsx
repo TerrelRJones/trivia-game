@@ -50,6 +50,12 @@ const HealthBarMiddle = styled.div<
 
   border-radius: ${({ currentHealth, maxHealth }) =>
     currentHealth === maxHealth && '5px'};
+
+  transition: width 1s ease-in-out;
+
+  ${({ currentHealth }) =>
+    currentHealth <= 50 &&
+    'animation: blinker 0.5s linear infinite;  @keyframes blinker { 25% { opacity: 0.5;}}'}
 `;
 
 const HeartImage = styled.img<Pick<HealthBarProps, 'isReversed'>>`
