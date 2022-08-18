@@ -10,7 +10,7 @@ import {
   GameStatus,
 } from 'models';
 
-export type questionData = {
+export type QuestionData = {
   status: QuestionStatus;
   text: string;
   answer: string;
@@ -26,7 +26,7 @@ export interface GameState {
   difficulty: DifficultyType;
   gameStatus: GameStatus;
   userAnswer: string;
-  question: questionData;
+  question: QuestionData;
 }
 
 export const initialState: GameState = {
@@ -94,7 +94,7 @@ export const gameSlice = createSlice({
       }
     },
 
-    getQuestionSuccess: (state, action: PayloadAction<questionData>) => {
+    getQuestionSuccess: (state, action: PayloadAction<QuestionData>) => {
       state.question.status = QuestionStatus.IDLE;
       state.question = action.payload;
     },
