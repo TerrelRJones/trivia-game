@@ -9,14 +9,14 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 export const useOpponentAttack = () => {
   const gameAction = useAppSelector(gameActionSelector);
   const heroCurrentHealth = useAppSelector(heroCurrentHealthSelector);
-  const [gameRound, { incrementRound }] = useGameRound();
+  const [, { incrementRound }] = useGameRound();
   const dispatch = useAppDispatch();
 
   const opponentAttack = useCallback(
     (userAnswer: boolean) => {
       if (
-        (gameAction === ActionStateType.ATTACK && !userAnswer) ||
-        (gameAction === ActionStateType.BLOCK && !userAnswer)
+        !userAnswer &&
+        [ActionStateType.ATTACK, ActionStateType.BLOCK].includes(gameAction)
       ) {
         dispatch(setHeroCurrentHealth(heroCurrentHealth - 5));
         incrementRound();
