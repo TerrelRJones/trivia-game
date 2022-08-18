@@ -75,10 +75,11 @@ const Defeat = () => {
   return (
     <DefeatPageContainer>
       <HeroContainer>
-        <Header>GAME OVER</Header>
+        <Header data-testid="header">GAME OVER</Header>
         <DefeatText>You lost to {name}</DefeatText>
         <ButtonContainer>
           <Button
+            testID="play-again-btn"
             onClick={() => {
               resetGame();
               navigate('/');
@@ -89,7 +90,7 @@ const Defeat = () => {
         </ButtonContainer>
       </HeroContainer>
       <AvatarContainer>
-        <Avatar src={defeatedFoxKnight} alt="Fox Knight" />
+        <Avatar data-testid="avatar" src={defeatedFoxKnight} alt="Fox Knight" />
         <Shadow src={shadow} />
       </AvatarContainer>
     </DefeatPageContainer>

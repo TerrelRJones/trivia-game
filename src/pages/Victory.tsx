@@ -85,10 +85,11 @@ const Victory = () => {
   return (
     <DefeatPageContainer>
       <HeroContainer>
-        <Header>VICTORY</Header>
+        <Header data-testid="header">VICTORY</Header>
         <DefeatText>You beat the {name}</DefeatText>
         <ButtonContainer>
           <Button
+            testID="play-again-btn"
             onClick={() => {
               resetGame();
               navigate('/');
@@ -99,7 +100,7 @@ const Victory = () => {
         </ButtonContainer>
       </HeroContainer>
       <AvatarContainer>
-        <Avatar src={victoryFoxKnight} alt="Fox Knight" />
+        <Avatar data-testid="avatar" src={victoryFoxKnight} alt="Fox Knight" />
         <Shadow src={shadow} />
         <ShadowGradient src={shadowGradient} />
       </AvatarContainer>
