@@ -238,7 +238,6 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
       correct={correct}
       incorrect={incorrect}
       disabled={disabled}
-      onClick={onClick}
       selected={selected}
       data-testid="btn-container"
     >
