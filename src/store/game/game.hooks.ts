@@ -101,7 +101,8 @@ export const useGameStatus = () => {
       return GameStatus.DEFEAT;
     }
 
-    return dispatch(setGameStatus(GameStatus.PLAYING));
+    dispatch(setGameStatus(GameStatus.PLAYING));
+    return GameStatus.PLAYING;
   };
 
   return getGameStatus;
