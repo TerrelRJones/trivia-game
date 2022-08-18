@@ -8,7 +8,6 @@ describe('Defeat Page', () => {
 
     expect(screen.getByTestId('header')).toHaveTextContent('GAME OVER');
     expect(screen.getByTestId('play-again-btn')).toBeInTheDocument();
-    expect(screen.getByTestId('avatar')).toBeInTheDocument();
     expect(screen.getByTestId('avatar')).toHaveAttribute(
       'src',
       'fox-knight_defeated.svg'
