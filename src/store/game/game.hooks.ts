@@ -12,8 +12,19 @@ import {
   setDifficulty,
   userAnswer,
   answeredVerify,
+  setGameStatus,
+  resetGameState,
 } from 'store/game/game.slice';
-import { AttackPower, AttackStrengthType, DifficultyType } from 'models';
+import {
+  AttackPower,
+  AttackStrengthType,
+  DifficultyType,
+  GameStatus,
+} from 'models';
+import { opponentCurrentHealthSelector } from 'store/opponent/opponent.selectors';
+import { heroCurrentHealthSelector } from 'store/hero/hero.selectors';
+import { resetHeroState } from 'store/hero/hero.slice';
+import { resetOpponentState } from 'store/opponent/opponent.slice';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
 
@@ -72,4 +83,38 @@ export const useAnsweredVerify = () => {
 export const useSetDifficulty = () => {
   const dispatch = useAppDispatch();
   return (difficulty: DifficultyType) => dispatch(setDifficulty(difficulty));
+};
+
+export const useGameStatus = () => {
+  const opponentCurrentHealth = useAppSelector(opponentCurrentHealthSelector);
+  const heroCurrentHealth = useAppSelector(heroCurrentHealthSelector);
+  const dispatch = useAppDispatch();
+
+  const getGameStatus = () => {
+    if (opponentCurrentHealth <= 0) {
+      dispatch(setGameStatus(GameStatus.VICTORY));
+      return GameStatus.VICTORY;
+    }
+
+    if (heroCurrentHealth <= 0) {
+      dispatch(setGameStatus(GameStatus.DEFEAT));
+      return GameStatus.DEFEAT;
+    }
+
+    return dispatch(setGameStatus(GameStatus.PLAYING));
+  };
+
+  return getGameStatus;
+};
+
+export const useGameReset = () => {
+  const dispatch = useAppDispatch();
+
+  const resetGame = () => {
+    dispatch(resetHeroState());
+    dispatch(resetOpponentState());
+    dispatch(resetGameState());
+  };
+
+  return resetGame;
 };
