@@ -5,7 +5,7 @@ import {
   getQuestion,
   GetQuestionPayloadAction,
   getQuestionSuccess,
-  questionData,
+  QuestionData,
 } from './game.slice';
 
 import { QuestionStatus } from 'models';
@@ -22,7 +22,7 @@ export function* getQuestionFetch(action: GetQuestionPayloadAction): any {
     const res = yield questionData.json();
     const { question, correct_answer, incorrect_answers } = res.results[0];
 
-    const formattedQuestion: questionData = {
+    const formattedQuestion: QuestionData = {
       status: QuestionStatus.IDLE,
       text: question,
       answer: correct_answer,
