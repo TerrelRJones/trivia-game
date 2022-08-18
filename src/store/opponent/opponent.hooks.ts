@@ -65,8 +65,8 @@ export const useOpponentAttack = () => {
   const opponentAttack = useCallback(
     (userAnswer: boolean) => {
       if (
-        (gameAction === ActionStateType.ATTACK || ActionStateType.BLOCK) &&
-        !userAnswer
+        !userAnswer &&
+        [ActionStateType.ATTACK, ActionStateType.BLOCK].includes(gameAction)
       ) {
         dispatch(setHeroCurrentHealth(heroCurrentHealth - opponentAttackPower));
         dispatch(setOpponentAttackValue(opponentAttackPower));
