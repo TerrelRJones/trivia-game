@@ -5,8 +5,6 @@ import { ButtonType } from 'components/Button/Button';
 import { useAnswered, useUserAnswer } from 'store/game/game.hooks';
 import { useAppSelector } from 'store/hooks';
 import { gameUserAnswerSelector } from 'store/game/game.selectors';
-import { useHeroAttack } from 'store/hero/hero.hooks';
-import { useOpponentAttack } from 'store/opponent/opponent.hooks';
 
 interface QuestionDialogProps {
   testID?: string;
