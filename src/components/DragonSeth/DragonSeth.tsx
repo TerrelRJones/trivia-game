@@ -5,6 +5,18 @@ interface DragonSethProps {
 }
 
 const DragonSethContainer = styled.div`
+  animation: floating 3s ease-in-out infinite;
+  @keyframes floating {
+    0% {
+      transform: translateY(-60px) translateX(15px);
+    }
+    50% {
+      transform: translateY(0px) translateX(-15px);
+    }
+    100% {
+      transform: translateY(-60px) translateX(15px);
+    }
+  }
   .fire {
     transform-origin: right;
 
@@ -20,7 +32,7 @@ const DragonSethContainer = styled.div`
   .left-wing {
     transform-origin: bottom left;
 
-    animation: fly 0.7s ease-in-out infinite;
+    animation: fly 1s ease-in-out infinite;
 
     @keyframes fly {
       0% {
@@ -37,7 +49,7 @@ const DragonSethContainer = styled.div`
   .right-wing {
     transform-origin: bottom;
 
-    animation: fly 0.7s ease-in-out infinite;
+    animation: fly 1s ease-in-out infinite;
 
     @keyframes fly {
       0% {
@@ -55,7 +67,7 @@ const DragonSethContainer = styled.div`
   .left-arm {
     transform-origin: top right;
 
-    animation: fly 0.7s ease-in-out infinite;
+    animation: fly 2s ease-in-out infinite;
 
     @keyframes fly {
       0% {
@@ -72,7 +84,7 @@ const DragonSethContainer = styled.div`
   .right-arm {
     transform-origin: top right;
 
-    animation: fly 0.7s ease-in-out infinite;
+    animation: fly 3s ease-in-out infinite;
 
     @keyframes fly {
       0% {

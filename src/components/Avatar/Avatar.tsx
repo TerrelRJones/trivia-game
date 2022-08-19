@@ -27,23 +27,13 @@ const AvatarContainer = styled.div`
   max-height: 297px;
   width: 100%;
   height: 100%;
-
-  div {
-    z-index: 2;
-  }
 `;
 
-// const AvatarImg = styled.img<Pick<AvatarProps, 'avatar'>>`
-//   z-index: 1;
-//   max-height: 297px;
-//   height: 100%;
-//   ${({ avatar }) =>
-//     avatar === dragonSeth &&
-//     'animation: floating 3s ease-in-out infinite; @keyframes floating {0% {transform: translateY(-60px) translateX(15px); transform:}50% {transform: translateY(0px) translateX(-15px);} 100%{transform: translateY(-60px) translateX(15px)}}'}
-//   ${({ avatar }) =>
-//     avatar === barbarianBunny &&
-//     ' transform-origin: bottom; animation: bounce 1s ease infinite; @keyframes bounce { 0% {transform: translateX(40px);}25% {transform: translateX(20px) translateY(-20px);}50% {transform: translateX(0px);}75% {transform: translateX(20px) translateY(-20px);}100% {transform: translateX(40px);}'}
-// `;
+const AvatarImg = styled.div`
+  z-index: 1;
+  max-height: 297px;
+  height: 100%;
+`;
 
 const ShadowGradientImg = styled.img`
   position: absolute;
@@ -81,7 +71,7 @@ export const Avatar = ({ name, avatar, testID }: AvatarProps) => {
   return (
     <Container>
       <AvatarContainer>
-        <div data-testid={testID}>{avatar}</div>
+        <AvatarImg data-testid={testID}>{avatar}</AvatarImg>
         <ShadowGradientImg
           data-testid="shadow"
           src={shadowGradient}
