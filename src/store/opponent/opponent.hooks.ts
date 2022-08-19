@@ -1,5 +1,5 @@
 import { ActionStateType, DifficultyType } from 'models';
-import { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useGameRound } from 'store/game/game.hooks';
 import {
   gameActionSelector,
@@ -18,9 +18,6 @@ import {
   setOpponentMaxHealth,
 } from './opponent.slice';
 
-import dragonSeth from 'assets/images/dragon-seth.svg';
-import barbarianBunny from 'assets/images/barbarian-bunny.svg';
-import wizardPig from 'assets/images/wizard-pig.svg';
 import { opponentAttackValueSelector } from './opponent.selectors';
 
 interface OpponentDetails {
@@ -108,15 +105,23 @@ export const useOpponentDetails = (): UseOpponentDetailsResult => {
   const opponentDetails: OpponentDetails = useMemo(() => {
     switch (difficulty) {
       case DifficultyType.EASY:
-        return { name: 'Wizard Pig', displayName: 'Easy', avatar: wizardPig };
+        return {
+          name: 'Wizard Pig',
+          displayName: 'Easy',
+          avatar: 'wizard',
+        };
       case DifficultyType.MEDIUM:
         return {
           name: 'Barbarian Bunny',
           displayName: 'Medium',
-          avatar: barbarianBunny,
+          avatar: 'bunny',
         };
       default:
-        return { name: 'Dragon Seth', displayName: 'Seth', avatar: dragonSeth };
+        return {
+          name: 'Dragon Seth',
+          displayName: 'Seth',
+          avatar: 'seth',
+        };
     }
   }, [difficulty]);
 

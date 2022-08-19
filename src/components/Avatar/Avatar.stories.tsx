@@ -1,9 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import FoxKnight from 'components/FoxKnight';
+import WizardPig from 'components/WizardPig';
 import { StoriesBackgroundContainer } from 'styles/styledElements';
 import Avatar from '.';
-
-import foxAvatar from 'assets/images/fox-knight.svg';
-import wizardPigAvatar from 'assets/images/wizard-pig.svg';
 
 export default {
   title: 'Avatar',
@@ -19,11 +18,11 @@ const Template: ComponentStory<typeof Avatar> = (args) => (
 export const Fox = Template.bind({});
 Fox.args = {
   name: 'Terrel',
-  avatar: foxAvatar,
+  avatar: <FoxKnight />,
 };
 
-export const WizardPig = Template.bind({});
-WizardPig.args = {
+export const Pig = Template.bind({});
+Pig.args = {
   name: 'Wizard Pig',
-  avatar: wizardPigAvatar,
+  avatar: <WizardPig />,
 };

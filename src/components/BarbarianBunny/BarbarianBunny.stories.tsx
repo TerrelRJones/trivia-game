@@ -3,7 +3,7 @@ import { StoriesBackgroundContainer } from 'styles/styledElements';
 import BarbarianBunny from '.';
 
 export default {
-  title: 'BarbarianBunny',
+  title: 'Characters',
   component: BarbarianBunny,
 } as ComponentMeta<typeof BarbarianBunny>;
 
@@ -13,6 +13,5 @@ const Template: ComponentStory<typeof BarbarianBunny> = (args) => (
   </StoriesBackgroundContainer>
 );
 
-export const Default = Template.bind({});
-Default.args = {
-};
+export const Bunny = Template.bind({});
+Bunny.args = {};

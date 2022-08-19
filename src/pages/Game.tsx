@@ -18,7 +18,10 @@ import Dialog from 'components/Dialog';
 import QuestionDialog from 'components/QuestionDialog';
 import AttackDialog from 'components/AttackDialog';
 
-import foxKnight from 'assets/images/fox-knight.svg';
+import FoxKnight from 'components/FoxKnight';
+import WizardPig from 'components/WizardPig';
+import BarbarianBunny from 'components/BarbarianBunny';
+import DragonSeth from 'components/DragonSeth';
 
 import {
   ActionStateType,
@@ -117,6 +120,12 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
     return 'Heavy attack...';
   };
 
+  const getCharacter = () => {
+    if (avatar === 'wizard') return <WizardPig />;
+    if (avatar === 'bunny') return <BarbarianBunny />;
+    return <DragonSeth />;
+  };
+
   useEffect(() => {
     if (gameDialog === DialogStageType.DIFFICULTY) {
       return navigate('/');
@@ -157,7 +166,7 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
       </TopContainer>
       <StyledPlayerContainer>
         <PlayerContainer>
-          <Avatar testID="player-1" avatar={foxKnight} name="Terrel" />
+          <Avatar testID="player-1" avatar={<FoxKnight />} name="Terrel" />
         </PlayerContainer>
         <ActionContainer>
           <Action
@@ -172,7 +181,11 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
           />
         </ActionContainer>
         <PlayerContainer>
-          <Avatar testID="player-2" avatar={avatar} name={displayName} />
+          <Avatar
+            testID="player-2"
+            avatar={getCharacter()}
+            name={displayName}
+          />
         </PlayerContainer>
       </StyledPlayerContainer>
 
