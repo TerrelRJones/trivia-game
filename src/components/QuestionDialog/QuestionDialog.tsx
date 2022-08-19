@@ -39,8 +39,6 @@ export const QuestionDialog = ({
   const answered = useAnswered();
   const userAnswer = useAppSelector(gameUserAnswerSelector);
   const setUserAnswer = useUserAnswer();
-  const heroAttack = useHeroAttack();
-  const opponentAttack = useOpponentAttack();
 
   const isCorrectAnswer = (potentialAnswer: string): boolean => {
     return Boolean(
@@ -64,8 +62,6 @@ export const QuestionDialog = ({
       <Question data-testid="question-text">{question}</Question>
       <AnswerContainer>
         {options.map((potentialAnswer, index) => {
-          const isUserAnswerCorrect = potentialAnswer === answer;
-
           return (
             <Button
               key={index}
@@ -74,8 +70,6 @@ export const QuestionDialog = ({
               onClick={() => {
                 answered();
                 setUserAnswer(potentialAnswer);
-                heroAttack(isUserAnswerCorrect);
-                opponentAttack(isUserAnswerCorrect);
               }}
               correct={isCorrectAnswer(potentialAnswer)}
               incorrect={isIncorrectAnswer(potentialAnswer)}
