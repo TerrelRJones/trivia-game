@@ -81,13 +81,7 @@ export const Avatar = ({ name, avatar, testID }: AvatarProps) => {
   return (
     <Container>
       <AvatarContainer>
-        <div>{avatar}</div>
-        {/* <AvatarImg
-          avatar={avatar}
-          data-testid={testID}
-          src={avatar}
-          alt="Fox Knight Avatar"
-        /> */}
+        <div data-testid={testID}>{avatar}</div>
         <ShadowGradientImg
           data-testid="shadow"
           src={shadowGradient}
