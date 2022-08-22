@@ -139,13 +139,13 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
       </StyledPlayerContainer>
 
       {gameDialog === DialogStageType.ACTION && (
-        <Dialog testID="dialog" message="Choose an attack">
+        <Dialog testID="dialog" message="Choose an action">
           <ActionDialog />
         </Dialog>
       )}
 
       {gameDialog === DialogStageType.ATTACKING && (
-        <Dialog testID="dialog" message="Attack strength">
+        <Dialog testID="dialog" message="Choose an attack">
           <AttackDialog />
         </Dialog>
       )}
