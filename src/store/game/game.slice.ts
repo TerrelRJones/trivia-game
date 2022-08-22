@@ -92,6 +92,7 @@ export const gameSlice = createSlice({
     },
 
     getQuestion: (state, action: GetQuestionPayloadAction) => {
+      state.dialogStage = DialogStageType.ANSWERING;
       state.userAnswer = ''; // <--- Can we move this?
     },
 
@@ -104,7 +105,7 @@ export const gameSlice = createSlice({
     },
 
     answeredVerify: (state, action: PayloadAction<boolean>) => {
-      if (action.payload && state.action === ActionStateType.ATTACK) {
+      if (state.action === ActionStateType.ATTACK && action.payload) {
         state.dialogStage = DialogStageType.ATTACKING;
       }
       if (state.action === ActionStateType.BLOCK && action.payload) {
@@ -113,8 +114,9 @@ export const gameSlice = createSlice({
       }
 
       if (
-        (!action.payload && state.action === ActionStateType.BLOCK) ||
-        state.action === ActionStateType.ATTACK
+        (state.action === ActionStateType.BLOCK ||
+          state.action === ActionStateType.ATTACK) &&
+        !action.payload
       ) {
         state.dialogStage = DialogStageType.ACTION;
         state.action = ActionStateType.NONE;

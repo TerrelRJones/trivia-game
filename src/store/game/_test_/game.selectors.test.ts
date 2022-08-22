@@ -3,6 +3,7 @@ import {
   gameRoundSelector,
   gameDialogSelector,
   gameAttackStrengthSelector,
+  gameAttackPowerSelector,
 } from 'store/game/game.selectors';
 
 import { MOCK_APP_STATE } from 'store/mocks/app-state.mocks';
@@ -34,6 +35,14 @@ describe('Game Selectors', () => {
     it('should return the current attackStrength', () => {
       expect(gameAttackStrengthSelector(MOCK_APP_STATE)).toEqual(
         MOCK_APP_STATE.game.attackStrength
+      );
+    });
+  });
+
+  describe('gameAttackPowerSelector', () => {
+    it('should return the current attack power', () => {
+      expect(gameAttackPowerSelector(MOCK_APP_STATE)).toEqual(
+        MOCK_APP_STATE.game.attackPower
       );
     });
   });

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import Button from 'components/Button';
 
-import { useAttack, useBlock } from 'store/game/game.hooks';
+import { useAttack, useBlock, useGetQuestion } from 'store/game/game.hooks';
+import { AttackStrengthType } from 'models';
 
 interface ActionDialogProps {
   testID?: string;
@@ -23,6 +24,7 @@ const ActionButtonContainer = styled.div`
 export const ActionDialog = ({ testID }: ActionDialogProps) => {
   const attack = useAttack();
   const block = useBlock();
+  const getQuestion = useGetQuestion();
 
   return (
     <ActionDialogContainer data-testid={testID}>
@@ -32,7 +34,14 @@ export const ActionDialog = ({ testID }: ActionDialogProps) => {
         </Button>
       </ActionButtonContainer>
       <ActionButtonContainer>
-        <Button testID="block" onClick={block} block>
+        <Button
+          testID="block"
+          onClick={() => {
+            getQuestion(AttackStrengthType.EASY);
+            block();
+          }}
+          block
+        >
           Block
         </Button>
       </ActionButtonContainer>
