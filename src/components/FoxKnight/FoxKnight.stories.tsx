@@ -1,5 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { StoriesBackgroundContainer } from 'styles/styledElements';
+import { Provider } from 'react-redux';
+import { store } from 'store';
 import FoxKnight from '.';
 
 export default {
@@ -9,7 +11,9 @@ export default {
 
 const Template: ComponentStory<typeof FoxKnight> = (args) => (
   <StoriesBackgroundContainer>
-    <FoxKnight {...args} />
+    <Provider store={store}>
+      <FoxKnight {...args} />
+    </Provider>
   </StoriesBackgroundContainer>
 );
 
