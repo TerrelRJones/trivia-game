@@ -5,8 +5,8 @@ interface VictoryFoxProps {
 }
 
 const VictoryFoxContainer = styled.div`
+  z-index: 1;
   transform-origin: middle;
-
   animation: jump 0.5s ease-in-out infinite;
 
   @keyframes jump {

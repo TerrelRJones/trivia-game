@@ -93,7 +93,6 @@ export const QuestionDialog = ({
                 onClick={() => {
                   answered();
                   setUserAnswer(potentialAnswer);
-                  heroAttack(potentialAnswer === answer);
                 }}
                 correct={isCorrectAnswer(potentialAnswer)}
                 incorrect={isIncorrectAnswer(potentialAnswer)}
