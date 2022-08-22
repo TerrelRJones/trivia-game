@@ -7,7 +7,7 @@ interface BarbarianBunnyProps {
 const BarbarianBunnyContainer = styled.div`
   transform-origin: bottom;
 
-  animation: bounce 2s ease infinite;
+  animation: bounce 1.2s ease infinite;
 
   @keyframes bounce {
     0% {
@@ -15,7 +15,7 @@ const BarbarianBunnyContainer = styled.div`
     }
 
     25% {
-      transform: translateX(20px) translateY(-20px);
+      transform: translateX(20px) translateY(-80px);
     }
 
     50% {
@@ -23,7 +23,7 @@ const BarbarianBunnyContainer = styled.div`
     }
 
     75% {
-      transform: translateX(20px) translateY(-20px);
+      transform: translateX(20px) translateY(-80px);
     }
 
     100% {
