@@ -88,10 +88,12 @@ export const gameSlice = createSlice({
     },
 
     getQuestionSuccess: (state, action: PayloadAction<questionData>) => {
+      state.question.status = QuestionStatus.IDLE;
       state.question = action.payload;
     },
 
     getQuestion: (state, action: GetQuestionPayloadAction) => {
+      state.question.status = QuestionStatus.LOADING;
       state.dialogStage = DialogStageType.ANSWERING;
       state.userAnswer = ''; // <--- Can we move this?
     },

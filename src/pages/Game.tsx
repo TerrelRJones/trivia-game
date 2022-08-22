@@ -4,6 +4,7 @@ import {
   gameRoundSelector,
   gameQuestionSelector,
   gameActionSelector,
+  gameQuestionStatusSelector,
 } from 'store/game/game.selectors';
 
 import { useAppSelector } from 'store/hooks';
@@ -19,7 +20,7 @@ import AttackDialog from 'components/AttackDialog';
 import foxKnight from 'assets/images/fox-knight.svg';
 import barbarianBunny from 'assets/images/barbarian-bunny.svg';
 
-import { ActionStateType, DialogStageType } from 'models';
+import { ActionStateType, DialogStageType, QuestionStatus } from 'models';
 import ActionDialog from 'components/ActionDialog';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -77,6 +78,7 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
   const gameRound = useAppSelector(gameRoundSelector);
   const question = useAppSelector(gameQuestionSelector);
   const action = useAppSelector(gameActionSelector);
+  const questionStatus = useAppSelector(gameQuestionStatusSelector);
   // hero
   const heroMaxHealth = useAppSelector(heroMaxHealthSelector);
   const heroCurrentHealth = useAppSelector(heroCurrentHealthSelector);
@@ -153,7 +155,11 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
       {(gameDialog === DialogStageType.ANSWERING ||
         gameDialog === DialogStageType.ANSWERED) && (
         <Dialog testID="dialog" message="Choose wisely...">
-          <QuestionDialog question={text} options={choices} answer={answer} />
+          {questionStatus === QuestionStatus.LOADING ? (
+            <h1>HANG TIGHT...</h1>
+          ) : (
+            <QuestionDialog question={text} options={choices} answer={answer} />
+          )}
         </Dialog>
       )}
     </StyledGameContainer>
