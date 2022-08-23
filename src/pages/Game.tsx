@@ -46,6 +46,7 @@ import {
 import { ScreenReaderOnly } from 'styles/styledElements';
 import { useOpponentDetails } from 'store/opponent/opponent.hooks';
 import { useGameStatus } from 'store/game/game.hooks';
+import { useHeroAttack } from 'store/hero/hero.hooks';
 
 interface GameTypes {
   testID?: string;
@@ -81,8 +82,35 @@ const PlayerContainer = styled.div`
 `;
 
 const ActionContainer = styled.div`
+  position: relative;
   display: flex;
   gap: 192px;
+`;
+
+const FinishThemButton = styled.button`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 40px;
+  width: 60%;
+  border-radius: 5px;
+  border: none;
+  background-color: ${({ theme: { colors } }) => colors.sethRed};
+  color: ${({ theme: { colors } }) => colors.white};
+  font-family: 'Lato';
+  font-weight: 900;
+  animation: blinker 0.5s linear infinite;
+  @keyframes blinker {
+    25% {
+      opacity: 0.5;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Game: React.FC<GameTypes> = ({ testID }) => {
@@ -103,6 +131,7 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
 
   const [{ displayName, avatar }, setOpponent] = useOpponentDetails();
   const getGameStatus = useGameStatus();
+  const [finishThem] = useHeroAttack();
 
   const { text, answer, choices } = question;
   const navigate = useNavigate();
@@ -174,6 +203,12 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
             actionState={getActionStateType()}
             attackValue={heroAttackValue}
           />
+          {heroAttackValue > opponentCurrentHealth && (
+            <FinishThemButton onClick={() => finishThem()}>
+              FINISH THEM
+            </FinishThemButton>
+          )}
+
           <Action
             isReversed
             actionState={ActionStateType.ATTACK}

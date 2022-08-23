@@ -16,7 +16,10 @@ enum AttackPowerValue {
   HEAVY = 15,
 }
 
-export const useHeroAttack = () => {
+export const useHeroAttack = (): [
+  () => void,
+  (userAnswer: boolean) => void
+] => {
   const currentHeroAttackValue = useAppSelector(heroAttackValueSelector);
   const gameAction = useAppSelector(gameActionSelector);
   const attackPower = useAppSelector(gameAttackPowerSelector);
@@ -67,5 +70,9 @@ export const useHeroAttack = () => {
     [currentHeroAttackValue, dispatch, getAttackPowerVal]
   );
 
-  return heroAttack;
+  const finishThem = () => {
+    dispatch(setOpponentCurrentHealth(0));
+  };
+
+  return [finishThem, heroAttack];
 };

@@ -69,7 +69,7 @@ export const Dialog = ({ testID, message, children }: DialogProps) => {
   const { answer } = useAppSelector(gameQuestionSelector);
   const userAnswer = useAppSelector(gameUserAnswerSelector);
   const answerVerify = useAnsweredVerify();
-  const heroAttack = useHeroAttack();
+  const [, heroAttack] = useHeroAttack();
   const opponentAttack = useOpponentAttack();
 
   const answeredStage = dialogStage === DialogStageType.ANSWERED;

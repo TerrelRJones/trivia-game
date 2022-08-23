@@ -73,15 +73,15 @@ export const QuestionDialog = ({
     );
   };
 
-  const questionHtmlStringToText = () => {
-    return new DOMParser().parseFromString(question, 'text/html')
-      .documentElement.textContent;
+  const questionHtmlStringToText = (text: string) => {
+    return new DOMParser().parseFromString(text, 'text/html').documentElement
+      .textContent;
   };
 
   return (
     <Container data-testid={testID}>
       <Question data-testid="question-text">
-        {questionHtmlStringToText()}
+        {questionHtmlStringToText(question)}
       </Question>
       <AnswerContainer>
         {options.map((potentialAnswer, index) => {
@@ -98,7 +98,7 @@ export const QuestionDialog = ({
                 incorrect={isIncorrectAnswer(potentialAnswer)}
                 disabled={isButtonDisabled(potentialAnswer)}
               >
-                {potentialAnswer}
+                {questionHtmlStringToText(potentialAnswer)}
               </Button>
             </ButtonContainer>
           );
