@@ -6,6 +6,7 @@ import { useAnswered, useUserAnswer } from 'store/game/game.hooks';
 import { useAppSelector } from 'store/hooks';
 import { gameUserAnswerSelector } from 'store/game/game.selectors';
 import { useHeroAttack } from 'store/hero/hero.hooks';
+import { useOpponentAttack } from 'store/opponent/opponent.hooks';
 
 interface QuestionDialogProps {
   testID?: string;
@@ -39,6 +40,7 @@ export const QuestionDialog = ({
   const userAnswer = useAppSelector(gameUserAnswerSelector);
   const setUserAnswer = useUserAnswer();
   const heroAttack = useHeroAttack();
+  const opponentAttack = useOpponentAttack();
 
   const isCorrectAnswer = (potentialAnswer: string): boolean => {
     return Boolean(
@@ -62,6 +64,8 @@ export const QuestionDialog = ({
       <Question data-testid="question-text">{question}</Question>
       <AnswerContainer>
         {options.map((potentialAnswer, index) => {
+          const isUserAnswerCorrect = potentialAnswer === answer;
+
           return (
             <Button
               key={index}
@@ -70,7 +74,8 @@ export const QuestionDialog = ({
               onClick={() => {
                 answered();
                 setUserAnswer(potentialAnswer);
-                heroAttack(potentialAnswer === answer);
+                heroAttack(isUserAnswerCorrect);
+                opponentAttack(isUserAnswerCorrect);
               }}
               correct={isCorrectAnswer(potentialAnswer)}
               incorrect={isIncorrectAnswer(potentialAnswer)}
