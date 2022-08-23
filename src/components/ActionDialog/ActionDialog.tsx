@@ -31,18 +31,14 @@ export const ActionDialog = ({ testID }: ActionDialogProps) => {
   const attack = useAttack();
   const block = useBlock();
   const getQuestion = useGetQuestion();
-  const [blockQuestion] = shuffleArray(['easy', 'medium', 'hard']);
+  const [blockQuestion] = shuffleArray([
+    AttackStrengthType.EASY,
+    AttackStrengthType.MEDIUM,
+    AttackStrengthType.HARD,
+  ]);
 
-  const randomDifficultyQuestion = () => {
-    if (blockQuestion === AttackStrengthType.EASY) {
-      return getQuestion(AttackStrengthType.EASY);
-    }
+  const randomDifficultyQuestion = () => getQuestion(blockQuestion);
 
-    if (blockQuestion === AttackStrengthType.MEDIUM) {
-      return getQuestion(AttackStrengthType.MEDIUM);
-    }
-    return getQuestion(AttackStrengthType.HARD);
-  };
   return (
     <ActionDialogContainer data-testid={testID}>
       <ActionButtonContainer>
