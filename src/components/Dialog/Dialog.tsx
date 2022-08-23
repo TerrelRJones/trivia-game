@@ -1,11 +1,7 @@
 import Button from 'components/Button';
 import { ButtonType } from 'components/Button/Button';
-import { AttackStrengthType, DialogStageType } from 'models';
-import {
-  useAnsweredVerify,
-  useGameRound,
-  useGetQuestion,
-} from 'store/game/game.hooks';
+import { DialogStageType } from 'models';
+import { useAnsweredVerify } from 'store/game/game.hooks';
 import {
   gameDialogSelector,
   gameQuestionSelector,

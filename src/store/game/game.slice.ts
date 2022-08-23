@@ -6,6 +6,7 @@ import {
   AttackStrengthType,
   QuestionStatus,
   AttackPower,
+  DifficultyType,
 } from 'models';
 
 export type questionData = {
@@ -21,6 +22,7 @@ export interface GameState {
   action: ActionStateType;
   attackStrength: AttackStrengthType;
   attackPower: AttackPower;
+  difficulty: DifficultyType;
   userAnswer: string;
   question: questionData;
 }
@@ -31,6 +33,7 @@ export const initialState: GameState = {
   action: ActionStateType.NONE,
   attackStrength: AttackStrengthType.EASY,
   attackPower: AttackPower.LIGHT,
+  difficulty: DifficultyType.EASY,
   userAnswer: '',
   question: {
     status: QuestionStatus.IDLE,
@@ -52,8 +55,9 @@ export const gameSlice = createSlice({
       state.round = action.payload;
     },
 
-    setDifficulty: (state, action: PayloadAction<DialogStageType>) => {
-      state.dialogStage = action.payload;
+    setDifficulty: (state, action: PayloadAction<DifficultyType>) => {
+      state.difficulty = action.payload;
+      state.dialogStage = DialogStageType.ACTION;
     },
 
     action: (state, action: PayloadAction<ActionStateType>) => {
@@ -95,7 +99,7 @@ export const gameSlice = createSlice({
     getQuestion: (state, action: GetQuestionPayloadAction) => {
       state.question.status = QuestionStatus.LOADING;
       state.dialogStage = DialogStageType.ANSWERING;
-      state.userAnswer = ''; // <--- Can we move this?
+      state.userAnswer = '';
     },
 
     answered: (state) => {

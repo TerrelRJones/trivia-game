@@ -1,4 +1,4 @@
-export const shuffleArray = (arr: Array<string>): Array<string> => {
+export const shuffleArray = <T>(arr: Array<T>): Array<T> => {
   let currentIndex = arr.length;
   let randomIndex;
 

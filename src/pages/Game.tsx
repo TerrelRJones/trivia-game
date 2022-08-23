@@ -4,6 +4,7 @@ import {
   gameRoundSelector,
   gameQuestionSelector,
   gameActionSelector,
+  gameAttackPowerSelector,
   gameQuestionStatusSelector,
 } from 'store/game/game.selectors';
 
@@ -18,9 +19,13 @@ import QuestionDialog from 'components/QuestionDialog';
 import AttackDialog from 'components/AttackDialog';
 
 import foxKnight from 'assets/images/fox-knight.svg';
-import barbarianBunny from 'assets/images/barbarian-bunny.svg';
 
-import { ActionStateType, DialogStageType, QuestionStatus } from 'models';
+import {
+  ActionStateType,
+  AttackPower,
+  DialogStageType,
+  QuestionStatus,
+} from 'models';
 import ActionDialog from 'components/ActionDialog';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -34,6 +39,8 @@ import {
   opponentCurrentHealthSelector,
   opponentMaxHealthSelector,
 } from 'store/opponent/opponent.selectors';
+import { ScreenReaderOnly } from 'styles/styledElements';
+import { useOpponentDetails } from 'store/opponent/opponent.hooks';
 
 interface GameTypes {
   testID?: string;
@@ -78,6 +85,7 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
   const gameRound = useAppSelector(gameRoundSelector);
   const question = useAppSelector(gameQuestionSelector);
   const action = useAppSelector(gameActionSelector);
+  const attackPower = useAppSelector(gameAttackPowerSelector);
   const questionStatus = useAppSelector(gameQuestionStatusSelector);
   // hero
   const heroMaxHealth = useAppSelector(heroMaxHealthSelector);
@@ -88,6 +96,8 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
   const opponentCurrentHealth = useAppSelector(opponentCurrentHealthSelector);
   const opponentAttackValue = useAppSelector(opponentAttackValueSelector);
 
+  const [{ name, avatar }, setOpponent] = useOpponentDetails();
+
   const { text, answer, choices } = question;
   const navigate = useNavigate();
 
@@ -97,14 +107,28 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
     return ActionStateType.ATTACK;
   };
 
+  const getQuestionDialogMessage = () => {
+    if (action === ActionStateType.BLOCK) return 'Blocking';
+    if (attackPower === AttackPower.LIGHT) return 'Light attack...';
+    if (attackPower === AttackPower.MEDIUM) return 'Medium attack...';
+    return 'Heavy attack...';
+  };
+
   useEffect(() => {
     if (gameDialog === DialogStageType.DIFFICULTY) {
       return navigate('/');
     }
   }, [gameDialog, navigate]);
 
+  useEffect(() => {
+    setOpponent();
+    // only want setOpponent to run on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <StyledGameContainer data-testid={testID}>
+      <ScreenReaderOnly aria-label="polite">{`You are at ${heroCurrentHealth} of ${heroMaxHealth} health. Your opponent is at ${opponentCurrentHealth} of ${opponentMaxHealth}, starting Round ${gameRound}`}</ScreenReaderOnly>
       <TopContainer>
         <HealthBar
           testID="health-bar-1"
@@ -136,25 +160,25 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
           />
         </ActionContainer>
         <PlayerContainer>
-          <Avatar testID="player-2" avatar={barbarianBunny} name="Medium" />
+          <Avatar testID="player-2" avatar={avatar} name={name} />
         </PlayerContainer>
       </StyledPlayerContainer>
 
       {gameDialog === DialogStageType.ACTION && (
-        <Dialog testID="dialog" message="Choose an attack">
+        <Dialog testID="dialog" message="Choose an action">
           <ActionDialog />
         </Dialog>
       )}
 
       {gameDialog === DialogStageType.ATTACKING && (
-        <Dialog testID="dialog" message="Attack strength">
+        <Dialog testID="dialog" message="Choose an attack">
           <AttackDialog />
         </Dialog>
       )}
 
       {(gameDialog === DialogStageType.ANSWERING ||
         gameDialog === DialogStageType.ANSWERED) && (
-        <Dialog testID="dialog" message="Choose wisely...">
+        <Dialog testID="dialog" message={getQuestionDialogMessage()}>
           {questionStatus === QuestionStatus.LOADING ? (
             <h1>HANG TIGHT...</h1>
           ) : (
