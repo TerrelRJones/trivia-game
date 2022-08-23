@@ -1,7 +1,7 @@
 import { RootState } from 'store/index';
 import { createSelector } from '@reduxjs/toolkit';
 import { questionData } from './game.slice';
-import { ActionStateType } from 'models';
+import { ActionStateType, DifficultyType, QuestionStatus } from 'models';
 
 export const gameSelector = (state: RootState) => state.game;
 
@@ -31,6 +31,11 @@ export const gameQuestionSelector = createSelector(
   (gameState): questionData => gameState.question
 );
 
+export const gameQuestionStatusSelector = createSelector(
+  gameSelector,
+  (gameState): QuestionStatus => gameState.question.status
+);
+
 export const gameUserAnswerSelector = createSelector(
   gameSelector,
   (gameState): string => gameState.userAnswer
@@ -39,4 +44,9 @@ export const gameUserAnswerSelector = createSelector(
 export const gameActionSelector = createSelector(
   gameSelector,
   (gameState): ActionStateType => gameState.action
+);
+
+export const gameDifficultySelector = createSelector(
+  gameSelector,
+  (gameState): DifficultyType => gameState.difficulty
 );
