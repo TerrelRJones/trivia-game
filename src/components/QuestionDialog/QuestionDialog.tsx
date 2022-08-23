@@ -92,22 +92,24 @@ export const QuestionDialog = ({
           const isUserAnswerCorrect = potentialAnswer === answer;
 
           return (
-            <Button
-              key={index}
-              testID={`button-${index}`}
-              buttonType={ButtonType.SECONDARY}
-              onClick={() => {
-                answered();
-                setUserAnswer(potentialAnswer);
-                heroAttack(isUserAnswerCorrect);
-                opponentAttack(isUserAnswerCorrect);
-              }}
-              correct={isCorrectAnswer(potentialAnswer)}
-              incorrect={isIncorrectAnswer(potentialAnswer)}
-              disabled={isButtonDisabled(potentialAnswer)}
-            >
-              {potentialAnswer}
-            </Button>
+            <ButtonContainer className={`btn-${index}`}>
+              <Button
+                key={index}
+                testID={`button-${index}`}
+                buttonType={ButtonType.SECONDARY}
+                onClick={() => {
+                  answered();
+                  setUserAnswer(potentialAnswer);
+                  heroAttack(isUserAnswerCorrect);
+                  opponentAttack(isUserAnswerCorrect);
+                }}
+                correct={isCorrectAnswer(potentialAnswer)}
+                incorrect={isIncorrectAnswer(potentialAnswer)}
+                disabled={isButtonDisabled(potentialAnswer)}
+              >
+                {potentialAnswer}
+              </Button>
+            </ButtonContainer>
           );
         })}
       </AnswerContainer>
