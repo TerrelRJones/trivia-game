@@ -3,11 +3,14 @@ import healthBarFull from 'assets/images/health-full.svg';
 import healthBarLow from 'assets/images/health-low.svg';
 import { ScreenReaderOnly } from 'styles/styledElements';
 
+import { getAnimationPlayState } from 'helper/getAnimationPlayState';
+
 interface HealthBarProps {
   isReversed?: boolean;
   maxHealth: number;
   currentHealth: number;
   testID?: string;
+  animation?: boolean;
 }
 
 const Container = styled.div<Pick<HealthBarProps, 'isReversed'>>`
@@ -37,7 +40,7 @@ const HealthBarContainer = styled.div<Pick<HealthBarProps, 'isReversed'>>`
 `;
 
 const HealthBarMiddle = styled.div<
-  Pick<HealthBarProps, 'maxHealth' | 'currentHealth'>
+  Pick<HealthBarProps, 'maxHealth' | 'currentHealth' | 'animation'>
 >`
   height: 25px;
   width: ${({ maxHealth, currentHealth }) =>
@@ -56,6 +59,7 @@ const HealthBarMiddle = styled.div<
   ${({ currentHealth }) =>
     currentHealth <= 50 &&
     'animation: blinker 0.5s linear infinite;  @keyframes blinker { 25% { opacity: 0.5;}}'}
+  ${({ animation }) => animation && getAnimationPlayState()}
 `;
 
 const HeartImage = styled.img<Pick<HealthBarProps, 'isReversed'>>`
@@ -81,6 +85,7 @@ export const HealthBar = ({
   maxHealth,
   currentHealth,
   testID,
+  animation,
 }: HealthBarProps) => {
   return (
     <Container data-testid={testID} isReversed={isReversed}>
@@ -103,6 +108,7 @@ export const HealthBar = ({
           data-testid="health-bar"
           maxHealth={maxHealth}
           currentHealth={currentHealth}
+          animation={animation}
         />
       </HealthBarContainer>
       <HealthText data-testid="health-text" isReversed={isReversed}>

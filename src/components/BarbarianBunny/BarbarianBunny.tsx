@@ -1,13 +1,18 @@
 import styled from 'styled-components';
+import { getAnimationPlayState } from 'helper/getAnimationPlayState';
 
 interface BarbarianBunnyProps {
   testID?: string;
+  animation?: boolean;
 }
 
-const BarbarianBunnyContainer = styled.div`
+const BarbarianBunnyContainer = styled.div<
+  Pick<BarbarianBunnyProps, 'animation'>
+>`
   transform-origin: bottom;
 
   animation: bounce 1.2s ease infinite;
+  ${({ animation }) => animation && getAnimationPlayState()}
 
   @keyframes bounce {
     0% {
@@ -35,6 +40,7 @@ const BarbarianBunnyContainer = styled.div`
     transform-origin: bottom;
 
     animation: headNod 2s ease-in-out infinite;
+    ${({ animation }) => animation && getAnimationPlayState()}
 
     @keyframes headNod {
       0% {
@@ -56,9 +62,9 @@ const BarbarianBunnyContainer = styled.div`
   }
 `;
 
-export const BarbarianBunny = ({ testID }: BarbarianBunnyProps) => {
+export const BarbarianBunny = ({ testID, animation }: BarbarianBunnyProps) => {
   return (
-    <BarbarianBunnyContainer data-testid={testID}>
+    <BarbarianBunnyContainer data-testid={testID} animation={animation}>
       <svg height="265" width="356" xmlns="http://www.w3.org/2000/svg">
         <linearGradient
           id="a"

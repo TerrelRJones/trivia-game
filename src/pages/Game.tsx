@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import {
   gameDialogSelector,
   gameRoundSelector,
@@ -31,7 +32,7 @@ import {
   QuestionStatus,
 } from 'models';
 import ActionDialog from 'components/ActionDialog';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   heroAttackValueSelector,
@@ -53,6 +54,7 @@ interface GameTypes {
 }
 
 const StyledGameContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,7 +115,31 @@ const FinishThemButton = styled.button`
   }
 `;
 
+const ButtonContainer = styled.div`
+  margin-top: 20px;
+
+  div {
+    background: ${({ theme: { colors } }) => colors.defaultBtnGradient};
+    border: 2px solid #038dc1;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Lato';
+    font-size: 18px;
+    font-weight: 900;
+    box-shadow: 0 0 0 0.25em #00c6f3;
+    opacity: 0.7;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 1;
+    }
+  }
+`;
+
 const Game: React.FC<GameTypes> = ({ testID }) => {
+  const [playAnimation, setPlayAnimation] = useState(false);
+
   const gameDialog = useAppSelector(gameDialogSelector);
   const gameRound = useAppSelector(gameRoundSelector);
   const question = useAppSelector(gameQuestionSelector);
@@ -151,8 +177,8 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
 
   const getCharacter = () => {
     if (avatar === 'wizard') return <WizardPig />;
-    if (avatar === 'bunny') return <BarbarianBunny />;
-    return <DragonSeth />;
+    if (avatar === 'bunny') return <BarbarianBunny animation={playAnimation} />;
+    return <DragonSeth animation={playAnimation} />;
   };
 
   useEffect(() => {
@@ -184,6 +210,7 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
           testID="health-bar-1"
           currentHealth={heroCurrentHealth}
           maxHealth={heroMaxHealth}
+          animation={playAnimation}
         />
         <Round testID="round" round={gameRound} />
         <HealthBar
@@ -191,11 +218,16 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
           isReversed
           currentHealth={opponentCurrentHealth}
           maxHealth={opponentMaxHealth}
+          animation={playAnimation}
         />
       </TopContainer>
       <StyledPlayerContainer>
         <PlayerContainer>
-          <Avatar testID="player-1" avatar={<FoxKnight />} name="Terrel" />
+          <Avatar
+            testID="player-1"
+            avatar={<FoxKnight animation={playAnimation} />}
+            name="Terrel"
+          />
         </PlayerContainer>
         <ActionContainer>
           <Action
@@ -246,6 +278,11 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
           )}
         </Dialog>
       )}
+      <ButtonContainer>
+        <div onClick={() => setPlayAnimation(!playAnimation)}>
+          {playAnimation ? 'PLAY ANIMATION' : 'STOP ANIMATION'}
+        </div>
+      </ButtonContainer>
     </StyledGameContainer>
   );
 };

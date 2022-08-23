@@ -1,11 +1,15 @@
 import styled from 'styled-components';
+import { getAnimationPlayState } from 'helper/getAnimationPlayState';
 
 interface DragonSethProps {
   testID?: string;
+  animation?: boolean;
 }
 
-const DragonSethContainer = styled.div`
+const DragonSethContainer = styled.div<Pick<DragonSethProps, 'animation'>>`
   animation: floating 3s ease-in-out infinite;
+  ${({ animation }) => animation && getAnimationPlayState()}
+
   @keyframes floating {
     0% {
       transform: translateY(-60px) translateX(15px);
@@ -21,6 +25,7 @@ const DragonSethContainer = styled.div`
     transform-origin: right;
 
     animation: flicker 0.5s ease-in-out infinite;
+    ${({ animation }) => animation && getAnimationPlayState()}
 
     @keyframes flicker {
       25% {
@@ -33,6 +38,7 @@ const DragonSethContainer = styled.div`
     transform-origin: bottom left;
 
     animation: fly 1s ease-in-out infinite;
+    ${({ animation }) => animation && getAnimationPlayState()}
 
     @keyframes fly {
       0% {
@@ -50,6 +56,7 @@ const DragonSethContainer = styled.div`
     transform-origin: bottom;
 
     animation: fly 1s ease-in-out infinite;
+    ${({ animation }) => animation && getAnimationPlayState()}
 
     @keyframes fly {
       0% {
@@ -68,6 +75,7 @@ const DragonSethContainer = styled.div`
     transform-origin: top right;
 
     animation: fly 2s ease-in-out infinite;
+    ${({ animation }) => animation && getAnimationPlayState()}
 
     @keyframes fly {
       0% {
@@ -85,6 +93,7 @@ const DragonSethContainer = styled.div`
     transform-origin: top right;
 
     animation: fly 3s ease-in-out infinite;
+    ${({ animation }) => animation && getAnimationPlayState()}
 
     @keyframes fly {
       0% {
@@ -100,9 +109,9 @@ const DragonSethContainer = styled.div`
   }
 `;
 
-export const DragonSeth = ({ testID }: DragonSethProps) => {
+export const DragonSeth = ({ testID, animation }: DragonSethProps) => {
   return (
-    <DragonSethContainer data-testid={testID}>
+    <DragonSethContainer data-testid={testID} animation={animation}>
       <svg height="261" width="363" xmlns="http://www.w3.org/2000/svg">
         <linearGradient
           id="a"

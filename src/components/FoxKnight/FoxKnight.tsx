@@ -2,12 +2,14 @@ import { ActionStateType } from 'models';
 import { gameActionSelector } from 'store/game/game.selectors';
 import { useAppSelector } from 'store/hooks';
 import styled from 'styled-components';
+import { getAnimationPlayState } from 'helper/getAnimationPlayState';
 
 interface FoxKnightProps {
   testID?: string;
+  animation?: boolean;
 }
 
-const FoxKnightContainer = styled.div`
+const FoxKnightContainer = styled.div<Pick<FoxKnightProps, 'animation'>>`
   svg {
     padding-top: 50px;
   }
@@ -29,7 +31,29 @@ const FoxKnightContainer = styled.div`
   .left-arm {
     transform-origin: left;
     animation: swing 1s ease-in-out infinite;
+    ${({ animation }) => animation && getAnimationPlayState()}
+
     @keyframes swing {
+      0% {
+        transform: rotate(-2deg);
+      }
+
+      50% {
+        transform: rotate(3deg);
+      }
+
+      100% {
+        transform: rotate(-2deg);
+      }
+    }
+  }
+
+  .tail {
+    transform-origin: bottom right;
+    animation: swing1 0.25s ease-in-out infinite;
+    ${({ animation }) => animation && getAnimationPlayState()}
+
+    @keyframes swing1 {
       0% {
         transform: rotate(-2deg);
       }
@@ -48,6 +72,7 @@ const FoxKnightContainer = styled.div`
     transform-origin: center;
 
     animation: block 0.75s infinite;
+    ${({ animation }) => animation && getAnimationPlayState()}
 
     @keyframes block {
       50% {
@@ -57,13 +82,13 @@ const FoxKnightContainer = styled.div`
   }
 `;
 
-export const FoxKnight = ({ testID }: FoxKnightProps) => {
+export const FoxKnight = ({ testID, animation }: FoxKnightProps) => {
   const action = useAppSelector(gameActionSelector);
 
   const isBlocking = action === ActionStateType.BLOCK;
 
   return (
-    <FoxKnightContainer data-testid={testID}>
+    <FoxKnightContainer data-testid={testID} animation={animation}>
       <svg
         height="216"
         width="249"
@@ -183,16 +208,18 @@ export const FoxKnight = ({ testID }: FoxKnightProps) => {
           <path d="M0 216h249V0H0z" fill-rule="evenodd" />
         </mask>
         <g fill="none" fill-rule="evenodd">
-          <path
-            d="M21.821 50.843c3.97 34.448 38.215 31.223 47.491 21.91 4.9-4.92-17.85-13.235-21.821-47.682C43.52-9.377 2.19.964 0 3.162 2.19.965 17.853 16.395 21.82 50.843"
-            fill="#ff8f33"
-            mask="url(#f)"
-            transform="translate(0 119)"
-          />
-          <path
-            d="M19.65 157C11.127 125.4.573 121.406 0 121.99c1.349-1.607 31.23-12.324 44 9.896-1.496.024-10.012-2.383-19.521-8.057 6.857 9.631 6.2 21.27 6.51 20.955-.31.316-4.188-6.697-14.407-12.901 6.402 8.844 3.292 23.39 3.068 25.117"
-            fill="#c44e12"
-          />
+          <g className="tail">
+            <path
+              d="M21.821 50.843c3.97 34.448 38.215 31.223 47.491 21.91 4.9-4.92-17.85-13.235-21.821-47.682C43.52-9.377 2.19.964 0 3.162 2.19.965 17.853 16.395 21.82 50.843"
+              fill="#ff8f33"
+              mask="url(#f)"
+              transform="translate(0 119)"
+            />
+            <path
+              d="M19.65 157C11.127 125.4.573 121.406 0 121.99c1.349-1.607 31.23-12.324 44 9.896-1.496.024-10.012-2.383-19.521-8.057 6.857 9.631 6.2 21.27 6.51 20.955-.31.316-4.188-6.697-14.407-12.901 6.402 8.844 3.292 23.39 3.068 25.117"
+              fill="#c44e12"
+            />
+          </g>
           <path d="M81.997 215H73v-26h18z" fill="#62717f" />
           <path d="M131.998 215H141v-26h-18z" fill="url(#g)" />
           <path
