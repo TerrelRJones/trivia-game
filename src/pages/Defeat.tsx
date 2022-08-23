@@ -7,6 +7,7 @@ import { BodyText } from 'styles/styledElements';
 import { useNavigate } from 'react-router-dom';
 import { useOpponentDetails } from 'store/opponent/opponent.hooks';
 import { useGameReset } from 'store/game/game.hooks';
+import DefeatedFox from 'components/DefeatedFox';
 
 const DefeatPageContainer = styled.div`
   display: flex;
@@ -54,7 +55,7 @@ const AvatarContainer = styled.div`
   margin-top: 104px;
 `;
 
-const Avatar = styled.img`
+const Avatar = styled.div`
   z-index: 1;
   width: 100%;
 `;
@@ -90,7 +91,9 @@ const Defeat = () => {
         </ButtonContainer>
       </HeroContainer>
       <AvatarContainer>
-        <Avatar data-testid="avatar" src={defeatedFoxKnight} alt="Fox Knight" />
+        <Avatar>
+          <DefeatedFox />
+        </Avatar>
         <Shadow src={shadow} />
       </AvatarContainer>
     </DefeatPageContainer>
