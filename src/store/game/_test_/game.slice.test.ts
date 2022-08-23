@@ -17,6 +17,7 @@ import {
   AttackStrengthType,
   DialogStageType,
   AttackPower,
+  DifficultyType,
 } from 'models';
 
 const { status, text, choices, answer } = questionOne;
@@ -33,6 +34,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      difficulty: DifficultyType.EASY,
       userAnswer: '',
       question: {
         status,
@@ -50,6 +52,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.NONE,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      difficulty: DifficultyType.EASY,
       userAnswer: '',
       question: {
         status,
@@ -60,15 +63,16 @@ describe('Game Slice reducer', () => {
     });
   });
 
-  it('should set dialogStage to answering if setDifficulty(DialogStageTypeANSWERING) is called', () => {
+  it('should set difficulty to SETH, and dialogStage to action if setDifficulty(DialogStageType.SETH) is called', () => {
     expect(
-      gameReducer(MOCK_GAME_STATE, setDifficulty(DialogStageType.ANSWERING))
+      gameReducer(MOCK_GAME_STATE, setDifficulty(DifficultyType.SETH))
     ).toEqual({
       round: 2,
-      dialogStage: DialogStageType.ANSWERING,
+      dialogStage: DialogStageType.ACTION,
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      difficulty: DifficultyType.SETH,
       userAnswer: '',
       question: {
         status,
@@ -86,6 +90,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.ATTACK,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      difficulty: DifficultyType.EASY,
       userAnswer: '',
       question: {
         status,
@@ -105,6 +110,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.HARD,
       attackPower: AttackPower.HEAVY,
+      difficulty: DifficultyType.EASY,
       userAnswer: '',
       question: {
         status,
@@ -124,6 +130,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.MEDIUM,
       attackPower: AttackPower.MEDIUM,
+      difficulty: DifficultyType.EASY,
       userAnswer: '',
       question: {
         status,
@@ -143,6 +150,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      difficulty: DifficultyType.EASY,
       userAnswer: '',
       question: {
         status,
@@ -160,6 +168,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      difficulty: DifficultyType.EASY,
       userAnswer: '',
       question: {
         status,
@@ -177,6 +186,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.BLOCK,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      difficulty: DifficultyType.EASY,
       userAnswer: '',
       question: {
         status,
@@ -194,6 +204,7 @@ describe('Game Slice reducer', () => {
       action: ActionStateType.NONE,
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
+      difficulty: DifficultyType.EASY,
       userAnswer: '',
       question: {
         status,

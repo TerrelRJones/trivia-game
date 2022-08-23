@@ -4,7 +4,8 @@ import Button from 'components/Button';
 import { ButtonType } from 'components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { useSetDifficulty } from 'store/game/game.hooks';
-import { DialogStageType } from 'models';
+import { DialogStageType, DifficultyType } from 'models';
+import { useOpponentDetails } from 'store/opponent/opponent.hooks';
 
 const LandingPageContainer = styled.div`
   display: flex;
@@ -55,7 +56,7 @@ const Home: React.FC = () => {
             testID="easy-btn"
             buttonType={ButtonType.EASY}
             onClick={() => {
-              setDifficulty(DialogStageType.ACTION);
+              setDifficulty(DifficultyType.EASY);
               navigate('/game');
             }}
           >
@@ -66,7 +67,7 @@ const Home: React.FC = () => {
           <Button
             buttonType={ButtonType.MEDIUM}
             onClick={() => {
-              setDifficulty(DialogStageType.ACTION);
+              setDifficulty(DifficultyType.MEDIUM);
               navigate('/game');
             }}
           >
@@ -77,7 +78,7 @@ const Home: React.FC = () => {
           <Button
             buttonType={ButtonType.SETH}
             onClick={() => {
-              setDifficulty(DialogStageType.ACTION);
+              setDifficulty(DifficultyType.SETH);
               navigate('/game');
             }}
           >

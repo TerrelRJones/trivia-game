@@ -1,9 +1,6 @@
 import { useCallback } from 'react';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
-import {
-  gameAttackStrengthSelector,
-  gameRoundSelector,
-} from 'store/game/game.selectors';
+import { gameRoundSelector } from 'store/game/game.selectors';
 import {
   setRound,
   attack,
@@ -16,7 +13,7 @@ import {
   userAnswer,
   answeredVerify,
 } from 'store/game/game.slice';
-import { AttackPower, AttackStrengthType, DialogStageType } from 'models';
+import { AttackPower, AttackStrengthType, DifficultyType } from 'models';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
 
@@ -53,7 +50,6 @@ export const useAttackPower = () => {
 
 export const useGetQuestion = () => {
   const dispatch = useAppDispatch();
-
   return (difficulty: AttackStrengthType) =>
     dispatch(getQuestion({ difficulty }));
 };
@@ -75,5 +71,5 @@ export const useAnsweredVerify = () => {
 
 export const useSetDifficulty = () => {
   const dispatch = useAppDispatch();
-  return (difficulty: DialogStageType) => dispatch(setDifficulty(difficulty));
+  return (difficulty: DifficultyType) => dispatch(setDifficulty(difficulty));
 };

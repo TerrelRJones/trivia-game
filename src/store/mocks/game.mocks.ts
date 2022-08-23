@@ -3,6 +3,7 @@ import {
   AttackPower,
   AttackStrengthType,
   DialogStageType,
+  DifficultyType,
 } from 'models';
 import { GameState } from 'store/game/game.slice';
 
@@ -15,6 +16,7 @@ export const MOCK_GAME_STATE: GameState = {
   action: ActionStateType.BLOCK,
   attackStrength: AttackStrengthType.EASY,
   attackPower: AttackPower.LIGHT,
+  difficulty: DifficultyType.EASY,
   userAnswer: '',
   question: {
     status,
