@@ -15,6 +15,10 @@ interface QuestionDialogProps {
   options: string[];
 }
 
+const Container = styled.div`
+  max-width: 800px;
+`;
+
 const Question = styled.h3`
   color: ${({ theme: { colors } }) => colors.white};
   font-family: 'Lato';
@@ -22,13 +26,27 @@ const Question = styled.h3`
   font-weight: 300;
   letter-spacing: -0.68px;
   line-height: 23px;
+  margin: 0;
+  margin-top: 23px;
+  margin-bottom: 30px;
 `;
 
 const AnswerContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+
+  .btn-0 {
+    margin-right: 45px;
+    margin-bottom: 30px;
+  }
+
+  .btn-2 {
+    margin-right: 45px;
+    margin-bottom: 34px;
+  }
 `;
+
+const ButtonContainer = styled.div``;
 
 export const QuestionDialog = ({
   testID,
@@ -59,33 +77,42 @@ export const QuestionDialog = ({
     );
   };
 
+  const questionHtmlStringToText = () => {
+    return new DOMParser().parseFromString(question, 'text/html')
+      .documentElement.textContent;
+  };
+
   return (
-    <div data-testid={testID}>
-      <Question data-testid="question-text">{question}</Question>
+    <Container data-testid={testID}>
+      <Question data-testid="question-text">
+        {questionHtmlStringToText()}
+      </Question>
       <AnswerContainer>
         {options.map((potentialAnswer, index) => {
           const isUserAnswerCorrect = potentialAnswer === answer;
 
           return (
-            <Button
-              key={index}
-              testID={`button-${index}`}
-              buttonType={ButtonType.SECONDARY}
-              onClick={() => {
-                answered();
-                setUserAnswer(potentialAnswer);
-                heroAttack(isUserAnswerCorrect);
-                opponentAttack(isUserAnswerCorrect);
-              }}
-              correct={isCorrectAnswer(potentialAnswer)}
-              incorrect={isIncorrectAnswer(potentialAnswer)}
-              disabled={isButtonDisabled(potentialAnswer)}
-            >
-              {potentialAnswer}
-            </Button>
+            <ButtonContainer className={`btn-${index}`}>
+              <Button
+                key={index}
+                testID={`button-${index}`}
+                buttonType={ButtonType.SECONDARY}
+                onClick={() => {
+                  answered();
+                  setUserAnswer(potentialAnswer);
+                  heroAttack(isUserAnswerCorrect);
+                  opponentAttack(isUserAnswerCorrect);
+                }}
+                correct={isCorrectAnswer(potentialAnswer)}
+                incorrect={isIncorrectAnswer(potentialAnswer)}
+                disabled={isButtonDisabled(potentialAnswer)}
+              >
+                {potentialAnswer}
+              </Button>
+            </ButtonContainer>
           );
         })}
       </AnswerContainer>
-    </div>
+    </Container>
   );
 };

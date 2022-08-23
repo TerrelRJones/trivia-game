@@ -14,6 +14,7 @@ export enum ButtonType {
   SECONDARY = 'secondary',
   ATTACK = 'attack',
   NEXT = 'next',
+  ACTION = 'action',
 }
 
 export interface ButtonProps {
@@ -90,8 +91,12 @@ const getBorderColor = ({
 };
 
 const getBorderRadius = ({ buttonType }: StyledButtonProps): string => {
-  if (!buttonType) return '9px';
-  if (buttonType === ButtonType.SECONDARY || buttonType === ButtonType.NEXT)
+  if (!buttonType || buttonType === ButtonType.ACTION) return '9px';
+  if (
+    buttonType === ButtonType.SECONDARY ||
+    buttonType === ButtonType.NEXT ||
+    buttonType === ButtonType.ATTACK
+  )
     return '8px';
   return '15px';
 };
@@ -109,6 +114,7 @@ const getLineHeight = ({ buttonType }: StyledButtonProps): string => {
 };
 const getMaxHeight = ({ buttonType }: StyledButtonProps): string => {
   if (!buttonType) return '53px';
+  if (buttonType === ButtonType.ACTION) return '50px';
   if (
     buttonType === ButtonType.SECONDARY ||
     buttonType === ButtonType.ATTACK ||
@@ -122,11 +128,12 @@ const getMaxWidth = ({ buttonType }: StyledButtonProps): string => {
   if (buttonType === ButtonType.NEXT) return '181px';
   if (buttonType === ButtonType.SECONDARY) return '373px';
   if (buttonType === ButtonType.ATTACK) return '300px';
+  if (buttonType === ButtonType.ACTION) return '300px';
   return '350px';
 };
 
 const getFontSize = ({ buttonType }: StyledButtonProps): string => {
-  if (!buttonType) return '25px';
+  if (!buttonType || buttonType === ButtonType.ACTION) return '25px';
   if (buttonType === ButtonType.SECONDARY) return '18px';
   if (buttonType === ButtonType.ATTACK) return '18px';
   if (buttonType === ButtonType.NEXT) return '18px';

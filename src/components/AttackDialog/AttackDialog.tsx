@@ -17,7 +17,6 @@ interface AttackDialogProps {
 
 const AttackDialogContainer = styled.div`
   display: flex;
-  gap: 20px;
   max-width: 750px;
   flex-wrap: wrap;
   justify-content: center;
@@ -27,7 +26,14 @@ const AttackDialogContainer = styled.div`
 const AttackButtonContainer = styled.div`
   width: 100%;
   max-width: 300px;
-  margin-bottom: 10px;
+
+  &:first-child {
+    margin-right: 45px;
+  }
+
+  &:last-child {
+    margin-top: 40px;
+  }
 `;
 
 export const AttackDialog = ({ testID }: AttackDialogProps) => {
