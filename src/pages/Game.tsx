@@ -20,9 +20,6 @@ import QuestionDialog from 'components/QuestionDialog';
 import AttackDialog from 'components/AttackDialog';
 
 import FoxKnight from 'components/FoxKnight';
-import WizardPig from 'components/WizardPig';
-import BarbarianBunny from 'components/BarbarianBunny';
-import DragonSeth from 'components/DragonSeth';
 
 import {
   ActionStateType,
@@ -48,6 +45,7 @@ import { ScreenReaderOnly } from 'styles/styledElements';
 import { useOpponentDetails } from 'store/opponent/opponent.hooks';
 import { useGameStatus } from 'store/game/game.hooks';
 import { useHeroAttack } from 'store/hero/hero.hooks';
+import GameAvatar from 'components/GameAvatar';
 
 interface GameTypes {
   testID?: string;
@@ -155,7 +153,7 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
   const opponentCurrentHealth = useAppSelector(opponentCurrentHealthSelector);
   const opponentAttackValue = useAppSelector(opponentAttackValueSelector);
 
-  const [{ displayName, avatar }, setOpponent] = useOpponentDetails();
+  const [{ avatar, displayName }, setOpponent] = useOpponentDetails();
   const gameStatus = useGameStatus();
   const [finishThem] = useHeroAttack();
 
@@ -175,17 +173,17 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
     return 'Heavy attack...';
   };
 
-  const getCharacter = () => {
-    if (avatar === 'wizard')
-      return (
-        <WizardPig
-          animation={playAnimation}
-          damage={opponentCurrentHealth < 50}
-        />
-      );
-    if (avatar === 'bunny') return <BarbarianBunny animation={playAnimation} />;
-    return <DragonSeth animation={playAnimation} />;
-  };
+  // const getCharacter = () => {
+  //   if (avatar === 'wizard')
+  //     return (
+  //       <WizardPig
+  //         animation={playAnimation}
+  //         damage={opponentCurrentHealth < 50}
+  //       />
+  //     );
+  //   if (avatar === 'bunny') return <BarbarianBunny animation={playAnimation} />;
+  //   return <DragonSeth animation={playAnimation} />;
+  // };
 
   useEffect(() => {
     if (gameDialog === DialogStageType.DIFFICULTY) {
@@ -256,7 +254,13 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
         <PlayerContainer>
           <Avatar
             testID="player-2"
-            avatar={getCharacter()}
+            avatar={
+              <GameAvatar
+                avatar={avatar}
+                animation={playAnimation}
+                damage={opponentCurrentHealth < 50}
+              />
+            }
             name={displayName}
           />
         </PlayerContainer>
