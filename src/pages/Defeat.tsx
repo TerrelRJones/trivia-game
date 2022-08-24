@@ -3,7 +3,15 @@ import styled from 'styled-components';
 
 import defeatedFoxKnight from 'assets/images/fox-knight_defeated.svg';
 import shadow from 'assets/images/shadow.svg';
-import { BodyText } from 'styles/styledElements';
+import {
+  CompletedPageContainer,
+  HeroContainer,
+  Header,
+  Text,
+  ButtonContainer,
+  AvatarContainer,
+  Avatar,
+} from 'styles/styledElements';
 import { useNavigate } from 'react-router-dom';
 import { useOpponentDetails } from 'store/opponent/opponent.hooks';
 import { useGameReset } from 'store/game/game.hooks';
@@ -55,7 +63,7 @@ const AvatarContainer = styled.div`
   margin-top: 104px;
 `;
 
-const Avatar = styled.div`
+const Avatar = styled.img`
   z-index: 1;
   width: 100%;
 `;
@@ -74,10 +82,10 @@ const Defeat = () => {
   const navigate = useNavigate();
 
   return (
-    <DefeatPageContainer>
+    <CompletedPageContainer>
       <HeroContainer>
         <Header data-testid="header">GAME OVER</Header>
-        <DefeatText>You lost to {name}</DefeatText>
+        <Text>You lost to {name}</Text>
         <ButtonContainer>
           <Button
             testID="play-again-btn"
@@ -96,7 +104,7 @@ const Defeat = () => {
         </Avatar>
         <Shadow src={shadow} />
       </AvatarContainer>
-    </DefeatPageContainer>
+    </CompletedPageContainer>
   );
 };
 

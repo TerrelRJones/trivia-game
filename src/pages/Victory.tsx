@@ -3,7 +3,15 @@ import styled from 'styled-components';
 import VictoryFox from 'components/VictoryFox';
 import shadow from 'assets/images/shadow.svg';
 import shadowGradient from 'assets/images/shadow-gradient.svg';
-import { BodyText } from 'styles/styledElements';
+import {
+  Avatar,
+  CompletedPageContainer,
+  Header,
+  HeroContainer,
+  Text,
+  ButtonContainer,
+  AvatarContainer,
+} from 'styles/styledElements';
 import { useNavigate } from 'react-router-dom';
 import { useOpponentDetails } from 'store/opponent/opponent.hooks';
 import { useGameReset } from 'store/game/game.hooks';
@@ -54,7 +62,7 @@ const AvatarContainer = styled.div`
   margin-top: 104px;
 `;
 
-const Avatar = styled.div`
+const Avatar = styled.img`
   z-index: 2;
   margin-left: 25%;
   max-height: 500px;
@@ -82,10 +90,10 @@ const Victory = () => {
   const navigate = useNavigate();
 
   return (
-    <DefeatPageContainer>
+    <CompletedPageContainer>
       <HeroContainer>
         <Header data-testid="header">VICTORY</Header>
-        <DefeatText>You beat the {name}</DefeatText>
+        <Text>You beat the {name}</Text>
         <ButtonContainer>
           <Button
             testID="play-again-btn"
@@ -105,7 +113,7 @@ const Victory = () => {
         <Shadow src={shadow} />
         <ShadowGradient src={shadowGradient} />
       </AvatarContainer>
-    </DefeatPageContainer>
+    </CompletedPageContainer>
   );
 };
 
