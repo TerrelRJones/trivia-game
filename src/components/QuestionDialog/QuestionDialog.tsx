@@ -5,6 +5,7 @@ import { ButtonType } from 'components/Button/Button';
 import { useAnswered, useUserAnswer } from 'store/game/game.hooks';
 import { useAppSelector } from 'store/hooks';
 import { gameUserAnswerSelector } from 'store/game/game.selectors';
+import { questionHtmlStringToText } from 'helper/htmlTextToString';
 
 interface QuestionDialogProps {
   testID?: string;
@@ -71,11 +72,6 @@ export const QuestionDialog = ({
     return Boolean(
       userAnswer && userAnswer !== potentialAnswer && answer !== potentialAnswer
     );
-  };
-
-  const questionHtmlStringToText = (text: string) => {
-    return new DOMParser().parseFromString(text, 'text/html').documentElement
-      .textContent;
   };
 
   return (
