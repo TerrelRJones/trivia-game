@@ -176,7 +176,13 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
   };
 
   const getCharacter = () => {
-    if (avatar === 'wizard') return <WizardPig />;
+    if (avatar === 'wizard')
+      return (
+        <WizardPig
+          animation={playAnimation}
+          damage={opponentCurrentHealth < 50}
+        />
+      );
     if (avatar === 'bunny') return <BarbarianBunny animation={playAnimation} />;
     return <DragonSeth animation={playAnimation} />;
   };
