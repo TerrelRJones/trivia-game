@@ -25,7 +25,7 @@ describe('Defeat Page', () => {
     expect(screen.getByTestId('play-again-btn')).toBeInTheDocument();
   });
 
-  it.only('should call naviagte() after clicking play again button.', () => {
+  it('should call naviagte() after clicking play again button.', () => {
     renderWithProviders(<Defeat />);
 
     const mockNavigateFN = useNavigate();

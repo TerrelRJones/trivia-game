@@ -28,8 +28,7 @@ const Shadow = styled.img`
 const Defeat = () => {
   const [{ name }] = useOpponentDetails();
   const resetGame = useGameReset();
-  const navigate = useNavigate();
-  console.log(navigate, useNavigate);
+  const replace = useNavigate();
 
   return (
     <CompletedPageContainer>
@@ -41,7 +40,7 @@ const Defeat = () => {
             testID="play-again-btn"
             onClick={() => {
               resetGame();
-              navigate('/');
+              replace('/');
             }}
           >
             Play Again
