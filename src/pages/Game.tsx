@@ -289,7 +289,7 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
         </Dialog>
       )}
       <ButtonContainer>
-        <div onClick={() => setPlayAnimation(!playAnimation)}>
+        <div onClick={() => setPlayAnimation((prevVal) => !prevVal)}>
           {playAnimation ? 'PLAY ANIMATION' : 'STOP ANIMATION'}
         </div>
       </ButtonContainer>
