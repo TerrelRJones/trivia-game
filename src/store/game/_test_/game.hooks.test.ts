@@ -31,9 +31,9 @@ describe('Game State Hooks', () => {
 
     it('shoud return gameStatus of playing', () => {
       const { result } = renderHookWithProviders(() => useGameStatus());
-      const getGameStatus = result.current;
+      const gameStatus = result.current;
 
-      expect(getGameStatus()).toEqual(GameStatus.PLAYING);
+      expect(gameStatus).toEqual(GameStatus.PLAYING);
     });
   });
 });

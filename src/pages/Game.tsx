@@ -99,7 +99,7 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
   const opponentAttackValue = useAppSelector(opponentAttackValueSelector);
 
   const [{ displayName, avatar }, setOpponent] = useOpponentDetails();
-  const getGameStatus = useGameStatus();
+  const gameStatus = useGameStatus();
 
   const { text, answer, choices } = question;
   const navigate = useNavigate();
@@ -130,13 +130,13 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
   }, []);
 
   useEffect(() => {
-    if (getGameStatus() === GameStatus.DEFEAT) {
+    if (gameStatus === GameStatus.DEFEAT) {
       return navigate('/defeat');
     }
-    if (getGameStatus() === GameStatus.VICTORY) {
+    if (gameStatus === GameStatus.VICTORY) {
       return navigate('/victory');
     }
-  }, [getGameStatus, navigate]);
+  }, [gameStatus, navigate]);
 
   return (
     <StyledGameContainer data-testid={testID}>
