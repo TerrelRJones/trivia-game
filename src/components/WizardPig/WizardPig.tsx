@@ -53,7 +53,9 @@ const WizardPigContainer = styled.div<
   .hair {
     transform-origin: top left;
 
-    animation: hairWind 6.5s infinite;
+    animation: hairWind 6.6s infinite;
+    ${({ animation }) => animation && getAnimationPlayState()}
+
     @keyframes hairWind {
       0% {
         transform: rotate(2deg);
