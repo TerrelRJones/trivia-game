@@ -23,13 +23,14 @@ const FoxKnightContainer = styled.div<Pick<FoxKnightProps, 'animation'>>`
         transform: translateY(0px);
       }
       50% {
-        transform: translateY(5px);
+        transform: translateY(2px);
       }
       100% {
         transform: translateY(0px);
       }
     }
   }
+
   .eyes {
     display: none;
   }
