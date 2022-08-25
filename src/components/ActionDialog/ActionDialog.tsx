@@ -5,6 +5,8 @@ import { useAttack, useBlock, useGetQuestion } from 'store/game/game.hooks';
 import { AttackStrengthType } from 'models';
 import { shuffleArray } from 'helper/shuffleArray';
 import { ButtonType } from 'components/Button/Button';
+import { useOpponentAttack } from 'store/opponent/opponent.hooks';
+import { useEffect } from 'react';
 
 interface ActionDialogProps {
   testID?: string;
@@ -36,8 +38,14 @@ export const ActionDialog = ({ testID }: ActionDialogProps) => {
     AttackStrengthType.MEDIUM,
     AttackStrengthType.HARD,
   ]);
+  const [setOpponentAttack] = useOpponentAttack();
 
   const randomDifficultyQuestion = () => getQuestion(blockQuestion);
+
+  useEffect(() => {
+    setOpponentAttack();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ActionDialogContainer data-testid={testID}>
@@ -45,8 +53,9 @@ export const ActionDialog = ({ testID }: ActionDialogProps) => {
         <Button
           testID="attack"
           buttonType={ButtonType.ACTION}
-          onClick={attack}
-          attack
+          onClick={() => {
+            attack();
+          }}
         >
           Attack
         </Button>
