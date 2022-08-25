@@ -40,7 +40,10 @@ const getRandomAttackValue = () => {
   return Math.floor(Math.random() * 5);
 };
 
-export const useOpponentAttack = () => {
+export const useOpponentAttack = (): [
+  () => void,
+  (userAnswer: boolean) => void
+] => {
   const gameAction = useAppSelector(gameActionSelector);
   const heroCurrentHealth = useAppSelector(heroCurrentHealthSelector);
   const heroMaxHealth = useAppSelector(heroMaxHealthSelector);
@@ -62,13 +65,16 @@ export const useOpponentAttack = () => {
 
   const opponentAttackPower = getOpponentAttackPower();
 
+  const setOpponentAttackVal = () => {
+    dispatch(setOpponentAttackValue(opponentAttackPower));
+  };
+
   const opponentAttack = useCallback(
     (userAnswer: boolean) => {
       if (
         !userAnswer &&
         [ActionStateType.ATTACK, ActionStateType.BLOCK].includes(gameAction)
       ) {
-        dispatch(setOpponentAttackValue(opponentAttackPower));
         dispatch(setHeroCurrentHealth(heroCurrentHealth - opponentAttackValue));
         return incrementRound();
       }
@@ -87,7 +93,6 @@ export const useOpponentAttack = () => {
     [
       gameAction,
       dispatch,
-      opponentAttackPower,
       heroCurrentHealth,
       opponentAttackValue,
       incrementRound,
@@ -95,7 +100,7 @@ export const useOpponentAttack = () => {
     ]
   );
 
-  return opponentAttack;
+  return [setOpponentAttackVal, opponentAttack];
 };
 
 export const useOpponentDetails = (): UseOpponentDetailsResult => {
