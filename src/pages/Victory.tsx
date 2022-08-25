@@ -1,7 +1,6 @@
 import Button from 'components/Button';
 import styled from 'styled-components';
-
-import victoryFoxKnight from 'assets/images/fox-knight_victory.svg';
+import VictoryFox from 'components/VictoryFox';
 import shadow from 'assets/images/shadow.svg';
 import shadowGradient from 'assets/images/shadow-gradient.svg';
 import {
@@ -55,7 +54,9 @@ const Victory = () => {
         </ButtonContainer>
       </HeroContainer>
       <AvatarContainer>
-        <Avatar data-testid="avatar" src={victoryFoxKnight} alt="Fox Knight" />
+        <Avatar>
+          <VictoryFox />
+        </Avatar>
         <Shadow src={shadow} />
         <ShadowGradient src={shadowGradient} />
       </AvatarContainer>

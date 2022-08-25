@@ -1,6 +1,6 @@
 import { RootState } from 'store/index';
 import { createSelector } from '@reduxjs/toolkit';
-import { questionData } from './game.slice';
+import { QuestionData } from './game.slice';
 import {
   ActionStateType,
   DifficultyType,
@@ -33,7 +33,7 @@ export const gameAttackPowerSelector = createSelector(
 
 export const gameQuestionSelector = createSelector(
   gameSelector,
-  (gameState): questionData => gameState.question
+  (gameState): QuestionData => gameState.question
 );
 
 export const gameQuestionStatusSelector = createSelector(

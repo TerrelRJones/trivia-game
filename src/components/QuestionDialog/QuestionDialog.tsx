@@ -5,8 +5,7 @@ import { ButtonType } from 'components/Button/Button';
 import { useAnswered, useUserAnswer } from 'store/game/game.hooks';
 import { useAppSelector } from 'store/hooks';
 import { gameUserAnswerSelector } from 'store/game/game.selectors';
-import { useHeroAttack } from 'store/hero/hero.hooks';
-import { useOpponentAttack } from 'store/opponent/opponent.hooks';
+import { questionHtmlStringToText } from 'helper/htmlTextToString';
 
 interface QuestionDialogProps {
   testID?: string;
@@ -57,8 +56,6 @@ export const QuestionDialog = ({
   const answered = useAnswered();
   const userAnswer = useAppSelector(gameUserAnswerSelector);
   const setUserAnswer = useUserAnswer();
-  const heroAttack = useHeroAttack();
-  const opponentAttack = useOpponentAttack();
 
   const isCorrectAnswer = (potentialAnswer: string): boolean => {
     return Boolean(
@@ -77,37 +74,27 @@ export const QuestionDialog = ({
     );
   };
 
-  const questionHtmlStringToText = () => {
-    return new DOMParser().parseFromString(question, 'text/html')
-      .documentElement.textContent;
-  };
-
   return (
     <Container data-testid={testID}>
       <Question data-testid="question-text">
-        {questionHtmlStringToText()}
+        {questionHtmlStringToText(question)}
       </Question>
       <AnswerContainer>
         {options.map((potentialAnswer, index) => {
-          const isUserAnswerCorrect = potentialAnswer === answer;
-
           return (
-            <ButtonContainer className={`btn-${index}`}>
+            <ButtonContainer key={index} className={`btn-${index}`}>
               <Button
-                key={index}
                 testID={`button-${index}`}
                 buttonType={ButtonType.SECONDARY}
                 onClick={() => {
                   answered();
                   setUserAnswer(potentialAnswer);
-                  heroAttack(isUserAnswerCorrect);
-                  opponentAttack(isUserAnswerCorrect);
                 }}
                 correct={isCorrectAnswer(potentialAnswer)}
                 incorrect={isIncorrectAnswer(potentialAnswer)}
                 disabled={isButtonDisabled(potentialAnswer)}
               >
-                {potentialAnswer}
+                {questionHtmlStringToText(potentialAnswer)}
               </Button>
             </ButtonContainer>
           );

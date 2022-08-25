@@ -7,7 +7,9 @@ import {
   gameQuestionSelector,
   gameUserAnswerSelector,
 } from 'store/game/game.selectors';
+import { useHeroAttack } from 'store/hero/hero.hooks';
 import { useAppSelector } from 'store/hooks';
+import { useOpponentAttack } from 'store/opponent/opponent.hooks';
 import styled from 'styled-components';
 import { BodyText } from 'styles/styledElements';
 
@@ -67,6 +69,8 @@ export const Dialog = ({ testID, message, children }: DialogProps) => {
   const { answer } = useAppSelector(gameQuestionSelector);
   const userAnswer = useAppSelector(gameUserAnswerSelector);
   const answerVerify = useAnsweredVerify();
+  const [, heroAttack] = useHeroAttack();
+  const opponentAttack = useOpponentAttack();
 
   const answeredStage = dialogStage === DialogStageType.ANSWERED;
   const isUserAnswerCorrect = userAnswer === answer;
@@ -76,12 +80,14 @@ export const Dialog = ({ testID, message, children }: DialogProps) => {
       {answeredStage ? (
         <NextButtonContainer>
           <Message className="next-message">
-            {userAnswer === answer ? 'Correct!' : 'Incorrect'}
+            {isUserAnswerCorrect ? 'Correct!' : 'Incorrect'}
           </Message>
           <Button
             buttonType={ButtonType.NEXT}
             onClick={() => {
               answerVerify(isUserAnswerCorrect);
+              heroAttack(isUserAnswerCorrect);
+              opponentAttack(isUserAnswerCorrect);
             }}
           >
             Next

@@ -80,7 +80,7 @@ export const AvatarContainer = styled.div`
   margin-top: 104px;
 `;
 
-export const Avatar = styled.img`
+export const Avatar = styled.div`
   z-index: 2;
   margin-left: 25%;
   max-height: 500px;

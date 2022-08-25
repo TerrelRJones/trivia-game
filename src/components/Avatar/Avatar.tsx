@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import shadowGradient from 'assets/images/shadow-gradient.svg';
 import shadow from 'assets/images/shadow.svg';
+// import dragonSeth from 'assets/images/dragon-seth.svg';
+// import barbarianBunny from 'assets/images/barbarian-bunny.svg';
 
 interface AvatarProps {
   name: string;
-  avatar: string;
+  avatar: React.ReactNode;
   testID?: string;
 }
 
@@ -27,7 +29,7 @@ const AvatarContainer = styled.div`
   height: 100%;
 `;
 
-const AvatarImg = styled.img`
+const AvatarImg = styled.div`
   z-index: 1;
   max-height: 297px;
   height: 100%;
@@ -37,6 +39,7 @@ const ShadowGradientImg = styled.img`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  transform-origin: bottom;
   bottom: 0;
 `;
 
@@ -68,7 +71,7 @@ export const Avatar = ({ name, avatar, testID }: AvatarProps) => {
   return (
     <Container>
       <AvatarContainer>
-        <AvatarImg data-testid={testID} src={avatar} alt="Fox Knight Avatar" />
+        <AvatarImg data-testid={testID}>{avatar}</AvatarImg>
         <ShadowGradientImg
           data-testid="shadow"
           src={shadowGradient}

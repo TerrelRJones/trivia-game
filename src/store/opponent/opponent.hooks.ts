@@ -18,9 +18,7 @@ import {
   setOpponentMaxHealth,
 } from './opponent.slice';
 
-import dragonSeth from 'assets/images/dragon-seth.svg';
-import barbarianBunny from 'assets/images/barbarian-bunny.svg';
-import wizardPig from 'assets/images/wizard-pig.svg';
+import { opponentAttackValueSelector } from './opponent.selectors';
 
 interface OpponentDetails {
   displayName: string;
@@ -47,6 +45,7 @@ export const useOpponentAttack = () => {
   const heroCurrentHealth = useAppSelector(heroCurrentHealthSelector);
   const heroMaxHealth = useAppSelector(heroMaxHealthSelector);
   const difficulty = useAppSelector(gameDifficultySelector);
+  const opponentAttackValue = useAppSelector(opponentAttackValueSelector);
   const [, { incrementRound }] = useGameRound();
   const dispatch = useAppDispatch();
 
@@ -69,13 +68,13 @@ export const useOpponentAttack = () => {
         !userAnswer &&
         [ActionStateType.ATTACK, ActionStateType.BLOCK].includes(gameAction)
       ) {
-        dispatch(setHeroCurrentHealth(heroCurrentHealth - opponentAttackPower));
         dispatch(setOpponentAttackValue(opponentAttackPower));
+        dispatch(setHeroCurrentHealth(heroCurrentHealth - opponentAttackValue));
         return incrementRound();
       }
 
       if (gameAction === ActionStateType.BLOCK && userAnswer) {
-        dispatch(setOpponentAttackValue(opponentAttackPower));
+        // dispatch(setOpponentAttackValue(opponentAttackPower));
         if (heroCurrentHealth > 90) {
           dispatch(setHeroCurrentHealth(heroMaxHealth));
           return incrementRound();
@@ -86,11 +85,12 @@ export const useOpponentAttack = () => {
       }
     },
     [
-      dispatch,
       gameAction,
-      heroCurrentHealth,
-      incrementRound,
+      dispatch,
       opponentAttackPower,
+      heroCurrentHealth,
+      opponentAttackValue,
+      incrementRound,
       heroMaxHealth,
     ]
   );
@@ -105,15 +105,23 @@ export const useOpponentDetails = (): UseOpponentDetailsResult => {
   const opponentDetails: OpponentDetails = useMemo(() => {
     switch (difficulty) {
       case DifficultyType.EASY:
-        return { name: 'Wizard Pig', displayName: 'Easy', avatar: wizardPig };
+        return {
+          name: 'Wizard Pig',
+          displayName: 'Easy',
+          avatar: 'wizard',
+        };
       case DifficultyType.MEDIUM:
         return {
           name: 'Barbarian Bunny',
           displayName: 'Medium',
-          avatar: barbarianBunny,
+          avatar: 'bunny',
         };
       default:
-        return { name: 'Dragon Seth', displayName: 'Seth', avatar: dragonSeth };
+        return {
+          name: 'Dragon Seth',
+          displayName: 'Seth',
+          avatar: 'seth',
+        };
     }
   }, [difficulty]);
 
