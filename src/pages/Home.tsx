@@ -4,8 +4,7 @@ import Button from 'components/Button';
 import { ButtonType } from 'components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { useSetDifficulty } from 'store/game/game.hooks';
-import { DialogStageType, DifficultyType } from 'models';
-import { useOpponentDetails } from 'store/opponent/opponent.hooks';
+import { DifficultyType } from 'models';
 
 const LandingPageContainer = styled.div`
   display: flex;

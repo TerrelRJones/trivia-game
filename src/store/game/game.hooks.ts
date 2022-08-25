@@ -1,6 +1,9 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
-import { gameRoundSelector } from 'store/game/game.selectors';
+import {
+  gameGameStatusSelector,
+  gameRoundSelector,
+} from 'store/game/game.selectors';
 import {
   setRound,
   attack,
@@ -12,8 +15,19 @@ import {
   setDifficulty,
   userAnswer,
   answeredVerify,
+  setGameStatus,
+  resetGameState,
 } from 'store/game/game.slice';
-import { AttackPower, AttackStrengthType, DifficultyType } from 'models';
+import {
+  AttackPower,
+  AttackStrengthType,
+  DifficultyType,
+  GameStatus,
+} from 'models';
+import { opponentCurrentHealthSelector } from 'store/opponent/opponent.selectors';
+import { heroCurrentHealthSelector } from 'store/hero/hero.selectors';
+import { resetHeroState } from 'store/hero/hero.slice';
+import { resetOpponentState } from 'store/opponent/opponent.slice';
 
 export type UseGameRoundResult = [number, { incrementRound: () => void }];
 
@@ -72,4 +86,34 @@ export const useAnsweredVerify = () => {
 export const useSetDifficulty = () => {
   const dispatch = useAppDispatch();
   return (difficulty: DifficultyType) => dispatch(setDifficulty(difficulty));
+};
+
+export const useGameStatus = () => {
+  const opponentCurrentHealth = useAppSelector(opponentCurrentHealthSelector);
+  const heroCurrentHealth = useAppSelector(heroCurrentHealthSelector);
+  const gameStatus = useAppSelector(gameGameStatusSelector);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (opponentCurrentHealth <= 0) {
+      dispatch(setGameStatus(GameStatus.VICTORY));
+    }
+    if (heroCurrentHealth <= 0) {
+      dispatch(setGameStatus(GameStatus.DEFEAT));
+    }
+  }, [dispatch, heroCurrentHealth, opponentCurrentHealth]);
+
+  return gameStatus;
+};
+
+export const useGameReset = () => {
+  const dispatch = useAppDispatch();
+
+  const resetGame = () => {
+    dispatch(resetHeroState());
+    dispatch(resetOpponentState());
+    dispatch(resetGameState());
+  };
+
+  return resetGame;
 };

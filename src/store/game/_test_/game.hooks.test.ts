@@ -1,7 +1,8 @@
 import { renderHookWithProviders } from 'testHelpers';
-import { useGameRound } from 'store/game/game.hooks';
+import { useGameRound, useGameStatus } from 'store/game/game.hooks';
 import { act } from '@testing-library/react';
 import { MOCK_APP_STATE } from 'store/mocks/app-state.mocks';
+import { GameStatus } from 'models';
 
 describe('Game State Hooks', () => {
   describe('useGameRound', () => {
@@ -26,6 +27,13 @@ describe('Game State Hooks', () => {
 
       [currentRound] = result.current;
       expect(currentRound).toEqual(2);
+    });
+
+    it('shoud return gameStatus of playing', () => {
+      const { result } = renderHookWithProviders(() => useGameStatus());
+      const gameStatus = result.current;
+
+      expect(gameStatus).toEqual(GameStatus.PLAYING);
     });
   });
 });

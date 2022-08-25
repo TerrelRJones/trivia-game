@@ -24,6 +24,7 @@ import {
   ActionStateType,
   AttackPower,
   DialogStageType,
+  GameStatus,
   QuestionStatus,
 } from 'models';
 import ActionDialog from 'components/ActionDialog';
@@ -41,6 +42,7 @@ import {
 } from 'store/opponent/opponent.selectors';
 import { ScreenReaderOnly } from 'styles/styledElements';
 import { useOpponentDetails } from 'store/opponent/opponent.hooks';
+import { useGameStatus } from 'store/game/game.hooks';
 
 interface GameTypes {
   testID?: string;
@@ -96,7 +98,8 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
   const opponentCurrentHealth = useAppSelector(opponentCurrentHealthSelector);
   const opponentAttackValue = useAppSelector(opponentAttackValueSelector);
 
-  const [{ name, avatar }, setOpponent] = useOpponentDetails();
+  const [{ displayName, avatar }, setOpponent] = useOpponentDetails();
+  const gameStatus = useGameStatus();
 
   const { text, answer, choices } = question;
   const navigate = useNavigate();
@@ -125,6 +128,15 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
     // only want setOpponent to run on mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (gameStatus === GameStatus.DEFEAT) {
+      return navigate('/defeat');
+    }
+    if (gameStatus === GameStatus.VICTORY) {
+      return navigate('/victory');
+    }
+  }, [gameStatus, navigate]);
 
   return (
     <StyledGameContainer data-testid={testID}>
@@ -160,7 +172,7 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
           />
         </ActionContainer>
         <PlayerContainer>
-          <Avatar testID="player-2" avatar={avatar} name={name} />
+          <Avatar testID="player-2" avatar={avatar} name={displayName} />
         </PlayerContainer>
       </StyledPlayerContainer>
 

@@ -18,6 +18,7 @@ import {
   DialogStageType,
   AttackPower,
   DifficultyType,
+  GameStatus,
 } from 'models';
 
 const { status, text, choices, answer } = questionOne;
@@ -35,6 +36,7 @@ describe('Game Slice reducer', () => {
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
       difficulty: DifficultyType.EASY,
+      gameStatus: GameStatus.PLAYING,
       userAnswer: '',
       question: {
         status,
@@ -53,6 +55,7 @@ describe('Game Slice reducer', () => {
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
       difficulty: DifficultyType.EASY,
+      gameStatus: GameStatus.PLAYING,
       userAnswer: '',
       question: {
         status,
@@ -73,6 +76,7 @@ describe('Game Slice reducer', () => {
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
       difficulty: DifficultyType.SETH,
+      gameStatus: GameStatus.PLAYING,
       userAnswer: '',
       question: {
         status,
@@ -91,6 +95,7 @@ describe('Game Slice reducer', () => {
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
       difficulty: DifficultyType.EASY,
+      gameStatus: GameStatus.PLAYING,
       userAnswer: '',
       question: {
         status,
@@ -111,6 +116,7 @@ describe('Game Slice reducer', () => {
       attackStrength: AttackStrengthType.HARD,
       attackPower: AttackPower.HEAVY,
       difficulty: DifficultyType.EASY,
+      gameStatus: GameStatus.PLAYING,
       userAnswer: '',
       question: {
         status,
@@ -131,6 +137,7 @@ describe('Game Slice reducer', () => {
       attackStrength: AttackStrengthType.MEDIUM,
       attackPower: AttackPower.MEDIUM,
       difficulty: DifficultyType.EASY,
+      gameStatus: GameStatus.PLAYING,
       userAnswer: '',
       question: {
         status,
@@ -151,6 +158,7 @@ describe('Game Slice reducer', () => {
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
       difficulty: DifficultyType.EASY,
+      gameStatus: GameStatus.PLAYING,
       userAnswer: '',
       question: {
         status,
@@ -169,6 +177,7 @@ describe('Game Slice reducer', () => {
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
       difficulty: DifficultyType.EASY,
+      gameStatus: GameStatus.PLAYING,
       userAnswer: '',
       question: {
         status,
@@ -187,6 +196,7 @@ describe('Game Slice reducer', () => {
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
       difficulty: DifficultyType.EASY,
+      gameStatus: GameStatus.PLAYING,
       userAnswer: '',
       question: {
         status,
@@ -205,6 +215,7 @@ describe('Game Slice reducer', () => {
       attackStrength: AttackStrengthType.EASY,
       attackPower: AttackPower.LIGHT,
       difficulty: DifficultyType.EASY,
+      gameStatus: GameStatus.PLAYING,
       userAnswer: '',
       question: {
         status,

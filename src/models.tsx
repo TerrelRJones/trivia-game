@@ -34,3 +34,9 @@ export enum DifficultyType {
   MEDIUM = 'medium',
   SETH = 'seth',
 }
+
+export enum GameStatus {
+  PLAYING = 'playing',
+  VICTORY = 'victory',
+  DEFEAT = 'defeat',
+}

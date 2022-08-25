@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Button from 'components/Button';
 
 import { useAttack, useBlock, useGetQuestion } from 'store/game/game.hooks';
-import { ActionStateType, AttackStrengthType } from 'models';
+import { AttackStrengthType } from 'models';
 import { shuffleArray } from 'helper/shuffleArray';
 import { ButtonType } from 'components/Button/Button';
 

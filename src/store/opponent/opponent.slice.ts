@@ -34,6 +34,9 @@ export const opponentSlice = createSlice({
     setOpponentDifficulty: (state, action: PayloadAction<DifficultyType>) => {
       state.difficulty = action.payload;
     },
+    resetOpponentState: (state) => {
+      return initialState;
+    },
   },
 });
 
@@ -42,6 +45,7 @@ export const {
   setOpponentCurrentHealth,
   setOpponentMaxHealth,
   setOpponentDifficulty,
+  resetOpponentState,
 } = opponentSlice.actions;
 
 export default opponentSlice.reducer;
