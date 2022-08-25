@@ -22,6 +22,7 @@ const DefeatedFoxContainer = styled.div`
     }
   }
   .left-arm {
+    transform-box: fill-box;
     transform-origin: bottom left;
     animation: swing2 0.6s infinite;
 
@@ -38,6 +39,7 @@ const DefeatedFoxContainer = styled.div`
     }
   }
   .leg {
+    transform-box: fill-box;
     transform-origin: bottom right;
     animation: swing3 0.4s infinite;
 
@@ -46,7 +48,7 @@ const DefeatedFoxContainer = styled.div`
         transform: rotate(0);
       }
       50% {
-        transform: rotate(2deg);
+        transform: rotate(15deg);
       }
       100% {
         transform: rotate(0);

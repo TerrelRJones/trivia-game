@@ -36,6 +36,7 @@ const FoxKnightContainer = styled.div<Pick<FoxKnightProps, 'animation'>>`
   }
 
   .helmet {
+    transform-box: fill-box;
     transform-origin: bottom left;
     transform: rotate(0);
     transition: rotate 0.25s ease-in-out;
@@ -46,28 +47,30 @@ const FoxKnightContainer = styled.div<Pick<FoxKnightProps, 'animation'>>`
   }
 
   .left-arm {
+    transform-box: fill-box;
     transform-origin: left;
     animation: swing 1s ease-in-out infinite;
     ${({ animation }) => animation && getAnimationPlayState()}
 
     @keyframes swing {
       0% {
-        transform: rotate(-2deg);
+        transform: rotate(-4deg);
       }
 
       50% {
-        transform: rotate(3deg);
+        transform: rotate(3deg) translateX(-3px);
       }
 
       100% {
-        transform: rotate(-2deg);
+        transform: rotate(-4deg);
       }
     }
   }
 
   .tail {
+    transform-box: fill-box;
     transform-origin: bottom right;
-    animation: swing1 3s ease-in-out infinite;
+    animation: swing1 0.5s ease-in-out infinite;
     ${({ animation }) => animation && getAnimationPlayState()}
 
     @keyframes swing1 {
@@ -76,7 +79,7 @@ const FoxKnightContainer = styled.div<Pick<FoxKnightProps, 'animation'>>`
       }
 
       50% {
-        transform: rotate(3deg);
+        transform: rotate(4deg);
       }
 
       100% {
