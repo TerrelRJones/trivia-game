@@ -120,16 +120,16 @@ export const DragonSeth = ({ testID, animation }: DragonSethProps) => {
           y1="25.385%"
           y2="60.109%"
         >
-          <stop offset="0" stop-color="#89603f" />
-          <stop offset="1" stop-color="#62442f" />
+          <stop offset="0" stopColor="#89603f" />
+          <stop offset="1" stopColor="#62442f" />
         </linearGradient>
         <mask id="b" fill="#fff">
           <path
             d="M30.612.827C-.596 6.208.137 20.93 0 21.058c20.433-9.422 20.468.622 20.468.622s25.048-14.79 35.594-2.63c10.547 12.161 12.634 4.93 16.15 11.504C74.546 34.921 74.627 54 74.627 54L81 51.152s-1.846-15.97-2.197-19.94c-.66-7.45-5.932-12.929-5.932-12.929S64.14.003 39.879 0c-2.87 0-5.952.255-9.267.827"
-            fill-rule="evenodd"
+            fillRule="evenodd"
           />
         </mask>
-        <g fill="none" fill-rule="evenodd">
+        <g fill="none" fillRule="evenodd">
           <g className="right-wing">
             <path
               d="M228.544 0s-11.296 18.585-3.034 36.999c-5.055 11.995-1.517 21.458 4.888 29.736-4.216 6.417-6.405 25.17 2.698 40.209-9.948-2.198-26.972-31.935-31.192-39.704-4.21-7.772-17.36-46.29 26.64-67.24"

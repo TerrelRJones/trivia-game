@@ -114,16 +114,16 @@ export const WizardPig = ({ testID, damage, animation }: WizardPigProps) => {
           y1="30.518%"
           y2="30.518%"
         >
-          <stop offset="0" stop-color="#00c1e7" />
-          <stop offset="1" stop-color="#2c018b" />
+          <stop offset="0" stopColor="#00c1e7" />
+          <stop offset="1" stopColor="#2c018b" />
         </linearGradient>
         <linearGradient id="wizardd" x1="50%" x2="50%" y1="0%" y2="100%">
-          <stop offset="0" stop-color="#00c1e8" />
-          <stop offset="1" stop-color="#2c018b" />
+          <stop offset="0" stopColor="#00c1e8" />
+          <stop offset="1" stopColor="#2c018b" />
         </linearGradient>
         <linearGradient id="wizarda">
-          <stop offset="0" stop-color="#00d9ff" />
-          <stop offset="1" stop-color="#2c018b" />
+          <stop offset="0" stopColor="#00d9ff" />
+          <stop offset="1" stopColor="#2c018b" />
         </linearGradient>
         <linearGradient
           id="wizarde"
@@ -150,12 +150,12 @@ export const WizardPig = ({ testID, damage, animation }: WizardPigProps) => {
           y2="114.217%"
         />
         <mask id="wizardc" fill="#fff">
-          <path d="M0 0h69v215H0z" fill-rule="evenodd" />
+          <path d="M0 0h69v215H0z" fillRule="evenodd" />
         </mask>
         <mask id="wizardf" fill="#fff">
-          <path d="M0 250h203V0H0z" fill-rule="evenodd" />
+          <path d="M0 250h203V0H0z" fillRule="evenodd" />
         </mask>
-        <g fill="none" fill-rule="evenodd" transform="matrix(-1 0 0 1 203 0)">
+        <g fill="none" fillRule="evenodd" transform="matrix(-1 0 0 1 203 0)">
           <path
             d="M32 228.278A5.718 5.718 0 0 0 37.718 234h7.568A5.718 5.718 0 0 0 51 228.278v-7.556A5.716 5.716 0 0 0 45.286 215h-7.568A5.716 5.716 0 0 0 32 220.722z"
             fill="#ffbdbd"

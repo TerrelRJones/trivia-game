@@ -73,8 +73,8 @@ export const BarbarianBunny = ({ testID, animation }: BarbarianBunnyProps) => {
           y1="-23.479%"
           y2="82.493%"
         >
-          <stop offset="0" stop-color="#ddd" />
-          <stop offset="1" stop-color="#666" />
+          <stop offset="0" stopColor="#ddd" />
+          <stop offset="1" stopColor="#666" />
         </linearGradient>
         <linearGradient
           id="b"
@@ -83,8 +83,8 @@ export const BarbarianBunny = ({ testID, animation }: BarbarianBunnyProps) => {
           y1="-22.303%"
           y2="93.592%"
         >
-          <stop offset=".013" stop-color="#909090" />
-          <stop offset="1" stop-color="#3b3a3a" />
+          <stop offset=".013" stopColor="#909090" />
+          <stop offset="1" stopColor="#3b3a3a" />
         </linearGradient>
         <linearGradient
           id="c"
@@ -93,20 +93,20 @@ export const BarbarianBunny = ({ testID, animation }: BarbarianBunnyProps) => {
           y1="-27.456%"
           y2="88.755%"
         >
-          <stop offset="0" stop-color="#dedede" />
-          <stop offset="1" stop-color="#6a6a6a" />
+          <stop offset="0" stopColor="#dedede" />
+          <stop offset="1" stopColor="#6a6a6a" />
         </linearGradient>
         <linearGradient id="d" x1="0%" x2="78.86%" y1="20.489%" y2="100%">
-          <stop offset="0" stop-color="#757575" />
-          <stop offset="1" stop-color="#414141" />
+          <stop offset="0" stopColor="#757575" />
+          <stop offset="1" stopColor="#414141" />
         </linearGradient>
         <linearGradient id="e" x1="50%" x2="36.236%" y1="-4.481%" y2="63.195%">
-          <stop offset="0" stop-color="#f58d00" />
-          <stop offset="1" stop-color="#803d00" />
+          <stop offset="0" stopColor="#f58d00" />
+          <stop offset="1" stopColor="#803d00" />
         </linearGradient>
         <linearGradient id="f" x1="50%" x2="63.662%" y1="2.918%" y2="60.29%">
-          <stop offset="0" stop-color="#ff9300" />
-          <stop offset="1" stop-color="#803d00" />
+          <stop offset="0" stopColor="#ff9300" />
+          <stop offset="1" stopColor="#803d00" />
         </linearGradient>
         <linearGradient
           id="g"
@@ -115,8 +115,8 @@ export const BarbarianBunny = ({ testID, animation }: BarbarianBunnyProps) => {
           y1="21.125%"
           y2="99.905%"
         >
-          <stop offset="0" stop-color="#744300" />
-          <stop offset="1" stop-color="#ffb551" />
+          <stop offset="0" stopColor="#744300" />
+          <stop offset="1" stopColor="#ffb551" />
         </linearGradient>
         <linearGradient
           id="h"
@@ -125,32 +125,32 @@ export const BarbarianBunny = ({ testID, animation }: BarbarianBunnyProps) => {
           y1="96.625%"
           y2="23.83%"
         >
-          <stop offset="0" stop-color="#ffb551" />
-          <stop offset="1" stop-color="#875121" />
+          <stop offset="0" stopColor="#ffb551" />
+          <stop offset="1" stopColor="#875121" />
         </linearGradient>
         <linearGradient id="i" x1="50%" x2="50%" y1="100%" y2="0%">
-          <stop offset="0" stop-color="#ffcb00" />
-          <stop offset="1" stop-color="#ff9b00" />
+          <stop offset="0" stopColor="#ffcb00" />
+          <stop offset="1" stopColor="#ff9b00" />
         </linearGradient>
         <linearGradient id="j" x1="50%" x2="50%" y1="-54.327%" y2="100%">
-          <stop offset="0" stop-color="#ffb551" />
-          <stop offset="1" stop-color="#7b4a1d" />
+          <stop offset="0" stopColor="#ffb551" />
+          <stop offset="1" stopColor="#7b4a1d" />
         </linearGradient>
         <radialGradient id="l" cx="50%" cy="50.333%" r="56.842%">
-          <stop offset="0" stop-color="#b74f00" />
-          <stop offset="1" stop-color="#493400" />
+          <stop offset="0" stopColor="#b74f00" />
+          <stop offset="1" stopColor="#493400" />
         </radialGradient>
         <radialGradient id="m" cx="50%" cy="50%" r="149.398%">
-          <stop offset="0" stop-color="#ffb700" />
-          <stop offset="1" stop-color="#a36200" />
+          <stop offset="0" stopColor="#ffb700" />
+          <stop offset="1" stopColor="#a36200" />
         </radialGradient>
         <mask id="k" fill="#fff">
-          <path d="M0 265h356V0H0z" fill-rule="evenodd" />
+          <path d="M0 265h356V0H0z" fillRule="evenodd" />
         </mask>
         <mask id="n" fill="#fff">
-          <path d="M0 0h17v17H0z" fill-rule="evenodd" />
+          <path d="M0 0h17v17H0z" fillRule="evenodd" />
         </mask>
-        <g fill="none" fill-rule="evenodd">
+        <g fill="none" fillRule="evenodd">
           <path
             d="M139.098 183.097c-5.464 5.468-5.464 14.334 0 19.802s14.332 5.468 19.801 0c5.468-5.468 5.468-14.334 0-19.802-5.469-5.463-14.337-5.463-19.801 0"
             fill="#fff"

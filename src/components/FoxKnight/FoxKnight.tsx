@@ -113,8 +113,8 @@ export const FoxKnight = ({ testID, animation }: FoxKnightProps) => {
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
         <linearGradient id="a">
-          <stop offset="0" stop-color="#9baab6" />
-          <stop offset="1" stop-color="#62717f" />
+          <stop offset="0" stopColor="#9baab6" />
+          <stop offset="1" stopColor="#62717f" />
         </linearGradient>
         <linearGradient
           id="g"
@@ -125,8 +125,8 @@ export const FoxKnight = ({ testID, animation }: FoxKnightProps) => {
           y2="100%"
         />
         <linearGradient id="b">
-          <stop offset="0" stop-color="#778892" />
-          <stop offset="1" stop-color="#425059" />
+          <stop offset="0" stopColor="#778892" />
+          <stop offset="1" stopColor="#425059" />
         </linearGradient>
         <linearGradient
           id="h"
@@ -137,8 +137,8 @@ export const FoxKnight = ({ testID, animation }: FoxKnightProps) => {
           y2="50%"
         />
         <linearGradient id="c">
-          <stop offset="0" stop-color="#b7c4d1" />
-          <stop offset="1" stop-color="#8192a4" />
+          <stop offset="0" stopColor="#b7c4d1" />
+          <stop offset="1" stopColor="#8192a4" />
         </linearGradient>
         <linearGradient
           id="i"
@@ -165,8 +165,8 @@ export const FoxKnight = ({ testID, animation }: FoxKnightProps) => {
           y2="86.599%"
         />
         <linearGradient id="d">
-          <stop offset="0" stop-color="#b7c4d1" />
-          <stop offset="1" stop-color="#687787" />
+          <stop offset="0" stopColor="#b7c4d1" />
+          <stop offset="1" stopColor="#687787" />
         </linearGradient>
         <linearGradient
           id="l"
@@ -177,8 +177,8 @@ export const FoxKnight = ({ testID, animation }: FoxKnightProps) => {
           y2="100%"
         />
         <linearGradient id="e">
-          <stop offset="0" stop-color="#dfe4e8" />
-          <stop offset="1" stop-color="#bcc4cd" />
+          <stop offset="0" stopColor="#dfe4e8" />
+          <stop offset="1" stopColor="#bcc4cd" />
         </linearGradient>
         <radialGradient id="m" cx="50%" cy="50%" r="65.586%" xlinkHref="#e" />
         <linearGradient
@@ -215,16 +215,16 @@ export const FoxKnight = ({ testID, animation }: FoxKnightProps) => {
         />
         <radialGradient id="s" cx="53.818%" cy="50%" r="50%" xlinkHref="#e" />
         <radialGradient id="t" cx="50%" cy="50%" r="63.564%">
-          <stop offset="0" stop-color="#a0adb8" />
-          <stop offset="1" stop-color="#8192a4" />
+          <stop offset="0" stopColor="#a0adb8" />
+          <stop offset="1" stopColor="#8192a4" />
         </radialGradient>
         <mask id="f" fill="#fff">
-          <path d="M0 0h70v79H0z" fill-rule="evenodd" />
+          <path d="M0 0h70v79H0z" fillRule="evenodd" />
         </mask>
         <mask id="q" fill="#fff">
-          <path d="M0 216h249V0H0z" fill-rule="evenodd" />
+          <path d="M0 216h249V0H0z" fillRule="evenodd" />
         </mask>
-        <g fill="none" fill-rule="evenodd">
+        <g fill="none" fillRule="evenodd">
           <g className="tail">
             <path
               d="M21.821 50.843c3.97 34.448 38.215 31.223 47.491 21.91 4.9-4.92-17.85-13.235-21.821-47.682C43.52-9.377 2.19.964 0 3.162 2.19.965 17.853 16.395 21.82 50.843"

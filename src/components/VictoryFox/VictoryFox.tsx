@@ -39,12 +39,12 @@ export const VictoryFox = ({ testID }: VictoryFoxProps) => {
     <VictoryFoxContainer data-testid={testID}>
       <svg height="269" width="312" xmlns="http://www.w3.org/2000/svg">
         <mask id="a" fill="#fff">
-          <path d="M0 0h88v99H0z" fill-rule="evenodd" />
+          <path d="M0 0h88v99H0z" fillRule="evenodd" />
         </mask>
         <mask id="b" fill="#fff">
-          <path d="M0 0h13v4H0z" fill-rule="evenodd" />
+          <path d="M0 0h13v4H0z" fillRule="evenodd" />
         </mask>
-        <g fill="none" fill-rule="evenodd">
+        <g fill="none" fillRule="evenodd">
           <path
             d="M27.433 63.715c4.99 43.169 48.04 39.128 59.702 27.455 6.16-6.164-22.44-16.584-27.432-59.752C54.713-11.752 2.753 1.208 0 3.963c2.752-2.754 22.444 16.583 27.433 59.752"
             fill="#ff8f33"

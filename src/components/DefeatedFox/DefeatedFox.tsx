@@ -76,12 +76,12 @@ export const DefeatedFox = ({ testID }: DefeatedFoxProps) => {
     <DefeatedFoxContainer data-testid={testID}>
       <svg height="238" width="478" xmlns="http://www.w3.org/2000/svg">
         <mask id="a" fill="#fff">
-          <path d="M0 0h94v41H0z" fill-rule="evenodd" />
+          <path d="M0 0h94v41H0z" fillRule="evenodd" />
         </mask>
         <mask id="b" fill="#fff">
-          <path d="M0 0h107.885v28.878H0z" fill-rule="evenodd" />
+          <path d="M0 0h107.885v28.878H0z" fillRule="evenodd" />
         </mask>
-        <g fill="none" fill-rule="evenodd">
+        <g fill="none" fillRule="evenodd">
           <path
             d="M168.196 133.556s-21.869-31.445-56.635-10.167c0 0 12.897 36.41-.561 62.654 44.86 10.64 60-3.546 60-3.546z"
             fill="#425059"
