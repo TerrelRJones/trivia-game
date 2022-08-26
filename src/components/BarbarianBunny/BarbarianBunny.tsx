@@ -64,7 +64,7 @@ const BarbarianBunnyContainer = styled.div<
     transform-origin: top right;
 
     ${({ animation }) =>
-      !animation && 'animation: axeSwing 2s ease-in-out infinite;'}
+      !animation && 'animation: axeSwing 1s ease-in-out infinite;'}
 
     @keyframes axeSwing {
       0% {

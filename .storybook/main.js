@@ -21,13 +21,13 @@ module.exports = {
     };
     return config;
   },
-  // typescript: {
-  //   reactDocgen: 'react-docgen-typescript',
-  //   reactDocgenTypescriptOptions: {
-  //     compilerOptions: {
-  //       allowSyntheticDefaultImports: false,
-  //       esModuleInterop: false,
-  //     },
-  //   },
-  // },
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      compilerOptions: {
+        allowSyntheticDefaultImports: false,
+        esModuleInterop: false,
+      },
+    },
+  },
 };
