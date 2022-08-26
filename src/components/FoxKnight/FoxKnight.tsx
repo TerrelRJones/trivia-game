@@ -32,12 +32,6 @@ const FoxKnightContainer = styled.div<Pick<FoxKnightProps, 'animation'>>`
     }
   }
 
-  .body {
-    transform-box: fill-box;
-    animation: nod 1s infinite;
-    animation-delay: 250ms;
-  }
-
   .helmet {
     transform-box: fill-box;
     transform-origin: bottom left;
@@ -398,17 +392,21 @@ export const FoxKnight = ({ testID, animation }: FoxKnightProps) => {
               d="M95.5 31C69.82 31 49 51.595 49 77h93c0-25.405-20.82-46-46.5-46"
               fill="#425059"
             />
-            <g className={isBlocking ? 'eyes' : 'blink'}>
-              <path
-                d="M95 101a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"
-                fill="#000"
-                mask="url(#q)"
-              />
-              <path
-                d="M99 97a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
-                fill="#f2f1e7"
-                mask="url(#q)"
-              />
+            <g className="eyes">
+              <g className="left-eye">
+                <path
+                  d="M95 101a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"
+                  fill="#000"
+                  mask="url(#q)"
+                />
+              </g>
+              <g className="right-eye">
+                <path
+                  d="M99 97a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
+                  fill="#f2f1e7"
+                  mask="url(#q)"
+                />
+              </g>
               <path
                 d="M149 101a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"
                 fill="#000"

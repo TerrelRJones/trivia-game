@@ -71,27 +71,6 @@ const WizardPigContainer = styled.div<
       }
     }
   }
-
-  .right-arm {
-    transform-origin: right;
-
-    animation: attack 2s linear;
-
-    @keyframes attack {
-      0% {
-        transform: translateX(0px);
-      }
-      50% {
-        transform: translateX(-8px);
-      }
-      80% {
-        transform: translateX(8px);
-      }
-      100% {
-        transform: translateX(0px);
-      }
-    }
-  }
 `;
 
 export const WizardPig = ({ testID, damage, animation }: WizardPigProps) => {
