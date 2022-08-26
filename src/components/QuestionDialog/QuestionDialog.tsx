@@ -4,8 +4,12 @@ import styled from 'styled-components';
 import { ButtonType } from 'components/Button/Button';
 import { useAnswered, useUserAnswer } from 'store/game/game.hooks';
 import { useAppSelector } from 'store/hooks';
-import { gameUserAnswerSelector } from 'store/game/game.selectors';
+import {
+  gameDialogSelector,
+  gameUserAnswerSelector,
+} from 'store/game/game.selectors';
 import { questionHtmlStringToText } from 'helper/htmlTextToString';
+import { DialogStageType } from 'models';
 
 interface QuestionDialogProps {
   testID?: string;
@@ -56,6 +60,7 @@ export const QuestionDialog = ({
   const answered = useAnswered();
   const userAnswer = useAppSelector(gameUserAnswerSelector);
   const setUserAnswer = useUserAnswer();
+  const dialogStage = useAppSelector(gameDialogSelector);
 
   const isCorrectAnswer = (potentialAnswer: string): boolean => {
     return Boolean(
@@ -74,6 +79,13 @@ export const QuestionDialog = ({
     );
   };
 
+  const submitAnswer = (potentialAnswer: string) => {
+    if (dialogStage === DialogStageType.ANSWERING) {
+      answered();
+      setUserAnswer(potentialAnswer);
+    }
+  };
+
   return (
     <Container data-testid={testID}>
       <Question data-testid="question-text">
@@ -86,10 +98,7 @@ export const QuestionDialog = ({
               <Button
                 testID={`button-${index}`}
                 buttonType={ButtonType.SECONDARY}
-                onClick={() => {
-                  answered();
-                  setUserAnswer(potentialAnswer);
-                }}
+                onClick={() => submitAnswer(potentialAnswer)}
                 correct={isCorrectAnswer(potentialAnswer)}
                 incorrect={isIncorrectAnswer(potentialAnswer)}
                 disabled={isButtonDisabled(potentialAnswer)}
