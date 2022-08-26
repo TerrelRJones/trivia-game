@@ -2,7 +2,7 @@ import { ActionStateType } from 'models';
 import { gameActionSelector } from 'store/game/game.selectors';
 import { useAppSelector } from 'store/hooks';
 import styled from 'styled-components';
-import { getAnimationPlayState } from 'helper/getAnimationPlayState';
+import { getAnimationPlayState } from '../../helper/getAnimationPlayState';
 
 interface FoxKnightProps {
   testID?: string;

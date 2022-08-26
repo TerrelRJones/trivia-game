@@ -16,10 +16,9 @@ enum AttackPowerValue {
   HEAVY = 15,
 }
 
-export const useHeroAttack = (): [
-  () => void,
-  (userAnswer: boolean) => void
-] => {
+type UseHeroType = [() => void, (userAnswer: boolean) => void];
+
+export const useHeroAttack = (): UseHeroType => {
   const currentHeroAttackValue = useAppSelector(heroAttackValueSelector);
   const gameAction = useAppSelector(gameActionSelector);
   const attackPower = useAppSelector(gameAttackPowerSelector);

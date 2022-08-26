@@ -10,10 +10,6 @@ interface WizardPigProps {
 const WizardPigContainer = styled.div<
   Pick<WizardPigProps, 'animation' | 'damage'>
 >`
-  position: absolute;
-  bottom: 0;
-  left: 40px;
-
   animation: hover 6s ease-in-out infinite;
   ${({ animation }) => animation && getAnimationPlayState()}
 
