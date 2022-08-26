@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { getAnimationPlayState } from 'helper/getAnimationPlayState';
+import Lightning from './Lightning';
 
 interface WizardPigProps {
   testID?: string;
@@ -76,6 +77,8 @@ export const WizardPig = ({ testID, damage, animation }: WizardPigProps) => {
       animation={animation}
       damage={damage}
     >
+      {!animation && <Lightning animation={animation} />}
+
       <svg
         height="251"
         width="203"
