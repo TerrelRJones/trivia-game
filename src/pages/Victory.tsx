@@ -15,6 +15,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useOpponentDetails } from 'store/opponent/opponent.hooks';
 import { useGameReset } from 'store/game/game.hooks';
+import { InitialTransition } from 'components/InitialTransition/InitialTransition';
 
 const ShadowGradient = styled.img`
   position: absolute;
@@ -37,30 +38,33 @@ const Victory = () => {
   const replace = useNavigate();
 
   return (
-    <CompletedPageContainer>
-      <HeroContainer>
-        <Header data-testid="header">VICTORY</Header>
-        <Text>You beat the {name}</Text>
-        <ButtonContainer>
-          <Button
-            testID="play-again-btn"
-            onClick={() => {
-              resetGame();
-              replace('/');
-            }}
-          >
-            Play Again
-          </Button>
-        </ButtonContainer>
-      </HeroContainer>
-      <AvatarContainer>
-        <Avatar>
-          <VictoryFox />
-        </Avatar>
-        <Shadow src={shadow} />
-        <ShadowGradient src={shadowGradient} />
-      </AvatarContainer>
-    </CompletedPageContainer>
+    <>
+      <InitialTransition />
+      <CompletedPageContainer>
+        <HeroContainer>
+          <Header data-testid="header">VICTORY</Header>
+          <Text>You beat the {name}</Text>
+          <ButtonContainer>
+            <Button
+              testID="play-again-btn"
+              onClick={() => {
+                resetGame();
+                replace('/');
+              }}
+            >
+              Play Again
+            </Button>
+          </ButtonContainer>
+        </HeroContainer>
+        <AvatarContainer>
+          <Avatar>
+            <VictoryFox />
+          </Avatar>
+          <Shadow src={shadow} />
+          <ShadowGradient src={shadowGradient} />
+        </AvatarContainer>
+      </CompletedPageContainer>
+    </>
   );
 };
 

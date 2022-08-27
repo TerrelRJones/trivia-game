@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { store } from 'store';
 import AppRoutes from 'AppRoutes';
+import { AnimatePresence } from 'framer-motion';
 
 import styled from 'styled-components';
 
@@ -17,15 +18,17 @@ const AppContainer = styled.div`
 
 const App: React.FunctionComponent = () => {
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <AppContainer>
-            <AppRoutes />
-          </AppContainer>
-        </BrowserRouter>
-      </ThemeProvider>
-    </Provider>
+    <AnimatePresence mode="wait">
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <AppContainer>
+              <AppRoutes />
+            </AppContainer>
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
+    </AnimatePresence>
   );
 };
 

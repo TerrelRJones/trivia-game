@@ -46,6 +46,7 @@ import { useOpponentDetails } from 'store/opponent/opponent.hooks';
 import { useGameStatus } from 'store/game/game.hooks';
 import { useHeroAttack } from 'store/hero/hero.hooks';
 import GameAvatar from 'components/GameAvatar';
+import { InitialTransition } from 'components/InitialTransition/InitialTransition';
 
 interface GameTypes {
   testID?: string;
@@ -173,18 +174,6 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
     return 'Heavy attack...';
   };
 
-  // const getCharacter = () => {
-  //   if (avatar === 'wizard')
-  //     return (
-  //       <WizardPig
-  //         animation={playAnimation}
-  //         damage={opponentCurrentHealth < 50}
-  //       />
-  //     );
-  //   if (avatar === 'bunny') return <BarbarianBunny animation={playAnimation} />;
-  //   return <DragonSeth animation={playAnimation} />;
-  // };
-
   useEffect(() => {
     if (gameDialog === DialogStageType.DIFFICULTY) {
       return navigate('/');
@@ -207,93 +196,100 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
   }, [gameStatus, navigate]);
 
   return (
-    <StyledGameContainer data-testid={testID}>
-      <ScreenReaderOnly aria-label="polite">{`You are at ${heroCurrentHealth} of ${heroMaxHealth} health. Your opponent is at ${opponentCurrentHealth} of ${opponentMaxHealth}, starting Round ${gameRound}`}</ScreenReaderOnly>
-      <TopContainer>
-        <HealthBar
-          testID="health-bar-1"
-          currentHealth={heroCurrentHealth}
-          maxHealth={heroMaxHealth}
-          animation={playAnimation}
-        />
-        <Round testID="round" round={gameRound} />
-        <HealthBar
-          testID="health-bar-2"
-          isReversed
-          currentHealth={opponentCurrentHealth}
-          maxHealth={opponentMaxHealth}
-          animation={playAnimation}
-        />
-      </TopContainer>
-      <StyledPlayerContainer>
-        <PlayerContainer>
-          <Avatar
-            testID="player-1"
-            avatar={<FoxKnight animation={playAnimation} />}
-            name="Terrel"
+    <>
+      <InitialTransition />
+      <StyledGameContainer>
+        <ScreenReaderOnly aria-label="polite">{`You are at ${heroCurrentHealth} of ${heroMaxHealth} health. Your opponent is at ${opponentCurrentHealth} of ${opponentMaxHealth}, starting Round ${gameRound}`}</ScreenReaderOnly>
+        <TopContainer>
+          <HealthBar
+            testID="health-bar-1"
+            currentHealth={heroCurrentHealth}
+            maxHealth={heroMaxHealth}
+            animation={playAnimation}
           />
-        </PlayerContainer>
-        <ActionContainer>
-          <Action
-            testID="hero-action"
-            actionState={getActionStateType()}
-            attackValue={heroAttackValue}
-          />
-          {heroAttackValue > opponentCurrentHealth && (
-            <FinishThemButton onClick={() => finishThem()}>
-              FINISH THEM
-            </FinishThemButton>
-          )}
-
-          <Action
+          <Round testID="round" round={gameRound} />
+          <HealthBar
+            testID="health-bar-2"
             isReversed
-            actionState={ActionStateType.ATTACK}
-            attackValue={opponentAttackValue}
+            currentHealth={opponentCurrentHealth}
+            maxHealth={opponentMaxHealth}
+            animation={playAnimation}
           />
-        </ActionContainer>
-        <PlayerContainer>
-          <Avatar
-            testID="player-2"
-            avatar={
-              <GameAvatar
-                avatar={avatar}
-                animation={playAnimation}
-                damage={opponentCurrentHealth < 50}
+        </TopContainer>
+        <StyledPlayerContainer>
+          <PlayerContainer>
+            <Avatar
+              testID="player-1"
+              avatar={<FoxKnight animation={playAnimation} />}
+              name="Terrel"
+            />
+          </PlayerContainer>
+          <ActionContainer>
+            <Action
+              testID="hero-action"
+              actionState={getActionStateType()}
+              attackValue={heroAttackValue}
+            />
+            {heroAttackValue >= opponentCurrentHealth && (
+              <FinishThemButton onClick={() => finishThem()}>
+                FINISH THEM
+              </FinishThemButton>
+            )}
+
+            <Action
+              isReversed
+              actionState={ActionStateType.ATTACK}
+              attackValue={opponentAttackValue}
+            />
+          </ActionContainer>
+          <PlayerContainer>
+            <Avatar
+              testID="player-2"
+              avatar={
+                <GameAvatar
+                  avatar={avatar}
+                  animation={playAnimation}
+                  damage={opponentCurrentHealth < 50}
+                />
+              }
+              name={displayName}
+            />
+          </PlayerContainer>
+        </StyledPlayerContainer>
+
+        {gameDialog === DialogStageType.ACTION && (
+          <Dialog testID="dialog" message="Choose an action">
+            <ActionDialog />
+          </Dialog>
+        )}
+
+        {gameDialog === DialogStageType.ATTACKING && (
+          <Dialog testID="dialog" message="Choose an attack">
+            <AttackDialog />
+          </Dialog>
+        )}
+
+        {(gameDialog === DialogStageType.ANSWERING ||
+          gameDialog === DialogStageType.ANSWERED) && (
+          <Dialog testID="dialog" message={getQuestionDialogMessage()}>
+            {questionStatus === QuestionStatus.LOADING ? (
+              <h1>HANG TIGHT...</h1>
+            ) : (
+              <QuestionDialog
+                question={text}
+                options={choices}
+                answer={answer}
               />
-            }
-            name={displayName}
-          />
-        </PlayerContainer>
-      </StyledPlayerContainer>
-
-      {gameDialog === DialogStageType.ACTION && (
-        <Dialog testID="dialog" message="Choose an action">
-          <ActionDialog />
-        </Dialog>
-      )}
-
-      {gameDialog === DialogStageType.ATTACKING && (
-        <Dialog testID="dialog" message="Choose an attack">
-          <AttackDialog />
-        </Dialog>
-      )}
-
-      {(gameDialog === DialogStageType.ANSWERING ||
-        gameDialog === DialogStageType.ANSWERED) && (
-        <Dialog testID="dialog" message={getQuestionDialogMessage()}>
-          {questionStatus === QuestionStatus.LOADING ? (
-            <h1>HANG TIGHT...</h1>
-          ) : (
-            <QuestionDialog question={text} options={choices} answer={answer} />
-          )}
-        </Dialog>
-      )}
-      <ButtonContainer>
-        <div onClick={() => setPlayAnimation((prevVal) => !prevVal)}>
-          {playAnimation ? 'PLAY ANIMATION' : 'STOP ANIMATION'}
-        </div>
-      </ButtonContainer>
-    </StyledGameContainer>
+            )}
+          </Dialog>
+        )}
+        <ButtonContainer>
+          <div onClick={() => setPlayAnimation((prevVal) => !prevVal)}>
+            {playAnimation ? 'PLAY ANIMATION' : 'STOP ANIMATION'}
+          </div>
+        </ButtonContainer>
+      </StyledGameContainer>
+    </>
   );
 };
 

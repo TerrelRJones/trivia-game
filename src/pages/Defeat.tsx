@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { useOpponentDetails } from 'store/opponent/opponent.hooks';
 import { useGameReset } from 'store/game/game.hooks';
 import DefeatedFox from 'components/DefeatedFox';
+import { InitialTransition } from 'components/InitialTransition/InitialTransition';
 
 const Shadow = styled.img`
   position: absolute;
@@ -32,6 +33,7 @@ const Defeat = () => {
 
   return (
     <CompletedPageContainer>
+      <InitialTransition />
       <HeroContainer>
         <Header data-testid="header">GAME OVER</Header>
         <Text>You lost to {name}</Text>
