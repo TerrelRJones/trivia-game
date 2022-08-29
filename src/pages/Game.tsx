@@ -1,4 +1,18 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { ScreenReaderOnly } from 'styles/styledElements';
+
+import Action from 'components/Action';
+import Avatar from 'components/Avatar';
+import HealthBar from 'components/HealthBar';
+import Round from 'components/Round';
+import Dialog from 'components/Dialog';
+import ActionDialog from 'components/ActionDialog';
+import QuestionDialog from 'components/QuestionDialog';
+import AttackDialog from 'components/AttackDialog';
+import FoxKnight from 'components/FoxKnight';
+import GameAvatar from 'components/GameAvatar';
 
 import {
   gameDialogSelector,
@@ -10,16 +24,9 @@ import {
 } from 'store/game/game.selectors';
 
 import { useAppSelector } from 'store/hooks';
-
-import Action from 'components/Action';
-import Avatar from 'components/Avatar';
-import HealthBar from 'components/HealthBar';
-import Round from 'components/Round';
-import Dialog from 'components/Dialog';
-import QuestionDialog from 'components/QuestionDialog';
-import AttackDialog from 'components/AttackDialog';
-
-import FoxKnight from 'components/FoxKnight';
+import { useOpponentDetails } from 'store/opponent/opponent.hooks';
+import { useGameStatus } from 'store/game/game.hooks';
+import { useHeroAttack } from 'store/hero/hero.hooks';
 
 import {
   ActionStateType,
@@ -28,31 +35,27 @@ import {
   GameStatus,
   QuestionStatus,
 } from 'models';
-import ActionDialog from 'components/ActionDialog';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import {
   heroAttackValueSelector,
   heroCurrentHealthSelector,
   heroMaxHealthSelector,
 } from 'store/hero/hero.selectors';
+
 import {
   opponentAttackValueSelector,
   opponentCurrentHealthSelector,
   opponentMaxHealthSelector,
 } from 'store/opponent/opponent.selectors';
-import { ScreenReaderOnly } from 'styles/styledElements';
-import { useOpponentDetails } from 'store/opponent/opponent.hooks';
-import { useGameStatus } from 'store/game/game.hooks';
-import { useHeroAttack } from 'store/hero/hero.hooks';
-import GameAvatar from 'components/GameAvatar';
+
 import { InitialTransition } from 'components/InitialTransition/InitialTransition';
+import { motion } from 'framer-motion';
 
 interface GameTypes {
   testID?: string;
 }
 
-const StyledGameContainer = styled.div`
+const StyledGameContainer = styled(motion.div)`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -64,7 +67,7 @@ const StyledGameContainer = styled.div`
   height: 100%;
 `;
 
-const TopContainer = styled.div`
+const TopContainer = styled(motion.div)`
   display: flex;
   align-items: center;
   width: 100%;
@@ -78,11 +81,11 @@ const StyledPlayerContainer = styled.div`
   justify-content: space-between;
 `;
 
-const PlayerContainer = styled.div`
+const PlayerContainer = styled(motion.div)`
   width: 100%;
 `;
 
-const ActionContainer = styled.div`
+const ActionContainer = styled(motion.div)`
   position: relative;
   display: flex;
   gap: 192px;
@@ -115,7 +118,8 @@ const FinishThemButton = styled.button`
 `;
 
 const ButtonContainer = styled.div`
-  margin-top: 20px;
+  max-width: 200px;
+  margin: 20px auto;
 
   div {
     background: ${({ theme: { colors } }) => colors.defaultBtnGradient};
@@ -126,12 +130,11 @@ const ButtonContainer = styled.div`
     font-family: 'Lato';
     font-size: 18px;
     font-weight: 900;
+    text-align: center;
     box-shadow: 0 0 0 0.25em #00c6f3;
-    opacity: 0.7;
 
     &:hover {
       cursor: pointer;
-      opacity: 1;
     }
   }
 `;
@@ -200,14 +203,24 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
       <InitialTransition />
       <StyledGameContainer>
         <ScreenReaderOnly aria-label="polite">{`You are at ${heroCurrentHealth} of ${heroMaxHealth} health. Your opponent is at ${opponentCurrentHealth} of ${opponentMaxHealth}, starting Round ${gameRound}`}</ScreenReaderOnly>
-        <TopContainer>
+        <TopContainer
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.5, duration: 0.5 }}
+        >
           <HealthBar
             testID="health-bar-1"
             currentHealth={heroCurrentHealth}
             maxHealth={heroMaxHealth}
             animation={playAnimation}
           />
-          <Round testID="round" round={gameRound} />
+          <motion.div
+            initial={{ translateY: '-100px' }}
+            animate={{ translateY: 0 }}
+            transition={{ delay: 3, duration: 0.5 }}
+          >
+            <Round testID="round" round={gameRound} />
+          </motion.div>
           <HealthBar
             testID="health-bar-2"
             isReversed
@@ -217,14 +230,22 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
           />
         </TopContainer>
         <StyledPlayerContainer>
-          <PlayerContainer>
+          <PlayerContainer
+            initial={{ translateX: '-150px' }}
+            animate={{ translateX: 0 }}
+            transition={{ delay: 2, duration: 0.25 }}
+          >
             <Avatar
               testID="player-1"
               avatar={<FoxKnight animation={playAnimation} />}
               name="Terrel"
             />
           </PlayerContainer>
-          <ActionContainer>
+          <ActionContainer
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.5, duration: 0.5 }}
+          >
             <Action
               testID="hero-action"
               actionState={getActionStateType()}
@@ -242,7 +263,11 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
               attackValue={opponentAttackValue}
             />
           </ActionContainer>
-          <PlayerContainer>
+          <PlayerContainer
+            initial={{ translateX: '150px' }}
+            animate={{ translateX: 0 }}
+            transition={{ delay: 2, duration: 0.25 }}
+          >
             <Avatar
               testID="player-2"
               avatar={
@@ -256,38 +281,43 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
             />
           </PlayerContainer>
         </StyledPlayerContainer>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.5, duration: 1.5 }}
+        >
+          {gameDialog === DialogStageType.ACTION && (
+            <Dialog testID="dialog" message="Choose an action">
+              <ActionDialog />
+            </Dialog>
+          )}
 
-        {gameDialog === DialogStageType.ACTION && (
-          <Dialog testID="dialog" message="Choose an action">
-            <ActionDialog />
-          </Dialog>
-        )}
+          {gameDialog === DialogStageType.ATTACKING && (
+            <Dialog testID="dialog" message="Choose an attack">
+              <AttackDialog />
+            </Dialog>
+          )}
 
-        {gameDialog === DialogStageType.ATTACKING && (
-          <Dialog testID="dialog" message="Choose an attack">
-            <AttackDialog />
-          </Dialog>
-        )}
-
-        {(gameDialog === DialogStageType.ANSWERING ||
-          gameDialog === DialogStageType.ANSWERED) && (
-          <Dialog testID="dialog" message={getQuestionDialogMessage()}>
-            {questionStatus === QuestionStatus.LOADING ? (
-              <h1>HANG TIGHT...</h1>
-            ) : (
-              <QuestionDialog
-                question={text}
-                options={choices}
-                answer={answer}
-              />
-            )}
-          </Dialog>
-        )}
-        <ButtonContainer>
-          <div onClick={() => setPlayAnimation((prevVal) => !prevVal)}>
-            {playAnimation ? 'PLAY ANIMATION' : 'STOP ANIMATION'}
-          </div>
-        </ButtonContainer>
+          {(gameDialog === DialogStageType.ANSWERING ||
+            gameDialog === DialogStageType.ANSWERED) && (
+            <Dialog testID="dialog" message={getQuestionDialogMessage()}>
+              {questionStatus === QuestionStatus.LOADING ? (
+                <h1>HANG TIGHT...</h1>
+              ) : (
+                <QuestionDialog
+                  question={text}
+                  options={choices}
+                  answer={answer}
+                />
+              )}
+            </Dialog>
+          )}
+          <ButtonContainer>
+            <div onClick={() => setPlayAnimation((prevVal) => !prevVal)}>
+              {playAnimation ? 'PLAY ANIMATION' : 'STOP ANIMATION'}
+            </div>
+          </ButtonContainer>
+        </motion.div>
       </StyledGameContainer>
     </>
   );
