@@ -11,6 +11,7 @@ interface WizardPigProps {
 const WizardPigContainer = styled.div<
   Pick<WizardPigProps, 'animation' | 'damage'>
 >`
+  position: relative;
   animation: hover 6s ease-in-out infinite;
   ${({ animation }) => animation && getAnimationPlayState()}
 
@@ -66,6 +67,46 @@ const WizardPigContainer = styled.div<
       100% {
         transform: rotate(2deg);
       }
+    }
+  }
+`;
+
+const Cloud = styled.div<Pick<WizardPigProps, 'animation'>>`
+  transform-box: fill-box;
+  transform-origin: center;
+  left: 60px;
+  bottom: -25px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eafffd;
+  ${({ animation }) =>
+    !animation && 'animation: breathe 3s ease-in-out infinite;'}
+
+  &.cloud-1 {
+    left: 80px;
+    animation-delay: 500ms;
+  }
+  &.cloud-2 {
+    left: 100px;
+    animation-delay: 150ms;
+    bottom: -30px;
+    width: 45px;
+    height: 45px;
+  }
+  &.cloud-3 {
+    left: 120px;
+    animation-delay: 350ms;
+  }
+  &.cloud-4 {
+    left: 130px;
+    animation-delay: 50ms;
+  }
+
+  @keyframes breathe {
+    50% {
+      scale: 0.8;
     }
   }
 `;
@@ -248,6 +289,16 @@ export const WizardPig = ({ testID, damage, animation }: WizardPigProps) => {
           </g>
         </g>
       </svg>
+
+      {!animation && (
+        <div style={{ filter: 'blur(4px)' }}>
+          <Cloud />
+          <Cloud className="cloud-1" />
+          <Cloud className="cloud-2" />
+          <Cloud className="cloud-3" />
+          <Cloud className="cloud-4" />
+        </div>
+      )}
     </WizardPigContainer>
   );
 };
