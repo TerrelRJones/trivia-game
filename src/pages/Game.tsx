@@ -238,7 +238,7 @@ const Game: React.FC<GameTypes> = ({ testID }) => {
             <Avatar
               testID="player-1"
               avatar={<FoxKnight animation={playAnimation} />}
-              name="Terrel"
+              name="Fox Knight"
             />
           </PlayerContainer>
           <ActionContainer

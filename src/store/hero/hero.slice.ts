@@ -24,7 +24,7 @@ export const heroSlice = createSlice({
       state.currentHealth = action.payload;
     },
 
-    resetHeroState: (state) => {
+    resetHeroState: () => {
       return initialState;
     },
   },
